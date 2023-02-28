@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.FPSCamera;
 using UnityEngine;
 
 /**
@@ -9,24 +10,24 @@ public class MobileCanvasController : MonoBehaviour
 {
     public void PointerDownForward()
     {
-        MobileCameraRotatorNew.Instance.SetStateIsMoveUp(true);
-        MobileCameraRotatorNew.Instance.SetStateIsMoveDown(false);
+        FirstPersonRotator.Instance.SetStateIsMoveUp(true);
+        FirstPersonRotator.Instance.SetStateIsMoveDown(false);
     } 
     
     public void PointerUpForward()
     {
-        MobileCameraRotatorNew.Instance.SetStateIsMoveUp(false);
+        FirstPersonRotator.Instance.SetStateIsMoveUp(false);
     }
     
     public void PointerDownBack()
     {
-        MobileCameraRotatorNew.Instance.SetStateIsMoveUp(false);
-        MobileCameraRotatorNew.Instance.SetStateIsMoveDown(true);
+        FirstPersonRotator.Instance.SetStateIsMoveUp(false);
+        FirstPersonRotator.Instance.SetStateIsMoveDown(true);
     } 
     
     public void PointerUpBack()
     {
-        MobileCameraRotatorNew.Instance.SetStateIsMoveDown(false);
+        FirstPersonRotator.Instance.SetStateIsMoveDown(false);
     }
  
 }
