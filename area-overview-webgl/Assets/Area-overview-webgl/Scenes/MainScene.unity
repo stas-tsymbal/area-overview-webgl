@@ -497,6 +497,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableTime: 3
   camera: {fileID: 1811196000}
+  isIndicatorDisable: 0
+  isMousePressed: 0
   indicatorAlpha: 50
   indicatorDisableForTeleport: 0
   ignoreLayer:

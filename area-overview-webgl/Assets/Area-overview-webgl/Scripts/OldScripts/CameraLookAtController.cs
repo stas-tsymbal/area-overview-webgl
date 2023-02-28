@@ -75,6 +75,6 @@ public class CameraLookAtController : MonoBehaviour
     public void BreakLookAtRotation()
     {
         rotationIsActive = false;
-        Debug.Log("rotation stopped");
+      //  Debug.Log("rotation stopped");
     }
 }

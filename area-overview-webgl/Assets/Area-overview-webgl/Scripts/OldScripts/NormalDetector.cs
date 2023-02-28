@@ -22,12 +22,13 @@ public class NormalDetector : MonoBehaviour
     private Image indicatorImg;
     
     private Vector3 currentMousePosition = Vector3.zero; // current mouse position, use for check disable/enable cursorIndicator
-    private bool timerCoroutineIsRunning = false;
+    private bool timerIsRunning = false;
 
-    private bool isIndicatorDisable = false;
-    private bool isMousePressed = false;
-    [Range(0, 255)]
-    [SerializeField] private byte indicatorAlpha = 50;
+    [SerializeField]private bool isIndicatorDisable = false;
+    [SerializeField]private bool isMousePressed = false;
+    [Range(0, 1)]
+    [SerializeField] private float indicatorAlpha = 0.4f;
+    [SerializeField] private float indicatorAnimationTime = 0.1f;
 
     [SerializeField] private bool indicatorDisableForTeleport = false;
     [SerializeField] private LayerMask ignoreLayer;
@@ -49,10 +50,10 @@ public class NormalDetector : MonoBehaviour
         timer.Start(disableTime);
     }
     
-    public void StopTimer()
+    public void PauseTimer()
     {
         SetStateTimerIsRunning(false);
-        timer.Stop();
+        timer.Pause();
     }
     
     private void OnEnable()
@@ -60,9 +61,14 @@ public class NormalDetector : MonoBehaviour
         timer.OnTimerFinishedEvent += OnTimerFinishedEvent;
     }
     
+    private void OnDisable()
+    {
+        timer.OnTimerFinishedEvent -= OnTimerFinishedEvent;
+    }
+    
     public void OnTimerFinishedEvent()
     {
-        SetIndicatorMaxColor(false);
+        if(!isIndicatorDisable) SetIndicatorMaxColor(false);
     }
 
     #endregion
@@ -96,8 +102,8 @@ public class NormalDetector : MonoBehaviour
             SetCurrentMousePosition(Input.mousePosition);
             if (IsTimerRunning())
             {
-                StopTimer();
-                if(!EventSystem.current.IsPointerOverGameObject()) SetIndicatorMaxColor(true);
+                PauseTimer();
+                if(!EventSystem.current.IsPointerOverGameObject() && isIndicatorDisable) SetIndicatorMaxColor(true);
             }
         }
 
@@ -124,7 +130,7 @@ public class NormalDetector : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             isMousePressed = true;
-            StopTimer();
+            PauseTimer();
             SetCurrentMousePosition(Input.mousePosition);
             if (!isIndicatorDisable)
                 SetIndicatorMaxColor(false);
@@ -133,44 +139,46 @@ public class NormalDetector : MonoBehaviour
             isMousePressed = false;
     }
 
-    // disable hit indicator after timer
-    private IEnumerator TryDisableCursorIndicator(float _time)
-    {
-       
-        yield return new WaitForSeconds(_time);
-        
-        
-    }
     
     // set state for timer coroutine
     private void SetStateTimerIsRunning(bool _val)
     {
-        timerCoroutineIsRunning = _val;
+        timerIsRunning = _val;
     }
 
     // get state for timer coroutine
     private bool IsTimerRunning()
     {
-        return timerCoroutineIsRunning;
+        return timerIsRunning;
     }
 
     // on/off indicator , true - enable indicator, false - disable
     void SetIndicatorMaxColor(bool _val)
     {
+        Debug.Log(_val);
         if (_val)
         {
-            byte maxAlpha = indicatorAlpha;
-            indicatorImg.color = new Color32(255, 255, 255, maxAlpha);
-            isIndicatorDisable = false;
+            // enable image
+            LeanTween.value(gameObject, UpdateImageAlpha, 0f, 0.5f, indicatorAnimationTime) .setOnStart(() => SetStateIndicator(false));;
         }
         else
         {
             // disable image
-            byte minAlpha = 0;
-            indicatorImg.color = new Color32(255, 255, 255, minAlpha);
-            isIndicatorDisable = true;
+            LeanTween.value(gameObject, UpdateImageAlpha, 0.5f, 0f, indicatorAnimationTime).setOnComplete(() => SetStateIndicator(true));;
         }
     }
+
+    void SetStateIndicator(bool state)
+    {
+        isIndicatorDisable = state;
+    }
+    
+    void UpdateImageAlpha (float alpha) 
+    {
+        indicatorImg.color = new Color(indicatorImg.color.r, indicatorImg.color.g, indicatorImg.color.b, alpha);
+    }
+    
+    
 
     // set current mouse position
     private void SetCurrentMousePosition(Vector3 _position)
