@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -60,7 +61,7 @@ public class IconViewController : MonoBehaviour
             return;
         
         if(!Application.isMobilePlatform)
-            NormalDetector.Instance.DisableCursor();
+            ParallelAreaIndicator.Instance.DisableCursor();
         
         currentIconSample.SetImage(iconSamples[_iconNumber].GetSprite()); 
         currentIconSample.SetText(iconSamples[_iconNumber].GetText()); 

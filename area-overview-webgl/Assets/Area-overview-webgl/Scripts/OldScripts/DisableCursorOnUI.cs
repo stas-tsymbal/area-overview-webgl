@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,6 +13,6 @@ public class DisableCursorOnUI : MonoBehaviour, IPointerEnterHandler
     {
         if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
         if(!Application.isMobilePlatform)
-            NormalDetector.Instance.DisableCursor();
+            ParallelAreaIndicator.Instance.DisableCursor();
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,7 +42,7 @@ public class CameraModeController : MonoBehaviour
     [SerializeField] private float firstPersonStandardAngle = 0; // apply for cam x
     private Coroutine moveCor;
     [SerializeField] private CameraModeIndicator cameraModeIndicator;
-    [SerializeField] private NormalDetector normalDetector;
+    [SerializeField] private ParallelAreaIndicator normalDetector;
     [SerializeField] private Transform rayYHeight; // height of ray for check teleport
     
     private void Awake()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,7 +18,7 @@ public class PaintOnPointerEnter : MonoBehaviour, IPointerEnterHandler, IPointer
             return;
         
         if(!Application.isMobilePlatform)
-            NormalDetector.Instance.DisableCursor();
+            ParallelAreaIndicator.Instance.DisableCursor();
         SetMaxColor(true);
     }
     
