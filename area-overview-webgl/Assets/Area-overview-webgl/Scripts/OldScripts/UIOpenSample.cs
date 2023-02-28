@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
 
 /**
@@ -29,13 +30,13 @@ public class UIOpenSample : MonoBehaviour
 
     private bool CanOpen()
     {
-        var canTeleport = !(Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(TeleportDetector.Instance.GetFirstPersonX().eulerAngles.y)) > angleForIgnoreTeleport || // check X
-                            (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(TeleportDetector.Instance.GetFirstPersonY().eulerAngles.x)) > angleForIgnoreTeleport));
+        var canTeleport = !(Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(Teleport.Instance.GetFirstPersonX().eulerAngles.y)) > angleForIgnoreTeleport || // check X
+                            (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(Teleport.Instance.GetFirstPersonY().eulerAngles.x)) > angleForIgnoreTeleport));
         return canTeleport;
     }
 
     private void RememberAngle()
     {
-        currentAngle = new Vector2( TeleportDetector.Instance.GetFirstPersonX().eulerAngles.y ,TeleportDetector.Instance.GetFirstPersonY().eulerAngles.x);
+        currentAngle = new Vector2( Teleport.Instance.GetFirstPersonX().eulerAngles.y ,Teleport.Instance.GetFirstPersonY().eulerAngles.x);
     }
 }

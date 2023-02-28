@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -63,7 +64,7 @@ public class ClickDetector : MonoBehaviour
                 if (!rotationTouch.isPressed && !EventSystem.current.IsPointerOverGameObject(id))
                 {
                     rotationTouch.SetTouchState(id, true);
-                    TeleportDetector.Instance.RememberCurrentCameraAngle(); // remember angle for teleport detector
+                    Teleport.Instance.RememberCurrentCameraAngle(); // remember angle for teleport detector
                 }
             }
             
@@ -79,7 +80,7 @@ public class ClickDetector : MonoBehaviour
                 if (rotationTouch.isPressed && rotationTouch.touchID == id)
                 {
                     rotationTouch.SetTouchState(-1, false);
-                    TeleportDetector.Instance.TryMakeTeleport(touch.position); // try to make teleport
+                    Teleport.Instance.TryMakeTeleport(touch.position); // try to make teleport
                 }
             }
         }

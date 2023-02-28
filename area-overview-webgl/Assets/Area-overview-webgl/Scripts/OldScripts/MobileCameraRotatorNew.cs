@@ -122,7 +122,6 @@ public class MobileCameraRotatorNew : MonoBehaviour
         {
              _curV = v * currentRotationSpeed * touchSensitivity;
              _curH = h * currentRotationSpeed * touchSensitivity;
-           //  text2.text = "v " + v + " - " + currentRotationSpeed + " - " + touchSensitivity + " h" + h;
         }
         else// correct sensitivity for PC mouse
         {
