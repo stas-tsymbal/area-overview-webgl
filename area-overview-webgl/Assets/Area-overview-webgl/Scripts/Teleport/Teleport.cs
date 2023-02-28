@@ -49,7 +49,7 @@ namespace Area_overview_webgl.Scripts.Teleport
                     if (CanTeleport() && CheckLayer(Input.mousePosition))
                     {
                         CameraLookAtController.Instance.BreakLookAtRotation();
-                        CameraModeController.Instance.MoveCameraByClick(GetHit().point);
+                        CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
                     }
                     else
                     {
@@ -80,7 +80,7 @@ namespace Area_overview_webgl.Scripts.Teleport
         public void TryMakeTeleport(Vector2 _position)
         {
             if (CanTeleport() && CheckLayer(_position))
-                CameraModeController.Instance.MoveCameraByClick(GetHit().point);
+                CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
         }
         
         
@@ -90,7 +90,7 @@ namespace Area_overview_webgl.Scripts.Teleport
             if (isRememberCurrentAngle) return; // don't remember again while mouse btn down
 
             isRememberCurrentAngle = true;
-            if (!CameraModeController.Instance.IsCurrentModeOrbital())
+            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
                 currentAngle = new Vector2(firstPersonX.eulerAngles.y, firstPersonY.eulerAngles.x);
             else
                 currentAngle = new Vector2(orbitalCamera.eulerAngles.y, orbitalCamera.eulerAngles.z);
@@ -100,7 +100,7 @@ namespace Area_overview_webgl.Scripts.Teleport
         {
             isRememberCurrentAngle = false;
             var canTeleport = true;
-            if (!CameraModeController.Instance.IsCurrentModeOrbital())
+            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
             {
                 if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(firstPersonX.eulerAngles.y)) >
                     angleForIgnoreTeleport || // check X

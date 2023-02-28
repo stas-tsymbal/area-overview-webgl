@@ -1,19 +1,14 @@
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using Area_overview_webgl.Scripts.FPSCamera;
-using Area_overview_webgl.Scripts.OrbitRotation;
-using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/**
- * This script help change camera mode -> orbital,firstPerson
- * You can set default mode, find void for change mode, lerp camera when change mode
- */
-public class CameraModeController : MonoBehaviour
+namespace Area_overview_webgl.Scripts.CameraModeController
 {
-    public static CameraModeController Instance;
+    public class CameraModeController : MonoBehaviour
+    {
+         public static CameraModeController Instance;
     private enum CameraMode
     {
         orbital,
@@ -23,7 +18,7 @@ public class CameraModeController : MonoBehaviour
     [SerializeField] private CameraMode cameraMode;
 
     [Header("Control Scripts")]
-    [SerializeField] private OrbitRotation orbitalLogic;
+    [SerializeField] private OrbitRotation.OrbitRotation orbitalLogic;
     [SerializeField] private CameraController orbitalController;
     [SerializeField] private FirstPersonRotator mobileFirstPerson; // logic PC and mobile
 
@@ -44,7 +39,7 @@ public class CameraModeController : MonoBehaviour
     [SerializeField] private float firstPersonStandardAngle = 0; // apply for cam x
     private Coroutine moveCor;
     [SerializeField] private CameraModeIndicator cameraModeIndicator;
-    [SerializeField] private ParallelAreaIndicator normalDetector;
+    [SerializeField] private ParallelAreaIndicator.ParallelAreaIndicator normalDetector;
     [SerializeField] private Transform rayYHeight; // height of ray for check teleport
     
     private void Awake()
@@ -61,7 +56,6 @@ public class CameraModeController : MonoBehaviour
         if (buildIndex == 0 && PlayerExitPosition.Instance != null)
         {
             // get position and mode
-            // 
             firstPersonCameraParent.transform.position = PlayerExitPosition.Instance.gameObject.transform.position;
             firstPersonCameraParent.transform.rotation = PlayerExitPosition.Instance.gameObject.transform.rotation;
             SetCameraMode(CameraMode.orbital);
@@ -283,5 +277,6 @@ public class CameraModeController : MonoBehaviour
     public bool FPScameraActive()
     {
         return cameraMode == CameraMode.firstPerson;
+    }
     }
 }

@@ -330,7 +330,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 886649355}
-          m_TargetAssemblyTypeName: CameraModeController, Assembly-CSharp
+          m_TargetAssemblyTypeName: Area_overview_webgl.Scripts.CameraModeController.CameraModeController,
+            Assembly-CSharp
           m_MethodName: SetOrbitalMode
           m_Mode: 1
           m_Arguments:
@@ -1132,7 +1133,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 886649355}
-          m_TargetAssemblyTypeName: CameraModeController, Assembly-CSharp
+          m_TargetAssemblyTypeName: Area_overview_webgl.Scripts.CameraModeController.CameraModeController,
+            Assembly-CSharp
           m_MethodName: SetFirstPersonMode
           m_Mode: 1
           m_Arguments:
@@ -1982,7 +1984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 886649353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35b3420298a38d9458f415f8e68fb759, type: 3}
+  m_Script: {fileID: 11500000, guid: b93a7cdfed0744ff93b1b3a2ad04921a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMode: 1
