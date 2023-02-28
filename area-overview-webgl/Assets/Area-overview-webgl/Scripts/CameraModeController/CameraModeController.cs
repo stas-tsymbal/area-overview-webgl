@@ -19,7 +19,6 @@ namespace Area_overview_webgl.Scripts.CameraModeController
 
     [Header("Control Scripts")]
     [SerializeField] private OrbitRotation.OrbitRotation orbitalLogic;
-    [SerializeField] private CameraController orbitalController;
     [SerializeField] private FirstPersonRotator mobileFirstPerson; // logic PC and mobile
 
     [Header("Camera Moving")]
@@ -110,7 +109,6 @@ namespace Area_overview_webgl.Scripts.CameraModeController
             yield return null;
         }
         EnableOrbitalScript(true);
-        EnableCameraControllerScript(true);
         normalDetector.DisableIndicatorForTeleport(false);
     }
 
@@ -129,8 +127,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         cameraModeIndicator.SetWalkColor();
         SetCameraMode(CameraMode.firstPerson);
         // off orbital moving logic 
-        EnableOrbitalScript(false); 
-        EnableCameraControllerScript(false);
+        EnableOrbitalScript(false);
         // reset parent
         myCamera.SetParent(firstPersonCameraParent.transform);
         // lerp moving 
@@ -173,13 +170,6 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         orbitalLogic.enabled = _val;
     }
     
-    // on/off camera controller script
-    private void EnableCameraControllerScript(bool _val)
-    {
-        orbitalController.enabled = _val;
-    }
-  
-
     // on/off mobile camera script
     private void EnableMobileFirstPersonScript(bool _val)
     {

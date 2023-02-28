@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Area_overview_webgl.Scripts.CameraModeController;
+using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
 
 /*
- * Script added to provide camera look at selected point feature
+ * Script added to provide camera look at selected object, object need to be in special layer (lookAtLayer)
  */
 
 public class CameraLookAtController : MonoBehaviour
@@ -18,7 +19,8 @@ public class CameraLookAtController : MonoBehaviour
     
     private bool rotationIsActive = false;
     [SerializeField] private float rotationSpeed = 1f;
-    
+
+    [SerializeField] private LayerMask lookAtLayer;
     #region Singleton
 
     public static CameraLookAtController Instance;
@@ -41,7 +43,7 @@ public class CameraLookAtController : MonoBehaviour
         if (Physics.Raycast(ray, out hit)) 
         {
             GameObject hitObject = hit.transform.gameObject;  // ray hit this object
-            if (hitObject.layer == LayerMask.NameToLayer("LookAt"))
+            if (hitObject.layer == MathStat.GetPowNumber2(lookAtLayer.value))
             {
                 //start camera rotation towards the target
                 lookAtPointBody.position = fpsBody.position;

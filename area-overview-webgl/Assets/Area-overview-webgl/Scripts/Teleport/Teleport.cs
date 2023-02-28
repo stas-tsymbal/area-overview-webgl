@@ -129,7 +129,7 @@ namespace Area_overview_webgl.Scripts.Teleport
             if (Physics.Raycast(ray, out hit))
             {
                 var hitObject = hit.transform.gameObject; // ray hit this object
-                if (hitObject.layer == GetPowNumber2(teleportLayerMask.value))
+                if (hitObject.layer == MathStat.GetPowNumber2(teleportLayerMask.value))
                     isLayerForTeleport = true;
                 currentHit = hit;
             }
@@ -152,7 +152,12 @@ namespace Area_overview_webgl.Scripts.Teleport
             return firstPersonY;
         }
 
-        private int GetPowNumber2(int powVal)
+        
+    }
+
+    public static class MathStat
+    {
+        public static int GetPowNumber2(int powVal)
         {
             var result = 0;
             while (powVal > 1)
