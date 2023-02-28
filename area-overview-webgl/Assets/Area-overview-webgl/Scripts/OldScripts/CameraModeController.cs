@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Area_overview_webgl.Scripts.OrbitRotation;
 using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,7 +22,7 @@ public class CameraModeController : MonoBehaviour
     [SerializeField] private CameraMode cameraMode;
 
     [Header("Control Scripts")]
-    [SerializeField] private InputControl orbitalLogic;
+    [SerializeField] private OrbitRotation orbitalLogic;
     [SerializeField] private CameraController orbitalController;
     [SerializeField] private MobileCameraRotatorNew mobileFirstPerson; // logic PC and mobile
 
