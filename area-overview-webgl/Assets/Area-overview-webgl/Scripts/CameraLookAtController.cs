@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Area_overview_webgl.Scripts.CameraModeController;
 using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /*
  * Script added to provide camera look at selected object, object need to be in special layer (lookAtLayer)
@@ -12,7 +13,7 @@ using UnityEngine;
 public class CameraLookAtController : MonoBehaviour
 {
     [SerializeField] private Transform fpsCamera;
-    [SerializeField] private Camera camera;
+    [SerializeField] private Camera myCamera;
     [SerializeField] private Transform fpsBody;
     [SerializeField] private Transform lookAtPointBody;
     [SerializeField] private Transform lookAtPointCamera;
@@ -39,7 +40,7 @@ public class CameraLookAtController : MonoBehaviour
             return;
         
         RaycastHit hit;
-        Ray ray = camera.ScreenPointToRay(_inputPosition); // make ray from position
+        Ray ray = myCamera.ScreenPointToRay(_inputPosition); // make ray from position
         if (Physics.Raycast(ray, out hit)) 
         {
             GameObject hitObject = hit.transform.gameObject;  // ray hit this object

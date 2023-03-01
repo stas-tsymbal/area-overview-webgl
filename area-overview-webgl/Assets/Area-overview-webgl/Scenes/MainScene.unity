@@ -2176,7 +2176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsCamera: {fileID: 1811196001}
-  camera: {fileID: 1811196000}
+  myCamera: {fileID: 0}
   fpsBody: {fileID: 1861629551}
   lookAtPointBody: {fileID: 13953784}
   lookAtPointCamera: {fileID: 791434790}
@@ -4071,11 +4071,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740382094}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!20 &1811196000 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 731421431861655996, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
-  m_PrefabInstance: {fileID: 731421431418327516}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1811196001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 731421431861655997, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
@@ -4299,7 +4294,6 @@ MonoBehaviour:
   orbitalCamera: {fileID: 163741825}
   firstPersonX: {fileID: 1861629551}
   firstPersonY: {fileID: 1811196001}
-  touchIndex: -1
 --- !u!4 &1881634849
 Transform:
   m_ObjectHideFlags: 0

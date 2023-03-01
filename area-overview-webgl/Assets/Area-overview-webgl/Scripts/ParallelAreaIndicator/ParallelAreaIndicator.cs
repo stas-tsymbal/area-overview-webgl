@@ -21,7 +21,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
         [Header("Don't apply parallel in this layer")] [SerializeField]
         private LayerMask ignoreLayer;
 
-        private Camera camera; // make ray from this camera
+        private Camera myCamera; // make ray from this camera
         private Transform cursorIndicator; // this object we set when ray collide with some area 
         private Image indicatorImg;
 
@@ -45,7 +45,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
         {
             cursorIndicator = transform.GetChild(0);
             indicatorImg = GetComponentInChildren<Image>();
-            camera = Camera.main;
+            myCamera = Camera.main;
 
             // disable indicator for mobile
             if (Application.isMobilePlatform)
@@ -82,7 +82,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
         private void DrawParallelAreaIndicator()
         {
             RaycastHit hit;
-            var ray = camera.ScreenPointToRay(Input.mousePosition);
+            var ray = myCamera.ScreenPointToRay(Input.mousePosition);
             // make normal to hit and set cursorIndidcator
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignoreLayer))
             {
@@ -151,14 +151,14 @@ namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
             if (_val)
             {
                 // enable image
-                LeanTween.value(gameObject, UpdateImageAlpha, 0f, 0.5f, cursorAnimationTime)
+                LeanTween.value(gameObject, UpdateImageAlpha, 0f, maxIndicatorAlphaColor, cursorAnimationTime)
                     .setOnStart(() => SetStateIndicator(false));
                 ;
             }
             else
             {
                 // disable image
-                LeanTween.value(gameObject, UpdateImageAlpha, 0.5f, 0f, cursorAnimationTime)
+                LeanTween.value(gameObject, UpdateImageAlpha, maxIndicatorAlphaColor, 0f, cursorAnimationTime)
                     .setOnComplete(() => SetStateIndicator(true));
                 ;
             }

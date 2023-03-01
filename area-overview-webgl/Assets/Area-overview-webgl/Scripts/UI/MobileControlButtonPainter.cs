@@ -17,12 +17,12 @@ public class MobileControlButtonPainter : MonoBehaviour
     
     private void Awake()
     {
-      //  btn = gameObject.GetComponent<Image>();
+        btn = gameObject.GetComponent<Image>();
     }
 
     public void IsPressBtn(bool _val)
     {
-     //   btn.color = _val ? pressedColor : standardColor;
+        btn.color = _val ? pressedColor : standardColor;
     }
     
 }

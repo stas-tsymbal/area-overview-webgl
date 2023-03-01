@@ -25,7 +25,6 @@ namespace Area_overview_webgl.Scripts.OrbitRotation
         private float touchSensitivity = .1f;
 
         [SerializeField] private float mouseSensitivity = .1f;
-        [SerializeField] private float startMoveTrashold = 10f;
 
 
         [Header("Invert mobile moving")] [SerializeField]

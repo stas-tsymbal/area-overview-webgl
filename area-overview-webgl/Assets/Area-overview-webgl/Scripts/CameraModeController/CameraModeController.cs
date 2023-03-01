@@ -44,25 +44,8 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     private void Awake()
     {
         Instance = this;
-        TrySetCameraNearChurchExit();
     }
-
-    // set camera after church exit after exit from church
-    private void TrySetCameraNearChurchExit()
-    {
-        var currentScene = SceneManager.GetActiveScene ();
-        var buildIndex = currentScene.buildIndex;
-        if (buildIndex == 0 && PlayerExitPosition.Instance != null)
-        {
-            // get position and mode
-            firstPersonCameraParent.transform.position = PlayerExitPosition.Instance.gameObject.transform.position;
-            firstPersonCameraParent.transform.rotation = PlayerExitPosition.Instance.gameObject.transform.rotation;
-            SetCameraMode(CameraMode.orbital);
-            SetFirstPersonMode();
-            Destroy( PlayerExitPosition.Instance.gameObject);
-        }
-    }
-
+    
     private void Start()
     {
         // indicate default mode

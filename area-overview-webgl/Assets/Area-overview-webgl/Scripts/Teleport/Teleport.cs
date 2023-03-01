@@ -19,16 +19,15 @@ namespace Area_overview_webgl.Scripts.Teleport
         [SerializeField] private Transform orbitalCamera;
         [SerializeField] private Transform firstPersonX;
         [SerializeField] private Transform firstPersonY;
-        [SerializeField] private int touchIndex = -1;
-        
-        private Camera camera;
+
+        private Camera myCamera;
         private RaycastHit currentHit;
 
         private void Awake()
         {
             Instance = this;
             
-            camera = Camera.main;
+            myCamera = Camera.main;
         }
 
         private void Update()
@@ -125,7 +124,7 @@ namespace Area_overview_webgl.Scripts.Teleport
         {
             var isLayerForTeleport = false;
             RaycastHit hit;
-            var ray = camera.ScreenPointToRay(_rayStartPosition); // make ray from position
+            var ray = myCamera.ScreenPointToRay(_rayStartPosition); // make ray from position
             if (Physics.Raycast(ray, out hit))
             {
                 var hitObject = hit.transform.gameObject; // ray hit this object

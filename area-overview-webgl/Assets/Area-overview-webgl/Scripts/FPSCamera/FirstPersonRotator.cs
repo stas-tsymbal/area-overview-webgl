@@ -46,8 +46,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         [Header("Copy Y for orbital camera")] [SerializeField]
         private Transform orbitalCamera;
-
-        [SerializeField] private float orbitStandardAngle = 80f;
+        
 
         private void Awake()
         {
