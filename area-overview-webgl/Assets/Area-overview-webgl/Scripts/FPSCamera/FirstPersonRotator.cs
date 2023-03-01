@@ -225,42 +225,42 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0) // move forward
             {
-                Vector3 forwardForce = Time.deltaTime * cameraBody.transform.forward;
+                Vector3 forwardForce = Time.fixedDeltaTime * cameraBody.transform.forward;
                 forwardForce *= boost;
                 ApplyForceToTheBody(forwardForce * movingForceSpeed);
             }
 
             if (Input.GetAxis("Mouse ScrollWheel") < 0) // move back
             {
-                Vector3 backForce = Time.deltaTime * -cameraBody.transform.forward;
+                Vector3 backForce = Time.fixedDeltaTime * -cameraBody.transform.forward;
                 backForce *= boost;
                 ApplyForceToTheBody(backForce * movingForceSpeed);
             }
 
             if (Input.GetKey(KeyCode.W)) // move forward
             {
-                Vector3 forwardForce = Time.deltaTime * cameraBody.transform.forward;
+                Vector3 forwardForce = Time.fixedDeltaTime * cameraBody.transform.forward;
                 forwardForce *= boost;
                 ApplyForceToTheBody(forwardForce * movingForceSpeed);
             }
 
             if (Input.GetKey(KeyCode.S)) // move back
             {
-                Vector3 backForce = Time.deltaTime * -cameraBody.transform.forward;
+                Vector3 backForce = Time.fixedDeltaTime * -cameraBody.transform.forward;
                 backForce *= boost;
                 ApplyForceToTheBody(backForce * movingForceSpeed);
             }
 
             if (Input.GetKey(KeyCode.A)) // move left
             {
-                Vector3 leftForce = Time.deltaTime * -cameraBody.transform.right;
+                Vector3 leftForce = Time.fixedDeltaTime * -cameraBody.transform.right;
                 leftForce *= boost;
                 ApplyForceToTheBody(leftForce * movingForceSpeed);
             }
 
             if (Input.GetKey(KeyCode.D)) // move right
             {
-                Vector3 rightForce = Time.deltaTime * cameraBody.transform.right;
+                Vector3 rightForce = Time.fixedDeltaTime * cameraBody.transform.right;
                 rightForce *= boost;
                 ApplyForceToTheBody(rightForce * movingForceSpeed);
             }
@@ -286,6 +286,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         private void ApplyForceToTheBody(Vector3 _newForce)
         {
+            Debug.LogError(_newForce);
             SetKinematicForRB(false);
             cameraBody.AddForce(_newForce);
             CameraLookAtController.Instance.BreakLookAtRotation();

@@ -35,8 +35,8 @@ public class CameraModeIndicator : MonoBehaviour
         walk.color = pressedColor;
         orbit.color = standardColor;
         
-    //    walkBorder.color = pressedColorBorder;
-    //    orbitBorder.color = standardColorBorder;
+        walkBorder.color = pressedColorBorder;
+        orbitBorder.color = standardColorBorder;
     }
 
     // Indicate orbit mode, call from ui
@@ -45,7 +45,7 @@ public class CameraModeIndicator : MonoBehaviour
         orbit.color = pressedColor;
         walk.color = standardColor;
         
-//        orbitBorder.color = pressedColorBorder;
-//        walkBorder.color = standardColorBorder;
+        orbitBorder.color = pressedColorBorder;
+        walkBorder.color = standardColorBorder;
     }
 }

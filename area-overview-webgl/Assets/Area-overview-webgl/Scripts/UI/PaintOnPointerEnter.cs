@@ -11,6 +11,11 @@ using UnityEngine.UI;
  */
 public class PaintOnPointerEnter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    private void Awake()
+    {
+        SetMaxColor(false);
+    }
+
     [SerializeField] private Image image;
     public void OnPointerEnter (PointerEventData eventData)
     {
