@@ -286,7 +286,6 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         private void ApplyForceToTheBody(Vector3 _newForce)
         {
-            Debug.LogError(_newForce);
             SetKinematicForRB(false);
             cameraBody.AddForce(_newForce);
             CameraLookAtController.Instance.BreakLookAtRotation();
