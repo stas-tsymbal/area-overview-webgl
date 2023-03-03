@@ -37,7 +37,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     [Header("First person angle on ground")] // set this angle when activate FP mode, settings for orbitStandardAngle you can find in mobile and pc first player logic  
     [SerializeField] private float firstPersonStandardAngle = 0; // apply for cam x
     private Coroutine moveCor;
-    [SerializeField] private CameraModeIndicator cameraModeIndicator;
+  //  [SerializeField] private CameraModeIndicator cameraModeIndicator;
     [SerializeField] private ParallelAreaIndicator.ParallelAreaIndicator normalDetector;
     [SerializeField] private Transform rayYHeight; // height of ray for check teleport
     
@@ -65,7 +65,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     public void SetOrbitalMode()
     {
         if(IsCurrentModeOrbital()) return;
-        cameraModeIndicator.SetOrbitColor();
+      //  cameraModeIndicator.SetOrbitColor();
         SetCameraMode(CameraMode.orbital); // set camera mode
         EnableMobileFirstPersonScript(false);
         
@@ -107,7 +107,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     {
         if(!IsCurrentModeOrbital()) return;
         // set camera mode
-        cameraModeIndicator.SetWalkColor();
+   //     cameraModeIndicator.SetWalkColor();
         SetCameraMode(CameraMode.firstPerson);
         // off orbital moving logic 
         EnableOrbitalScript(false);

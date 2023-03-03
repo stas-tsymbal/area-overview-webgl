@@ -2,7 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6731d23-6fa8-48bb-8a65-af11f9059eea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/CameraLookAtController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraLookAtController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/CameraLookAtController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraLookAtController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/CameraModeController.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/CameraModeController/CameraModeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/CameraModeController/CameraModeController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/FPSCamera.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/FPSCamera/FirstPersonRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/FPSCamera/FirstPersonRotator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/FPSCamera/MobileCanvasController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/MobileCanvasController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/FPSCamera/MobileCanvasController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/MobileCanvasController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/LookAtTarget.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtTarget.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/LookAtTarget.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/MobileCanvasActivator.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/MobileCanvasActivator.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/MobileCanvasActivator/CanvasChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/MobileCanvasActivator/CanvasChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/MobileCanvasActivator/CanvasChecker.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/MobileCanvasActivator/CanvasChecker.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OpenLink.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OpenLink.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OpenLink.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OpenLink.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OrbitRotation.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OrbitRotation.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OrbitRotation/OrbitRotation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OrbitRotation/OrbitRotation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OrbitRotation/OrbitRotation.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OrbitRotation/OrbitRotation.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaIndicator.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaIndicator/ParallelAreaIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaIndicator/ParallelAreaIndicator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Teleport.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Teleport/ClickDetector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/ClickDetector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Teleport/ClickDetector.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/ClickDetector.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Teleport/Teleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/Teleport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Teleport/Teleport.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/Teleport.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/CameraModeIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UIScripts/CameraModeIndicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/CameraModeIndicator.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UIScripts/CameraModeIndicator.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/DisableCursorOnUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/DisableCursorOnUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/DisableCursorOnUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/DisableCursorOnUI.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/MobileControlButtonPainter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MobileControlButtonPainter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/MobileControlButtonPainter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MobileControlButtonPainter.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/MouseCursorIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MouseCursorIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/MouseCursorIcon.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MouseCursorIcon.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/PaintOnPointerEnter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/PaintOnPointerEnter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/PaintOnPointerEnter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/PaintOnPointerEnter.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/UiController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/UiController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UI/UiController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/UiController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +138,8 @@
       <workItem from="1677525737981" duration="6934000" />
       <workItem from="1677539233644" duration="16609000" />
       <workItem from="1677608786416" duration="15045000" />
-      <workItem from="1677728782472" duration="401000" />
+      <workItem from="1677728782472" duration="2374000" />
+      <workItem from="1677796461863" duration="15872000" />
     </task>
     <servers />
   </component>
