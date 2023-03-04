@@ -1,4 +1,5 @@
-﻿using Area_overview_webgl.Scripts.Static;
+﻿using System;
+using Area_overview_webgl.Scripts.Static;
 using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
@@ -10,7 +11,14 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
         [Header("Rotates to an object with this layer")] [SerializeField]
         private LayerMask lookAtLayer;
         
-        private Camera myCamera;
+        [SerializeField] private Camera myCamera;
+
+        public static LookAtRotatorController Insctance;
+
+        private void Awake()
+        {
+            Insctance = this;
+        }
 
         public void Init(Camera myCamera, Transform playerHorizontalAxis, Transform playerVerticalAxis)
         {

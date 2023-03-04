@@ -43,7 +43,6 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
                 new Vector3(lookAtHorizontalAxis.localEulerAngles.x, 0f, 0f);
 
             rotationIsActive = true;
-            
         }
 
         private void LateUpdate()

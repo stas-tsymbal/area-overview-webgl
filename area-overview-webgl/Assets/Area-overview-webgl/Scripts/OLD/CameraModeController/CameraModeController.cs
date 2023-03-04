@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using Area_overview_webgl.Scripts.FPSCamera;
+using Area_overview_webgl.Scripts.LookAtRotatorScripts;
+using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Area_overview_webgl.Scripts.CameraModeController
 {
@@ -38,7 +39,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     [SerializeField] private float firstPersonStandardAngle = 0; // apply for cam x
     private Coroutine moveCor;
   //  [SerializeField] private CameraModeIndicator cameraModeIndicator;
-    [SerializeField] private ParallelAreaIndicator.ParallelAreaIndicator normalDetector;
+    [SerializeField] private ParallelAreaIndicatorActivationController normalDetector;
     [SerializeField] private Transform rayYHeight; // height of ray for check teleport
     
     private void Awake()
@@ -78,7 +79,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         StartCoroutine(LerpOrbitalMode());
         SetStateMobileControlBtn(false);
         
-        CameraLookAtController.Instance.BreakLookAtRotation();
+        LookAtRotatorController.Insctance.StopLookAtRotation();
     }
     
     // disable camera rotation and moving scripts while lerp 

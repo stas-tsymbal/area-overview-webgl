@@ -8,27 +8,49 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
     {
         [SerializeField] private ParallelAreaIndicator parallelAreaIndicator;
         [SerializeField] private ParallelAreaIndicatorActivationController activationController;
-        public void Init(GamePlatform currentGamePlatform)
+
+        private GamePlatform currentGamePlatform;
+        public void Init(GamePlatform currentGamePlatform, Camera myCamera)
         {
-            switch (currentGamePlatform)
+            this.currentGamePlatform = currentGamePlatform;
+            switch (this.currentGamePlatform)
             {
-                case GamePlatform.mobile: DestroyIndicator();
+                case GamePlatform.mobile: DestroyIndicatorElements();
                     break;
-                case GamePlatform.PC: InitPC();
+                case GamePlatform.PC: InitPC(myCamera);
                     break;
                 default:
                     throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
             }
         }
 
-        private void DestroyIndicator()
+        
+        private void DestroyIndicatorElements()
         {
             
         }
 
-        private void InitPC()
+        private void InitPC(Camera myCamera)
         {
-            
+            parallelAreaIndicator.Init(myCamera);
+            activationController.Init();
+            Subscribe();
+        }
+
+        private void OnDestroy()
+        {
+            if (currentGamePlatform == GamePlatform.PC)
+                Unsubscribe();
+        }
+
+        private void Subscribe()
+        {
+            activationController.OnChangeCursorIndicatorState += parallelAreaIndicator.SetIndicatorMaxColor;
+        }
+        
+        private void Unsubscribe()
+        {
+            activationController.OnChangeCursorIndicatorState -= parallelAreaIndicator.SetIndicatorMaxColor;
         }
     }
 }

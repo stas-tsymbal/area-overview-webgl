@@ -49,7 +49,7 @@ namespace Area_overview_webgl.Scripts.Controllers
             // set player x and y transform for rotation
             //lookAtRotatorController.Init(playerCamera,); 
             
-            parallelAreaIndicatorMainController.Init(currentGamePlatform);
+            parallelAreaIndicatorMainController.Init(currentGamePlatform, playerCamera);
             
             switch (currentGamePlatform)
             {

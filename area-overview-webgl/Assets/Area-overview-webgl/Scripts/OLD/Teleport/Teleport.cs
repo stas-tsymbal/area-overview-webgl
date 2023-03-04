@@ -1,4 +1,5 @@
 ﻿using System;
+using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -47,13 +48,13 @@ namespace Area_overview_webgl.Scripts.Teleport
                 {
                     if (CanTeleport() && CheckLayer(Input.mousePosition))
                     {
-                        CameraLookAtController.Instance.BreakLookAtRotation();
+                        LookAtRotatorController.Insctance.StopLookAtRotation();
                         CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
                     }
                     else
                     {
                         //added to provide look at mech
-                        if (CanTeleport()) CameraLookAtController.Instance.CheckLookAtLayer(Input.mousePosition);
+                        if (CanTeleport()) LookAtRotatorController.Insctance.TryRotateToObject(Input.mousePosition);
                     }
                 }
 

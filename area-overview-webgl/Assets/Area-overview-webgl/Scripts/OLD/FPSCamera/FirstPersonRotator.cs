@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -87,7 +88,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                     currentRotationSpeed = maxRotationSpeed;
 
                 if (ClickDetector.Instance.GetRotationTouch().isPressed || Input.GetMouseButton(0))
-                    CameraLookAtController.Instance.BreakLookAtRotation();
+                    LookAtRotatorController.Insctance.StopLookAtRotation();
 
                 if (Input.touchCount > 0)
                 {
@@ -271,7 +272,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                 eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x,
                     eulerAnglesHorizontal.y - cameraRotationFromKeySpeed, eulerAnglesHorizontal.z);
                 cameraBody.transform.eulerAngles = eulerAnglesHorizontal;
-                CameraLookAtController.Instance.BreakLookAtRotation();
+                LookAtRotatorController.Insctance.StopLookAtRotation();
             }
 
             if (Input.GetKey(KeyCode.E)) // rotate right
@@ -280,7 +281,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                 eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x,
                     eulerAnglesHorizontal.y + cameraRotationFromKeySpeed, eulerAnglesHorizontal.z);
                 cameraBody.transform.eulerAngles = eulerAnglesHorizontal;
-                CameraLookAtController.Instance.BreakLookAtRotation();
+                LookAtRotatorController.Insctance.StopLookAtRotation();
             }
         }
 
@@ -288,7 +289,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         {
             SetKinematicForRB(false);
             cameraBody.AddForce(_newForce);
-            CameraLookAtController.Instance.BreakLookAtRotation();
+            LookAtRotatorController.Insctance.StopLookAtRotation();
             StopAllCoroutines();
             StartCoroutine(FreezRb()); // try freez RB  
         }

@@ -8,10 +8,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
     public class ParallelAreaIndicator : MonoBehaviour
     {
         public static ParallelAreaIndicator Instance;
-
-        [Header("After this time we disable cursor")] [SerializeField]
-        private float disablingTime = 3f;
-
+        
         [Header("Cursor animation duration on turn off/on")] [SerializeField]
         private float cursorAnimationTime = 0.1f;
 
@@ -21,62 +18,27 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         private LayerMask ignoreLayer;
 
         [SerializeField] private Camera myCamera; // make ray from this camera
+        [Space]
         [SerializeField] private Transform cursorIndicator; // this object we set when ray collide with some area 
         [SerializeField] private Image indicatorImg;
-
-        private Vector3 currentMousePosition = Vector3.zero; // current mouse position, use for check disable/enable cursorIndicator
-
-        private bool timerIsRunning;
+        
         private bool isIndicatorDisable;
-        private bool isMousePressed;
-        private bool indicatorDisableForTeleport;
+       
 
-        private Timer timer;
-
-        private void Awake()
+        public void Init(Camera myCamera)
         {
-            Instance = this;
-
-            AddNewTimer();
-        }
-
-        private void Start()
-        {
-            cursorIndicator = transform.GetChild(0);
-            indicatorImg = GetComponentInChildren<Image>();
-            myCamera = Camera.main;
-
-            // disable indicator for mobile
-            if (Application.isMobilePlatform)
-                gameObject.SetActive(false);
-        }
-
-        private void OnEnable()
-        {
-            timer.OnTimerFinishedEvent += OnTimerFinishedEvent;
-        }
-
-        private void OnDisable()
-        {
-            timer.OnTimerFinishedEvent -= OnTimerFinishedEvent;
+            this.myCamera = myCamera;
+            
         }
         
         private void FixedUpdate()
         {
-            if (isMousePressed) return;
-
-            if (indicatorDisableForTeleport) return;
-
-            TryStartTimerForDisablingCursor();
-
+            if(isIndicatorDisable) return;
+            
             DrawParallelAreaIndicator();
         }
 
-        private void Update()
-        {
-            DetectMouseClick();
-        }
-
+        
         // Draw parallel area indicator
         private void DrawParallelAreaIndicator()
         {
@@ -100,66 +62,25 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
                 indicatorImg.color = new Color32(255, 255, 255, 0);
             }
         }
-
-        void DetectMouseClick()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                isMousePressed = true;
-                SetCurrentMousePosition(Input.mousePosition);
-                // stop timer and disable cursor indicator
-                if (timerIsRunning) PauseTimer();
-                if (!isIndicatorDisable) SetIndicatorMaxColor(false);
-            }
-            else
-                isMousePressed = false;
-        }
-
-        // set current mouse position
-        private void SetCurrentMousePosition(Vector3 _position)
-        {
-            currentMousePosition = _position;
-        }
-
-        void TryStartTimerForDisablingCursor()
-        {
-            // disable/enable cursorIndicator if mouse don't move
-            if (currentMousePosition == Input.mousePosition)
-            {
-                // start check 
-                if (!IsTimerRunning())
-                    StartTimer();
-            }
-            else
-            {
-                SetCurrentMousePosition(Input.mousePosition);
-                if (IsTimerRunning())
-                {
-                    PauseTimer();
-                    if (!EventSystem.current.IsPointerOverGameObject() && isIndicatorDisable)
-                        SetIndicatorMaxColor(true);
-                }
-            }
-        }
-
+        
         #region EnablingDisablingCursor
 
         // on/off indicator , true - enable indicator, false - disable
-        void SetIndicatorMaxColor(bool _val)
+        public void SetIndicatorMaxColor(bool _val)
         {
             if (_val)
             {
                 // enable image
-                LeanTween.value(gameObject, UpdateImageAlpha, 0f, maxIndicatorAlphaColor, cursorAnimationTime)
-                    .setOnStart(() => SetStateIndicator(false));
-                ;
+                if(isIndicatorDisable)
+                    LeanTween.value(gameObject, UpdateImageAlpha, 0f, maxIndicatorAlphaColor, cursorAnimationTime)
+                    .setOnStart(() => SetStateIndicator(false)); ;
             }
             else
             {
                 // disable image
+                if(isIndicatorDisable) return;
                 LeanTween.value(gameObject, UpdateImageAlpha, maxIndicatorAlphaColor, 0f, cursorAnimationTime)
-                    .setOnComplete(() => SetStateIndicator(true));
-                ;
+                    .setOnComplete(() => SetStateIndicator(true)); ;
             }
         }
 
@@ -172,59 +93,11 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         {
             indicatorImg.color = new Color(indicatorImg.color.r, indicatorImg.color.g, indicatorImg.color.b, alpha);
         }
-
-        public void DisableIndicatorForTeleport(bool _val)
-        {
-            indicatorDisableForTeleport = _val;
-            if (_val && gameObject.activeSelf)
-                SetIndicatorMaxColor(false); // disable indicator
-        }
-
-        public void DisableCursor()
-        {
-            SetIndicatorMaxColor(false);
-        }
-
+        
         #endregion
 
 
-        #region Timer
-
-        private void AddNewTimer()
-        {
-            timer = new Timer(TimerType.OneSecTick, disablingTime);
-            StartTimer();
-        }
-
-        private void StartTimer()
-        {
-            SetStateTimerIsRunning(true);
-            timer.Start(disablingTime);
-        }
-
-        private void PauseTimer()
-        {
-            SetStateTimerIsRunning(false);
-            timer.Pause();
-        }
-
-        // TIMER FINISH
-        private void OnTimerFinishedEvent()
-        {
-            if (!isIndicatorDisable) SetIndicatorMaxColor(false);
-        }
-
-        private void SetStateTimerIsRunning(bool _val)
-        {
-            timerIsRunning = _val;
-        }
-
-        private bool IsTimerRunning()
-        {
-            return timerIsRunning;
-        }
-
-        #endregion
+       
 
         
     }

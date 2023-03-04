@@ -2,13 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6731d23-6fa8-48bb-8a65-af11f9059eea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/Look at rotator/Look at rotator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/Look at rotator/Look at rotator.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotatorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotatorController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraLookAtController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraLookAtController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/ParallelAreaIndicator/ParallelAreaIndicator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/Teleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/Teleport.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/DisableCursorOnUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/DisableCursorOnUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MouseCursorIcon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/MouseCursorIcon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/PaintOnPointerEnter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/UI/PaintOnPointerEnter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorActivationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorActivationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +117,7 @@
       <workItem from="1677608786416" duration="15045000" />
       <workItem from="1677728782472" duration="2374000" />
       <workItem from="1677796461863" duration="15872000" />
-      <workItem from="1677883063873" duration="11518000" />
+      <workItem from="1677883063873" duration="15322000" />
     </task>
     <servers />
   </component>

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Area_overview_webgl.Scripts.ParallelAreaIndicator;
 using UnityEngine;
 
 /**
