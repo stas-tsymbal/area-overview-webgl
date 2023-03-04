@@ -1,6 +1,8 @@
-﻿namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
+﻿using UnityEngine;
+
+namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
 {
-    public class LookAtRotatorController
+    public class LookAtRotatorController : MonoBehaviour
     {
         
     }

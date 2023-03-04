@@ -13,7 +13,7 @@ public class MouseCursorIcon : MonoBehaviour
     public Vector2 hotSpot = Vector2.zero;
     void OnMouseOver()
     {
-        if (UiController.Instance.SomeOverlayUiIsActive())
+        /*if (UiController.Instance.SomeOverlayUiIsActive())
         {
             Cursor.SetCursor(null, Vector2.zero, cursorMode);
             return;
@@ -23,7 +23,7 @@ public class MouseCursorIcon : MonoBehaviour
         {
             Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
             ParallelAreaIndicator.Instance.DisableCursor();
-        }
+        }*/
             
     }
 

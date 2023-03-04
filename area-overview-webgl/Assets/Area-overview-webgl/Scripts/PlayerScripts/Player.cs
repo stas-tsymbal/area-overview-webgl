@@ -2,7 +2,7 @@
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
         [SerializeField] private MovingController movingController;
         [SerializeField] private PlayerMoving playerMoving;

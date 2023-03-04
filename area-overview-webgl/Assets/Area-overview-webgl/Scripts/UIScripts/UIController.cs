@@ -23,5 +23,15 @@ namespace Area_overview_webgl.Scripts.UIScripts
             else
                 mobileMovingButtons.Hide();
         }
+
+        public CameraModeIndicator GetCameraModeIndicator()
+        {
+            return cameraModeIndicator;
+        }
+        
+        public MobileControlButton GetMobileMovingButtons()
+        {
+            return mobileMovingButtons;
+        }
     }
 }

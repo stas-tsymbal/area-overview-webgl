@@ -1,6 +1,8 @@
-﻿namespace Area_overview_webgl.Scripts.ParallelAreaScripts
+﻿using UnityEngine;
+
+namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 {
-    public class ParallelAreaIndicatorController
+    public class ParallelAreaIndicatorController : MonoBehaviour
     {
        
     }

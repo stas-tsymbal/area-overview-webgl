@@ -59,30 +59,35 @@ namespace Area_overview_webgl.Scripts.UIScripts
         private void PointerEnterEventTrigger()
         {
             OnEnter?.Invoke();
+            Debug.Log("enter click");
         }
 
         // Pointer Exit
         private void PointerExitEventTrigger()
         {
             OnExit?.Invoke();
+            Debug.Log("pointer exit");
         }
 
         // Pointer Down
         private void PointerDownEventTrigger()
         {
             OnDown?.Invoke();
+            Debug.Log("pointer down");
         }
 
         // Pointer Up
         private void PointerUpEventTrigger()
         {
             OnUp?.Invoke();
+            Debug.Log("pointer up");
         }
         
         //Button Clicked
         private void CLickEventTrigger()
         {
             OnClick?.Invoke();
+            Debug.Log("pointer click");
         }
 
         

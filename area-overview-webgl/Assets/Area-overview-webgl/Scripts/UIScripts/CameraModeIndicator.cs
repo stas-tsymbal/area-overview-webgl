@@ -14,24 +14,19 @@ namespace Area_overview_webgl.Scripts.UIScripts
  */
     public class CameraModeIndicator : SampleUIView
     {
-        private enum DefaultMode
-        {
-            walk,
-            orbit
-        }
-        [SerializeField] private DefaultMode defaultMode;
-        [Space]
-        [SerializeField] private Image walk;
+        [Header("Button background")]
+        [SerializeField] private Image firstPerson;
         [SerializeField] private Image orbit;
         [SerializeField] private Color32 standardColor;
         [SerializeField] private Color32 pressedColor;
     
-        [Space]
-        [SerializeField] private Image walkBorder;
-        [SerializeField] private Image orbitBorder;
+        [Header("Button icon")]
+        [SerializeField] private Image firstPersonIcon;
+        [SerializeField] private Image orbitIcon;
         [SerializeField] private Color32 standardColorBorder;
         [SerializeField] private Color32 pressedColorBorder;
 
+        [Header("Buttons")]
         [SerializeField] private SampleEventTrigger firstPersonEventTrigger;
         [SerializeField] private SampleEventTrigger orbitalEventTrigger;
         
@@ -42,6 +37,20 @@ namespace Area_overview_webgl.Scripts.UIScripts
         public void Init(CameraMode startCameraMode)
         {
             AddEventsOnButton();
+            PaintButtonOnStart(startCameraMode);
+        }
+
+       private void PaintButtonOnStart(CameraMode startCameraMode)
+        {
+            switch (startCameraMode)
+            {
+                case CameraMode.firstPerson: PaintFirstPersonColorButton();
+                    break;
+                case CameraMode.orbital: PaintOrbitalColorButton();
+                    break;
+                default:
+                    throw new ArgumentException($"Check CameraMode enum for this value {startCameraMode}");
+            }
         }
 
         // Add and subscribe on events
@@ -70,21 +79,21 @@ namespace Area_overview_webgl.Scripts.UIScripts
         // Change indicator color for first person button -> active, orbital - inactive
         public void PaintFirstPersonColorButton()
         {
-            walk.color = pressedColor;
+            firstPerson.color = pressedColor;
             orbit.color = standardColor;
         
-            walkBorder.color = pressedColorBorder;
-            orbitBorder.color = standardColorBorder;
+            firstPersonIcon.color = pressedColorBorder;
+            orbitIcon.color = standardColorBorder;
         }
 
         // Change indicator color for orbital -> active, first person button - inactive
         public void PaintOrbitalColorButton()
         {
+            firstPerson.color = standardColor;
             orbit.color = pressedColor;
-            walk.color = standardColor;
-        
-            orbitBorder.color = pressedColorBorder;
-            walkBorder.color = standardColorBorder;
+            
+            firstPersonIcon.color = standardColorBorder;
+            orbitIcon.color = pressedColorBorder;
         }
 
         private void OnDestroy()
