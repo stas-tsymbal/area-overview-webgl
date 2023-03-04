@@ -5,6 +5,7 @@ using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using Area_overview_webgl.Scripts.PlayerScripts;
 using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Area_overview_webgl.Scripts.Controllers
 {
@@ -16,8 +17,9 @@ namespace Area_overview_webgl.Scripts.Controllers
         [Header("Set start camera mode")]
         [SerializeField] private CameraMode startCameraMode;
         [SerializeField] private Camera playerCamera;
+        [FormerlySerializedAs("parallelAreaIndicatorController")]
         [Header("Controllers")]
-        [SerializeField] private ParallelAreaIndicatorController parallelAreaIndicatorController;
+        [SerializeField] private ParallelAreaIndicatorMainController parallelAreaIndicatorMainController;
         [SerializeField] private LookAtRotatorController lookAtRotatorController;
         [SerializeField] private CameraModeScripts.CameraModeController cameraModeController;
         
@@ -44,7 +46,10 @@ namespace Area_overview_webgl.Scripts.Controllers
             // activate menu, add listeners on buttons
             uiController.Init(currentGamePlatform, startCameraMode); 
             
+            // set player x and y transform for rotation
+            //lookAtRotatorController.Init(playerCamera,); 
             
+            parallelAreaIndicatorMainController.Init(currentGamePlatform);
             
             switch (currentGamePlatform)
             {

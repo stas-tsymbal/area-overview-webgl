@@ -1,10 +1,9 @@
 ﻿using _4_timers.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
+namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 {
     public class ParallelAreaIndicator : MonoBehaviour
     {
@@ -226,5 +225,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaIndicator
         }
 
         #endregion
+
+        
     }
 }
