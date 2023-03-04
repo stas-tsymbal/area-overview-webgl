@@ -15,6 +15,7 @@ namespace Area_overview_webgl.Scripts.Controllers
     {
         [Header("Set start camera mode")]
         [SerializeField] private CameraMode startCameraMode;
+        [SerializeField] private Camera playerCamera;
         [Header("Controllers")]
         [SerializeField] private ParallelAreaIndicatorController parallelAreaIndicatorController;
         [SerializeField] private LookAtRotatorController lookAtRotatorController;

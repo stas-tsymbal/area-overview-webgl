@@ -173,5 +173,10 @@ namespace Area_overview_webgl.Scripts.Teleport
             }
             return result;
         }
+
+        public static int Calculator(int value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

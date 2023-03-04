@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Area_overview_webgl.Scripts.CameraModeController;
+using Area_overview_webgl.Scripts.Static;
 using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,6 +15,8 @@ public class CameraLookAtController : MonoBehaviour
 {
     [SerializeField] private Transform fpsCamera;
     [SerializeField] private Camera myCamera;
+    
+    
     [SerializeField] private Transform fpsBody;
     [SerializeField] private Transform lookAtPointBody;
     [SerializeField] private Transform lookAtPointCamera;
@@ -36,6 +39,7 @@ public class CameraLookAtController : MonoBehaviour
     //after player clicks over some scene obj
     public void CheckLookAtLayer(Vector3 _inputPosition)
     {
+        Debug.Log("look at this object");
         if(!CameraModeController.Instance.FPScameraActive())
             return;
         
@@ -44,7 +48,7 @@ public class CameraLookAtController : MonoBehaviour
         if (Physics.Raycast(ray, out hit)) 
         {
             GameObject hitObject = hit.transform.gameObject;  // ray hit this object
-            if (hitObject.layer == MathStat.GetPowNumber2(lookAtLayer.value))
+            if (hitObject.layer == Calculator.GetPowNumber2(lookAtLayer.value))
             {
                 //start camera rotation towards the target
                 lookAtPointBody.position = fpsBody.position;
