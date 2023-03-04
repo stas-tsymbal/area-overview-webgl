@@ -199,58 +199,11 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         {
             if(moveCor != null)
                 StopCoroutine(moveCor);
-            moveCor = StartCoroutine(MoveByClick(_newPos));
+          //  moveCor = StartCoroutine(MoveByClick(_newPos));
+            //TODO call teleport
         }
     }
     
-    // disable camera rotation and moving scripts while lerp 
-    private IEnumerator MoveByClick(Vector3 _newPos)
-    {
-        normalDetector.DisableIndicatorForTeleport(true);
-        _newPos = new Vector3(_newPos.x,_newPos.y + firstPersonCameraParent.height/2, _newPos.z);
-        // Lerp camera position 
-        while (Vector3.Distance(firstPersonCameraParent.transform.position,_newPos) > lerpMinValue)
-        {
-            if (CheckDistanceLimit(_newPos)) // check capsule near wall
-            {
-                _newPos = firstPersonCameraParent.transform.position;
-                //Debug.LogError("stop move");
-            }
-            firstPersonCameraParent.transform.position  = Vector3.Lerp( firstPersonCameraParent.transform.position, _newPos, Time.deltaTime * lerpSpeed);
-            yield return null;
-        }
-        normalDetector.DisableIndicatorForTeleport(false);
-        
-    }
     
-    // lerp can't finish if target point near wall, because capsule collider with this obstacles and newer reach target position 
-    private bool CheckDistanceLimit(Vector3 _targetPoint)
-    {
-        var needStop = false;
-        // add 2 vector3 for correct Y 
-        var playerPosition = new Vector3(firstPersonCameraParent.transform.position.x, rayYHeight.position.y,
-            firstPersonCameraParent.transform.position.z);
-        var targetPointFixY = new Vector3(_targetPoint.x, rayYHeight.position.y, _targetPoint.z);
-
-        if (Math.Sqrt((playerPosition - targetPointFixY).sqrMagnitude) < firstPersonCameraParent.radius + 0.6f)
-        {
-            RaycastHit hit;
-            var ray = new Ray(playerPosition, targetPointFixY-playerPosition);
-            if (Physics.Raycast(ray, out hit)) {
-                var hitObject = hit.transform.gameObject;  // ray hit this object
-                if (Math.Sqrt((playerPosition - hit.point).sqrMagnitude) <
-                    firstPersonCameraParent.radius + 0.5f)
-                    needStop = true;
-            }
-        }
-          
-        return needStop;
-    }
-
-    //added to control look at mode behaviour
-    public bool FPScameraActive()
-    {
-        return cameraMode == CameraMode.firstPerson;
-    }
     }
 }

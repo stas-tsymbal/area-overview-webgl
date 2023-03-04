@@ -3,6 +3,7 @@ using Area_overview_webgl.Scripts.CameraModeScripts;
 using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using Area_overview_webgl.Scripts.PlayerScripts;
+using Area_overview_webgl.Scripts.TeleportScripts;
 using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -22,6 +23,7 @@ namespace Area_overview_webgl.Scripts.Controllers
         [SerializeField] private ParallelAreaIndicatorMainController parallelAreaIndicatorMainController;
         [SerializeField] private LookAtRotatorController lookAtRotatorController;
         [SerializeField] private CameraModeScripts.CameraModeController cameraModeController;
+        [SerializeField] private TeleportController teleportController;
         
         [Header("UI")]
         [SerializeField] private UIController uiController;
@@ -51,6 +53,7 @@ namespace Area_overview_webgl.Scripts.Controllers
             
             parallelAreaIndicatorMainController.Init(currentGamePlatform, playerCamera);
             
+            //teleportController.Init();
             switch (currentGamePlatform)
             {
                 case GamePlatform.mobile: InitMobileSetup(currentGamePlatform, startCameraMode);

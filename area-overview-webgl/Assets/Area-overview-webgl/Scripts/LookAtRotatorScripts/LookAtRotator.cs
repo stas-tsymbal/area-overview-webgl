@@ -1,5 +1,4 @@
 ﻿using Area_overview_webgl.Scripts.Static;
-using Area_overview_webgl.Scripts.Teleport;
 using UnityEngine;
 using UnityEngine.Serialization;
 
