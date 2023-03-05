@@ -59,7 +59,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
         private void PointerEnterEventTrigger()
         {
             OnEnter?.Invoke();
-            Debug.Log("enter click");
+            Debug.Log("pointer enter");
         }
 
         // Pointer Exit

@@ -27,7 +27,9 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         
         private void DestroyIndicatorElements()
         {
-            
+            Destroy(parallelAreaIndicator.gameObject);
+            Destroy(activationController.gameObject);
+            Destroy(gameObject);
         }
 
         private void InitPC(Camera myCamera)

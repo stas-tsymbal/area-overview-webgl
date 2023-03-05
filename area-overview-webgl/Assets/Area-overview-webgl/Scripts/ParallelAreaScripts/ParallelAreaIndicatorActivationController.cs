@@ -33,11 +33,6 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             Subscribe();
         }
 
-        private void OnDestroy()
-        {
-            Unsubscribe();
-        }
-
         private void Subscribe()
         {
             timer.OnTimerFinishedEvent += OnTimerFinishedEvent;
