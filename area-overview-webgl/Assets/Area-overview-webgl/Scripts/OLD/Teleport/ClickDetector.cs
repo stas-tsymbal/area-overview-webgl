@@ -64,7 +64,7 @@ public class ClickDetector : MonoBehaviour
                 if (!rotationTouch.isPressed && !EventSystem.current.IsPointerOverGameObject(id))
                 {
                     rotationTouch.SetTouchState(id, true);
-                    TeleportController.Instance.RememberCurrentCameraAngle(); // remember angle for teleport detector
+                   // TeleportController.Instance.RememberCurrentCameraAngle(); // remember angle for teleport detector
                     
                 }
             }

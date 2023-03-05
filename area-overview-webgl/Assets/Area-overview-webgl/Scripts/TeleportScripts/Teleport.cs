@@ -7,21 +7,24 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
 {
     public class Teleport : MonoBehaviour
     {
-
-        [SerializeField] private Transform firstPersonCamera; // cam transform
+        [Header("Set from init")]
+        [SerializeField] private Transform firstPersonHead; // cam transform
         [SerializeField] private CapsuleCollider firstPersonCollider; 
         
-        
-        [SerializeField] private float lerpMinValue = 0.1f;
-        [SerializeField] private float lerpSpeed = 10f;
+        [Header("Lerp values, ")]
+        [SerializeField] private float distanceForStopTeleporting = 0.1f;
+        [SerializeField] private float lertTeleportSpeed = 10f;
         
         
         private Coroutine teleportation = null;
         
         public Action OnEndTeleportation;
-        public void Init(Transform firstPersonCamera, CapsuleCollider firstPersonCollider)
+        
+        
+        public void Init(Transform firstPersonHead, CapsuleCollider firstPersonCollider)
         {
-            
+            this.firstPersonCollider = firstPersonCollider;
+            this.firstPersonHead = firstPersonHead;
         }
         
         public void MakeTeleport(Vector3 _newPos)
@@ -29,7 +32,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             teleportation = StartCoroutine(MakeTeleportCor(_newPos));
         }
 
-        public void StopCor()
+        public void StopTeleportation()
         {
             StopCoroutine(teleportation);
             teleportation = null;
@@ -41,14 +44,14 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
            // normalDetector.DisableIndicatorForTeleport(true);
             _newPos = new Vector3(_newPos.x,_newPos.y + firstPersonCollider.height/2, _newPos.z);
             // Lerp camera position 
-            while (Vector3.Distance(firstPersonCollider.transform.position,_newPos) > lerpMinValue)
+            while (Vector3.Distance(firstPersonCollider.transform.position,_newPos) > distanceForStopTeleporting)
             {
                 if (CheckDistanceLimit(_newPos)) // check capsule near wall
                 {
                     _newPos = firstPersonCollider.transform.position;
                     //Debug.LogError("stop move");
                 }
-                firstPersonCollider.transform.position  = Vector3.Lerp( firstPersonCollider.transform.position, _newPos, Time.deltaTime * lerpSpeed);
+                firstPersonCollider.transform.position  = Vector3.Lerp( firstPersonCollider.transform.position, _newPos, Time.deltaTime * lertTeleportSpeed);
                 yield return null;
             }
             OnEndTeleportation?.Invoke();
@@ -62,9 +65,9 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         {
             var needStop = false;
             // add 2 vector3 for correct Y 
-            var playerPosition = new Vector3(firstPersonCollider.transform.position.x, firstPersonCamera.position.y,
+            var playerPosition = new Vector3(firstPersonCollider.transform.position.x, firstPersonHead.position.y,
                 firstPersonCollider.transform.position.z);
-            var targetPointFixY = new Vector3(_targetPoint.x, firstPersonCamera.position.y, _targetPoint.z);
+            var targetPointFixY = new Vector3(_targetPoint.x, firstPersonHead.position.y, _targetPoint.z);
 
             if (Math.Sqrt((playerPosition - targetPointFixY).sqrMagnitude) < firstPersonCollider.radius + 0.6f)
             {

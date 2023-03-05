@@ -7,8 +7,8 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
     public class LookAtRotator : MonoBehaviour
     {
         [Header("Transform that need to be rotated, setup from init")] 
-        [SerializeField] private Transform playerHorizontalAxis;
-        [SerializeField] private Transform playerVerticalAxis;
+        [SerializeField] private Transform playerHorizontalAxis; // head
+        [SerializeField] private Transform playerVerticalAxis; // body
         
         [Header("Rotator axis vertical-Y and horizontal-X")] 
         [SerializeField] private Transform lookAtVerticalAxis;
@@ -20,10 +20,10 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
         private bool rotationIsActive = false;
 
         
-        public void Init(Transform playerHorizontalAxis, Transform playerVerticalAxis)
+        public void Init(Transform playerHead, Transform playerBody)
         {
-            this.playerHorizontalAxis = playerHorizontalAxis;
-            this.playerVerticalAxis = playerVerticalAxis;
+            this.playerHorizontalAxis = playerHead;
+            this.playerVerticalAxis = playerBody;
            
         }
 

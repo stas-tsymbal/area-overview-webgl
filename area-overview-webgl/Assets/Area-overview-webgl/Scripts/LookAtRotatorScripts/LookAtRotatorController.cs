@@ -20,10 +20,10 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
             Insctance = this;
         }
 
-        public void Init(Camera myCamera, Transform playerHorizontalAxis, Transform playerVerticalAxis)
+        public void Init(Camera myCamera, Transform playerHead, Transform playerBody)
         {
             this.myCamera = myCamera;
-            lookAtRotator.Init(playerHorizontalAxis,playerVerticalAxis);
+            lookAtRotator.Init(playerHead,playerBody);
         }
 
         public void TryRotateToObject(Vector3 inputCursorPosition)

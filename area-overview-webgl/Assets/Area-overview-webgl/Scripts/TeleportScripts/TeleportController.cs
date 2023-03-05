@@ -12,20 +12,13 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         [Header("Layer for teleport")]
         [SerializeField] private LayerMask teleportLayerMask ;
         
-        [Header("Ignore teleport")]
-        [SerializeField] private float angleForIgnoreTeleport;
-        
         [Space] private Vector2 currentAngle; // use for remember current angle -> X and Y
         private bool isRememberCurrentAngle;
         
         private Camera myCamera;
         private RaycastHit currentHit;
         
-        [SerializeField] private Transform firstPersonX;
-        [SerializeField] private Transform firstPersonY;
         
-        [SerializeField] private Transform orbitalCamera;
-
         public static TeleportController Instance;
 
         private void Awake()
@@ -48,7 +41,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         private void Update()
         {
             //TODO remove Update
-            if (!Application.isMobilePlatform)
+          /*  if (!Application.isMobilePlatform)
             {
                 #region PC teleport detector
 
@@ -89,9 +82,14 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
                 }
 
                 #endregion
-            }
+            }*/
         }
         
+        
+    /*    [SerializeField] private Transform firstPersonX;
+        [SerializeField] private Transform firstPersonY;
+        
+        [SerializeField] private Transform orbitalCamera;
         // remember camera angle
         public void RememberCurrentCameraAngle()
         {
@@ -102,8 +100,10 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
                 currentAngle = new Vector2(firstPersonX.eulerAngles.y, firstPersonY.eulerAngles.x);
             else
                 currentAngle = new Vector2(orbitalCamera.eulerAngles.y, orbitalCamera.eulerAngles.z);
-        }
+        }*/
 
+ /*   [Header("Ignore teleport")]
+    [SerializeField] private float angleForIgnoreTeleport;
         private bool CanTeleport()
         {
             isRememberCurrentAngle = false;
@@ -126,7 +126,31 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             }
 
             return canTeleport;
-        }
+        }*/
+        
+      /*  private bool CanTeleport(Transform firstPersonX, Transform firstPersonY)
+        {
+            isRememberCurrentAngle = false;
+            var canTeleport = true;
+            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
+            {
+                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(firstPersonX.eulerAngles.y)) >
+                    angleForIgnoreTeleport || // check X
+                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(firstPersonY.eulerAngles.x)) >
+                     angleForIgnoreTeleport)) // check Y
+                    canTeleport = false;
+            }
+            else
+            {
+                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(orbitalCamera.eulerAngles.y)) >
+                    angleForIgnoreTeleport || // check X
+                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(orbitalCamera.eulerAngles.z)) >
+                     angleForIgnoreTeleport)) // check Y
+                    canTeleport = false;
+            }
+
+            return canTeleport;
+        }*/
         
         // check layer for teleport
         private bool CheckLayer(Vector3 _rayStartPosition)
@@ -148,7 +172,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         // call from TouchPhase.Ended in click detector
         public void TryMakeTeleport(Vector2 _position)
         {
-            if (CanTeleport() && CheckLayer(_position))
+            if (CheckLayer(_position))
                 telepot.MakeTeleport(GetHit().point);
               //  CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
         }

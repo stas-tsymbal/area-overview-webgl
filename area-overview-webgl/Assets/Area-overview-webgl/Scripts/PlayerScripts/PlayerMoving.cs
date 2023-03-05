@@ -1,6 +1,8 @@
-﻿namespace Area_overview_webgl.Scripts.PlayerScripts
+﻿using UnityEngine;
+
+namespace Area_overview_webgl.Scripts.PlayerScripts
 {
-    public class PlayerMoving
+    public class PlayerMoving : MonoBehaviour
     {
         
     }
