@@ -34,7 +34,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
            }
        }
        
-
        private void Update()
         {
             switch (currentGamePlatform)
@@ -46,16 +45,19 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             }
             
         }
-
        
-
        #region PC
         private void DetectMovingPC()
         {
             
-            if (Input.GetKey(boostMovingSpeedKey))
+            if (Input.GetKeyDown(boostMovingSpeedKey))
             {
-                player.BoostSpeed();
+                player.BoostSpeed(true);
+            }
+            
+            if (Input.GetKeyUp(boostMovingSpeedKey))
+            {
+                player.BoostSpeed(false);
             }
 
             if (Input.GetKey(moveForwardKey)) // move forward
@@ -77,10 +79,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             {
                 player.MoveLeft();
             }
-            
-            
         }
-
         #endregion
 
         #region Mobile
@@ -143,8 +142,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             mobileBack = val;
         }
-        
-
         #endregion
 
         private void OnDestroy()

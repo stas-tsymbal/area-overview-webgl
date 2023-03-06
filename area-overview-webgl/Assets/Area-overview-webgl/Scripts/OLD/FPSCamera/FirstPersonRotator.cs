@@ -10,7 +10,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         public static FirstPersonRotator Instance;
         
         private GameObject player; // main camera,  use for rotate vertical
-        private Rigidbody cameraBody; // camera body,  use for rotate horizontal and moving
+       // private Rigidbody cameraBody; // camera body,  use for rotate horizontal and moving
         
         [Header("Rotation speed")]
         [SerializeField] private float maxRotationSpeed = 8f; //rotation speed
@@ -37,10 +37,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         [Header("Camera Moving")] [SerializeField]
         private float movingForceSpeed = 10f; // use for correct camera body speed 
 
-        private bool isMoveUp;
-        private bool isMoveDown;
-        [SerializeField] private float cameraRotationFromKeySpeed = 10f; // correct rotation speed for key rotation QE
-        [SerializeField] private float shiftBoostSpeed = 5f; // speed when press shift
+
 
         [Header("Mobile control btn")] [SerializeField]
         private GameObject controlBtn;
@@ -53,7 +50,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         {
             Instance = this;
             player = Camera.main.gameObject;
-            cameraBody = gameObject.GetComponentInChildren<Rigidbody>();
+            //cameraBody = gameObject.GetComponentInChildren<Rigidbody>();
         }
 
         private void OnEnable()
@@ -72,8 +69,8 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                 currentRotationSpeed = Mathf.Lerp(currentRotationSpeed, 0f, Time.deltaTime * lerpSpeed);
             }
 
-            if (!ClickDetector.Instance.GetUiTouch().isPressed) // reset moving if don't touch ui 
-                ResetCameraMoving();
+         //   if (!ClickDetector.Instance.GetUiTouch().isPressed) // reset moving if don't touch ui 
+          //      ResetCameraMoving();
 
             // block rotation if UI is open
             if (UiController.Instance.SomeOverlayUiIsActive())
@@ -92,8 +89,8 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
                 if (Input.touchCount > 0)
                 {
-                    if (!ClickDetector.Instance.GetUiTouch().isPressed)
-                        ResetCameraMoving();
+                   // if (!ClickDetector.Instance.GetUiTouch().isPressed)
+                        //ResetCameraMoving();
 
                     if (ClickDetector.Instance.GetRotationTouch().isPressed &&
                         Input.GetTouch(ClickDetector.Instance.GetRotationTouch().touchID).phase == TouchPhase.Moved)
@@ -121,10 +118,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                     v = Input.GetAxis("Mouse Y");
                 }
             }
-
-            // detect PC key WASD + QE + mouse wheel
-            if (!Application.isMobilePlatform)
-                DetectPCKayMoving();
+            
         }
 
         private void FixedUpdate()
@@ -156,14 +150,12 @@ namespace Area_overview_webgl.Scripts.FPSCamera
             player.transform.eulerAngles = eulerAnglesVertical;
 
             // rotate horizontal
-            Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
+         /*   Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
             eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x, eulerAnglesHorizontal.y + _curH,
                 eulerAnglesHorizontal.z);
-            cameraBody.transform.eulerAngles = eulerAnglesHorizontal;
+            cameraBody.transform.eulerAngles = eulerAnglesHorizontal;*/
 
-            // move camera from screen buttons
-            if ((isMoveUp || isMoveDown))
-                MoveUpDown();
+           
         }
 
         //check for the lower camera limit
@@ -180,128 +172,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         }
 
 
-        #region CameraMoving
 
-        // call from event trigger on button  
-        public void SetStateIsMoveUp(bool _val)
-        {
-            isMoveUp = _val;
-        }
-
-        // call from event trigger on button  
-        public void SetStateIsMoveDown(bool _val)
-        {
-            isMoveDown = _val;
-        }
-
-        // move camera from ui
-        private void MoveUpDown()
-        {
-            if (isMoveUp)
-            {
-                Vector3 forwardForce = Time.deltaTime * cameraBody.transform.forward;
-                ApplyForceToTheBody(forwardForce * movingForceSpeed);
-            }
-            else if (isMoveDown)
-            {
-                Vector3 backForce = Time.deltaTime * -cameraBody.transform.forward;
-                ApplyForceToTheBody(backForce * movingForceSpeed);
-            }
-        }
-
-        private void SetKinematicForRB(bool _val)
-        {
-            cameraBody.isKinematic = _val;
-        }
-
-        // Detect PC kay for control moving WASD + QE
-        private void DetectPCKayMoving()
-        {
-            float boost = 1f;
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                boost *= shiftBoostSpeed;
-            }
-
-            if (Input.GetAxis("Mouse ScrollWheel") > 0) // move forward
-            {
-                Vector3 forwardForce = Time.fixedDeltaTime * cameraBody.transform.forward;
-                forwardForce *= boost;
-                ApplyForceToTheBody(forwardForce * movingForceSpeed);
-            }
-
-            if (Input.GetAxis("Mouse ScrollWheel") < 0) // move back
-            {
-                Vector3 backForce = Time.fixedDeltaTime * -cameraBody.transform.forward;
-                backForce *= boost;
-                ApplyForceToTheBody(backForce * movingForceSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.W)) // move forward
-            {
-                Vector3 forwardForce = Time.fixedDeltaTime * cameraBody.transform.forward;
-                forwardForce *= boost;
-                ApplyForceToTheBody(forwardForce * movingForceSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.S)) // move back
-            {
-                Vector3 backForce = Time.fixedDeltaTime * -cameraBody.transform.forward;
-                backForce *= boost;
-                ApplyForceToTheBody(backForce * movingForceSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.A)) // move left
-            {
-                Vector3 leftForce = Time.fixedDeltaTime * -cameraBody.transform.right;
-                leftForce *= boost;
-                ApplyForceToTheBody(leftForce * movingForceSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.D)) // move right
-            {
-                Vector3 rightForce = Time.fixedDeltaTime * cameraBody.transform.right;
-                rightForce *= boost;
-                ApplyForceToTheBody(rightForce * movingForceSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.Q)) // rotate left
-            {
-                Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
-                eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x,
-                    eulerAnglesHorizontal.y - cameraRotationFromKeySpeed, eulerAnglesHorizontal.z);
-                cameraBody.transform.eulerAngles = eulerAnglesHorizontal;
-                LookAtRotatorController.Insctance.StopLookAtRotation();
-            }
-
-            if (Input.GetKey(KeyCode.E)) // rotate right
-            {
-                Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
-                eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x,
-                    eulerAnglesHorizontal.y + cameraRotationFromKeySpeed, eulerAnglesHorizontal.z);
-                cameraBody.transform.eulerAngles = eulerAnglesHorizontal;
-                LookAtRotatorController.Insctance.StopLookAtRotation();
-            }
-        }
-
-        private void ApplyForceToTheBody(Vector3 _newForce)
-        {
-            SetKinematicForRB(false);
-            cameraBody.AddForce(_newForce);
-            LookAtRotatorController.Insctance.StopLookAtRotation();
-            StopAllCoroutines();
-            StartCoroutine(FreezRb()); // try freez RB  
-        }
-
-        // freez rigidbody after stop moving 
-        IEnumerator FreezRb()
-        {
-            yield return new WaitForSeconds(0.1f);
-            SetKinematicForRB(true);
-        }
-
-        #endregion
 
         // enable/disable control btn for mobile
         public void SetStateControlBtn(bool _val)
@@ -310,13 +181,6 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                 controlBtn.SetActive(_val);
         }
 
-        // reset camera moving
-        private void ResetCameraMoving()
-        {
-            if (!isMoveUp && !isMoveDown) return;
-            SetStateIsMoveUp(false);
-            SetStateIsMoveDown(false);
-            SetKinematicForRB(true);
-        }
+ 
     }
 }

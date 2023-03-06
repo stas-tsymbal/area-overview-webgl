@@ -6,7 +6,7 @@
         void MoveBack();
         void MoveLeft();
         void MoveRight();
-        void BoostSpeed();
+        void BoostSpeed(bool val);
 
     }
 }

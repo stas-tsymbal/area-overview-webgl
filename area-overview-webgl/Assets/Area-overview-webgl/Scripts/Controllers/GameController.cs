@@ -45,7 +45,8 @@ namespace Area_overview_webgl.Scripts.Controllers
         // Initialization parameters for start game 
         private void StartInit(GamePlatform currentGamePlatform, CameraMode startCameraMode)
         {
-            currentGamePlatform = GamePlatform.mobile;
+            //currentGamePlatform = GamePlatform.mobile;
+            
             // activate menu, add listeners on buttons
             uiController.Init(currentGamePlatform, startCameraMode); 
             

@@ -2932,7 +2932,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 731421431418327516}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731421431418327517}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbdf0471ad02444f89ad66ba86245da1, type: 3}
   m_Name: 
@@ -3286,7 +3286,7 @@ PrefabInstance:
       objectReference: {fileID: 163741825}
     - target: {fileID: 731421431912081325, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 731421431912081325, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
       propertyPath: controlBtn
@@ -3423,6 +3423,14 @@ MonoBehaviour:
     head: {fileID: 1811196001}
     body: {fileID: 1861629551}
     collider: {fileID: 1861629548}
+    rigidbody: {fileID: 731421431418327522}
+  movingForceSpeed: 10
+  boostSpeed: 5
+--- !u!54 &731421431418327522 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 731421431912081324, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
+  m_PrefabInstance: {fileID: 731421431418327516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &888475273133452484
 PrefabInstance:
   m_ObjectHideFlags: 0

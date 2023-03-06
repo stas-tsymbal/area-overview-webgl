@@ -171,7 +171,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     // on/off mobile control btn for first person mode 
     public void SetStateMobileControlBtn(bool _val)
     {
-        mobileFirstPerson.SetStateControlBtn(_val);
+       // mobileFirstPerson.SetStateControlBtn(_val);
     }
 
     // return is orbital game mode

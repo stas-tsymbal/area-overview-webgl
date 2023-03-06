@@ -3,14 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="a6731d23-6fa8-48bb-8a65-af11f9059eea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/UI/Mobile moving buttons/Mobile moving sample - button.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/UI/Mobile moving buttons/Mobile moving sample - button.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorActivationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorActivationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/ParallelAreaScripts/ParallelAreaIndicatorMainController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/CameraModeController/CameraModeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/MobileCanvasController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/MobileCanvasController.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/MovingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/MovingController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/PlayerMoving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/PlayerMoving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UIScripts/SampleEventTrigger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/UIScripts/SampleEventTrigger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +28,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4014a86cbefb4944b2b6c9211c8fd2fc159a00/4f/1fae9618/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4014a86cbefb4944b2b6c9211c8fd2fc159a00/6a/31866c99/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4014a86cbefb4944b2b6c9211c8fd2fc159a00/ce/45d4c082/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4014a86cbefb4944b2b6c9211c8fd2fc159a00/f4/39f9ef1c/Time.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/4-timers/Scripts/TimerTestController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_UGUI_Private.cs" root0="SKIP_HIGHLIGHTING" />
@@ -110,7 +114,8 @@
       <workItem from="1677796461863" duration="15872000" />
       <workItem from="1677883063873" duration="18666000" />
       <workItem from="1677941524074" duration="1957000" />
-      <workItem from="1677971718857" duration="13991000" />
+      <workItem from="1677971718857" duration="15316000" />
+      <workItem from="1678086314845" duration="3659000" />
     </task>
     <servers />
   </component>
