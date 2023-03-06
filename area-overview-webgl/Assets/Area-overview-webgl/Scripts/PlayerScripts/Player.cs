@@ -4,27 +4,48 @@ using Area_overview_webgl.Scripts.Controllers;
 using Area_overview_webgl.Scripts.Interfaces;
 using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
-    public class Player : MonoBehaviour, IMove
+    public class Player : MonoBehaviour, IMove, IRotate
     {
-        [SerializeField] private MovingController movingController;
+        private GamePlatform currentGamePlatform;
+        [SerializeField] private MovingInputController movingInputController;
+        [SerializeField] private RotationInputController rotationInputController;
         [SerializeField] private ClickController clickController;
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
         
-        [Header("Camera Moving")] [SerializeField]
+        [Header("Player Moving")] [SerializeField]
         private float movingForceSpeed = 10f; // use for correct camera body speed 
         
         [SerializeField] private float boostSpeed = 5f; // speed when press shift
         private bool isBoost;
         
+        [Header("Player Rotation")]
+        [SerializeField] private float maxRotationSpeed = 8f; //rotation speed
+        [SerializeField] private float yAxisTopLimit = 280f; //upper euler angle for the camera rotation
+        [SerializeField] private float yAxisBottomLimit = 80f; //lower euler angle for the camera rotation 
+       
+        [SerializeField] private float lerpSpeed = 10f;
+
+        
+        [FormerlySerializedAs("touchSensitivity")]
+        [Header("Rotation Sensitivity")]
+        [SerializeField] private float mobileSensitivity = .1f;
+        [SerializeField] private float mouseSensitivity = .1f;
+        
+        
+        
         
         public void Init(GamePlatform currentGamePlatform, UIController uiController)
         {
-            movingController.Init(this, currentGamePlatform, uiController);
+            this.currentGamePlatform = currentGamePlatform;
+            movingInputController.Init(this, currentGamePlatform, uiController);
+            rotationInputController.Init(this, currentGamePlatform);
+           
         }
 
         public PlayerBody GetPlayerBody()
@@ -32,6 +53,17 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             return playerBody;
         }
 
+        private void FixedUpdate()
+        {
+            ApplyRotation();
+        }
+        
+        private void LateUpdate()
+        {
+            CorrectRotationVerticalLimit();
+        }
+
+        
         #region PlayerMoving
         public void MoveForward()
         {
@@ -65,7 +97,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         private void ApplyForceToTheBody(Vector3 forceHeading)
         {
-            
             var forceForMoving = GetForceForMoving(forceHeading);
             var finalForce = forceForMoving * movingForceSpeed;
            
@@ -73,7 +104,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             GetPlayerBody().GetRigidbody().AddForce(finalForce);
             
             // LookAtRotatorController.Insctance.StopLookAtRotation();
-            StopCoroutine(freezingRigidbodyCor);
+            if(freezingRigidbodyCor != null) StopCoroutine(freezingRigidbodyCor);
             freezingRigidbodyCor = StartCoroutine(FreezingRigidbody()); // try freez RB  
         }
 
@@ -97,44 +128,101 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
 
         #endregion
-       
+
+        #region Rotation
+
+        private float currentRotationSpeedLerpValue;
+        private float h;
+        private float v;
+        
+        public void Rotate(float horizontalValue, float verticalValue)
+        {
+            currentRotationSpeedLerpValue = maxRotationSpeed;
+            h = horizontalValue;
+            v = verticalValue;
+        }
+
+        public void DampRotation()
+        {
+            currentRotationSpeedLerpValue = Mathf.Lerp(currentRotationSpeedLerpValue, 0f, Time.deltaTime * lerpSpeed);
+        }
+
+        void ApplyRotation()
+        {
+            float currentVerticalRotationValue;
+            float currentHorizontalRotationValue;
+
+            switch (currentGamePlatform)
+            {
+                case GamePlatform.PC: 
+                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mouseSensitivity;
+                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mouseSensitivity;
+                    break;
+                case GamePlatform.mobile:
+                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mobileSensitivity;
+                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mobileSensitivity;
+                    break;
+                default:  throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
+            }
+            
+            currentVerticalRotationValue = CheckVerticalLimit(currentVerticalRotationValue);
+
+            RotateVertical(currentVerticalRotationValue);
+
+            RotateHorizontal(currentHorizontalRotationValue);
+        }
+
+        private float CheckVerticalLimit(float currentVerticalRotationValue)
+        {
+            var _newYAfterRotation = GetPlayerBody().GetHead().eulerAngles.x + currentVerticalRotationValue;
+            if (_newYAfterRotation <= yAxisTopLimit && _newYAfterRotation > 180 ||
+                _newYAfterRotation >= yAxisBottomLimit && _newYAfterRotation < 180)
+                return 0;
+            else
+                return currentVerticalRotationValue;
+        }
+
+        private void RotateVertical(float currentVerticalRotationValue)
+        {
+            // rotate vertical
+            Vector3 eulerAnglesVertical = GetPlayerBody().GetHead().eulerAngles;
+            eulerAnglesVertical = new Vector3(eulerAnglesVertical.x + currentVerticalRotationValue, 
+                eulerAnglesVertical.y,
+                eulerAnglesVertical.z);
+            GetPlayerBody().GetHead().eulerAngles = eulerAnglesVertical;
+        }
+        private void RotateHorizontal(float currentHorizontalRotationValue)
+        {
+            // rotate horizontal
+            Vector3 eulerAnglesHorizontal = GetPlayerBody().GetBody().transform.eulerAngles;
+            eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x, 
+                eulerAnglesHorizontal.y + currentHorizontalRotationValue,
+                eulerAnglesHorizontal.z);
+            GetPlayerBody().GetBody().transform.eulerAngles = eulerAnglesHorizontal;
+        }
+        private void CorrectRotationVerticalLimit()
+        {
+            var cameraRotation = GetPlayerBody().GetHead().eulerAngles;
+            // top
+            if (cameraRotation.x <= yAxisTopLimit && cameraRotation.x > 180)
+                GetPlayerBody().GetHead().eulerAngles = new Vector3(yAxisTopLimit, cameraRotation.y, cameraRotation.z);
+
+            // bottom 
+            if (cameraRotation.x >= yAxisBottomLimit && cameraRotation.x < 180)
+                GetPlayerBody().GetHead().eulerAngles = new Vector3(yAxisBottomLimit, cameraRotation.y, cameraRotation.z);
+        }
+        
+        private void ResetRotationSpeed()
+        {
+            currentRotationSpeedLerpValue = 0;
+            h = 0;
+            v = 0;
+        }
+
+        #endregion
 
         
     }
 
-    [Serializable]
-    public class PlayerBody
-    {
-       [SerializeField] private Transform head;
-       [SerializeField] private Transform body;
-       [SerializeField] private CapsuleCollider collider;
-       [SerializeField] private Rigidbody rigidbody;
-       
-       public Transform GetHead()
-       {
-           return head;
-       }
-       
-       public Transform GetBody()
-       {
-           return head;
-       }
-       
-       public CapsuleCollider GetCapsuleCollider()
-       {
-           return collider;
-       }
-       
-       public Rigidbody GetRigidbody()
-       {
-           return rigidbody;
-       }
-
-       public void SetKinematicStateForRigidbody(bool val)
-       {
-           GetRigidbody().isKinematic = val;
-       }
-    }
-    
     
 }

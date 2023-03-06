@@ -3392,18 +3392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e382b9ad4424305b781ffd6c9d05190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &731421431418327520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 731421431418327517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11afbd7fcf934d77b44b2d19defc4bef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &731421431418327521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3416,21 +3404,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbaf51c7ceab44c38723791d262ee5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingController: {fileID: 731421431418327518}
-  playerMoving: {fileID: 731421431418327520}
+  movingInputController: {fileID: 731421431418327518}
+  rotationInputController: {fileID: 731421431418327525}
   clickController: {fileID: 731421431418327519}
   playerBody:
     head: {fileID: 1811196001}
     body: {fileID: 1861629551}
     collider: {fileID: 1861629548}
     rigidbody: {fileID: 731421431418327522}
-  movingForceSpeed: 10
-  boostSpeed: 5
+  movingForceSpeed: 100
+  boostSpeed: 3
+  maxRotationSpeed: 8
+  yAxisTopLimit: 280
+  yAxisBottomLimit: 80
+  lerpSpeed: 10
+  mobileSensitivity: 0.1
+  mouseSensitivity: 0.1
+  invertX: 1
+  invertY: 1
 --- !u!54 &731421431418327522 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 731421431912081324, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
   m_PrefabInstance: {fileID: 731421431418327516}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &731421431418327525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731421431418327517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754e56450fe14845bb01a6b092e3b0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &888475273133452484
 PrefabInstance:
   m_ObjectHideFlags: 0

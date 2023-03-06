@@ -36,9 +36,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         [Header("Camera Moving")] [SerializeField]
         private float movingForceSpeed = 10f; // use for correct camera body speed 
-
-
-
+        
         [Header("Mobile control btn")] [SerializeField]
         private GameObject controlBtn;
 
@@ -62,7 +60,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         private void Update()
         {
-            if ((!Application.isMobilePlatform && !Input.GetMouseButton(0)) || (Application.isMobilePlatform &&
+       /*     if ((!Application.isMobilePlatform && !Input.GetMouseButton(0)) || (Application.isMobilePlatform &&
                     !ClickDetector.Instance.GetRotationTouch().isPressed))
             {
                 //added to smoothly lerp camera rotation speed after lmb unpick
@@ -117,13 +115,13 @@ namespace Area_overview_webgl.Scripts.FPSCamera
                     h = -Input.GetAxis("Mouse X");
                     v = Input.GetAxis("Mouse Y");
                 }
-            }
+            }*/
             
         }
 
         private void FixedUpdate()
         {
-            float _curV;
+        /*    float _curV;
             float _curH;
             if (Application.isMobilePlatform)
             {
@@ -150,7 +148,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
             player.transform.eulerAngles = eulerAnglesVertical;
 
             // rotate horizontal
-         /*   Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
+            Vector3 eulerAnglesHorizontal = cameraBody.transform.eulerAngles;
             eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x, eulerAnglesHorizontal.y + _curH,
                 eulerAnglesHorizontal.z);
             cameraBody.transform.eulerAngles = eulerAnglesHorizontal;*/
@@ -161,14 +159,14 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         //check for the lower camera limit
         private void LateUpdate()
         {
-            Vector3 _cameraRotation = player.transform.eulerAngles;
+        /*    Vector3 _cameraRotation = player.transform.eulerAngles;
             // top
             if (_cameraRotation.x <= yAxisTopLimit && _cameraRotation.x > 180)
                 player.transform.eulerAngles = new Vector3(yAxisTopLimit, _cameraRotation.y, _cameraRotation.z);
 
             // bottom 
             if (_cameraRotation.x >= yAxisBottomLimit && _cameraRotation.x < 180)
-                player.transform.eulerAngles = new Vector3(yAxisBottomLimit, _cameraRotation.y, _cameraRotation.z);
+                player.transform.eulerAngles = new Vector3(yAxisBottomLimit, _cameraRotation.y, _cameraRotation.z);*/
         }
 
 
