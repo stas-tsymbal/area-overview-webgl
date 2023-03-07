@@ -18,7 +18,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
        
         public Transform GetBody()
         {
-            return head;
+            return body;
         }
        
         public CapsuleCollider GetCapsuleCollider()

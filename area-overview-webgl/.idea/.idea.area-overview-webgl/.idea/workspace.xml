@@ -3,19 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="a6731d23-6fa8-48bb-8a65-af11f9059eea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.area-overview-webgl/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/ParralerAreaIndicator.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Prefabs/ParralerAreaIndicator.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scenes/MainScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IRotate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IRotatable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IRotate.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/IRotatable.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/FPSCamera/FirstPersonRotator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OrbitRotation/OrbitRotation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/OrbitRotation/OrbitRotation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/ClickDetector.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/OLD/Teleport/ClickDetector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Controllers/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/ILookAtRotatable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/ILookAtRotatable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/ITeleportable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/Interfaces/ITeleportable.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/LookAtRotatorScripts/LookAtRotator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/ClickController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/ClickController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/RotationInputController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/RotationInputController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/PlayerBody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/PlayerScripts/PlayerBody.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/TeleportScripts/Teleport.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/TeleportScripts/Teleport.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/TeleportScripts/TeleportController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Area-overview-webgl/Scripts/TeleportScripts/TeleportController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +114,7 @@
       <workItem from="1677883063873" duration="18666000" />
       <workItem from="1677941524074" duration="1957000" />
       <workItem from="1677971718857" duration="15316000" />
-      <workItem from="1678086314845" duration="19992000" />
+      <workItem from="1678086314845" duration="25858000" />
     </task>
     <servers />
   </component>

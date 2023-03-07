@@ -7,39 +7,41 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
     public class LookAtRotator : MonoBehaviour
     {
         [Header("Transform that need to be rotated, setup from init")] 
-        [SerializeField] private Transform playerHorizontalAxis; // head
-        [SerializeField] private Transform playerVerticalAxis; // body
+        [SerializeField] private Transform playerHead; // head
+        [SerializeField] private Transform playerBody; // body
         
         [Header("Rotator axis vertical-Y and horizontal-X")] 
-        [SerializeField] private Transform lookAtVerticalAxis;
-        [SerializeField] private Transform lookAtHorizontalAxis;
+        [SerializeField] private Transform lookAtBody;
+        [SerializeField] private Transform lookAtHead;
 
         [Header("Rotation speed")] [SerializeField]
         private float rotationSpeed = 1f;
 
         private bool rotationIsActive = false;
-
+        private Vector3 lookAtPosition;
+        private Vector3 lookAtRotation;
         
         public void Init(Transform playerHead, Transform playerBody)
         {
-            this.playerHorizontalAxis = playerHead;
-            this.playerVerticalAxis = playerBody;
-           
+            this.playerHead = playerHead;
+            this.playerBody = playerBody;
+            
+            lookAtPosition = transform.position;
+            lookAtRotation = transform.eulerAngles;
         }
 
         //Rotate camera to object
         public void LookAtPoint(Vector3 rotateToThisPoint)
         {
             //start camera rotation towards the target
-            lookAtVerticalAxis.position = playerVerticalAxis.position;
-            lookAtHorizontalAxis.position = playerHorizontalAxis.position;
+            lookAtBody.position = playerBody.position;
+            lookAtHead.position = playerHead.position;
 
-            lookAtVerticalAxis.LookAt(rotateToThisPoint);
-            lookAtVerticalAxis.eulerAngles = new Vector3(0f, lookAtVerticalAxis.eulerAngles.y, 0f);
+            lookAtBody.LookAt(rotateToThisPoint);
+            lookAtBody.eulerAngles = new Vector3(0f, lookAtBody.eulerAngles.y, 0f);
 
-            lookAtHorizontalAxis.LookAt(rotateToThisPoint);
-            lookAtHorizontalAxis.localEulerAngles =
-                new Vector3(lookAtHorizontalAxis.localEulerAngles.x, 0f, 0f);
+            lookAtHead.LookAt(rotateToThisPoint);
+            lookAtHead.localEulerAngles = new Vector3(lookAtHead.localEulerAngles.x, 0f, 0f);
 
             rotationIsActive = true;
         }
@@ -49,20 +51,28 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
             if (!rotationIsActive)
                 return;
 
+            KeepRotatorStartPosition();
+            
             //try to lerp camera rotation towards the target
-            playerVerticalAxis.rotation = Quaternion.Lerp(playerVerticalAxis.rotation, lookAtVerticalAxis.rotation,
+            playerBody.rotation = Quaternion.Lerp(playerBody.rotation, lookAtBody.rotation,
                 Time.deltaTime * rotationSpeed);
-            playerVerticalAxis.eulerAngles = new Vector3(0f, playerVerticalAxis.eulerAngles.y, 0f);
+            playerBody.eulerAngles = new Vector3(0f, playerBody.eulerAngles.y, 0f);
 
-            playerHorizontalAxis.rotation = Quaternion.Lerp(playerHorizontalAxis.rotation,
-                lookAtHorizontalAxis.rotation, Time.deltaTime * rotationSpeed);
-            playerHorizontalAxis.localEulerAngles = new Vector3(playerHorizontalAxis.localEulerAngles.x, 0f, 0f);
+            playerHead.rotation = Quaternion.Lerp(playerHead.rotation,
+                lookAtHead.rotation, Time.deltaTime * rotationSpeed);
+            playerHead.localEulerAngles = new Vector3(playerHead.localEulerAngles.x, 0f, 0f);
+        }
+
+        private void KeepRotatorStartPosition()
+        {
+           transform.position = lookAtPosition;
+           transform.eulerAngles = lookAtRotation;
         }
 
         //Stop look at action after player's activity
         public void StopLookAtRotation()
         {
-            rotationIsActive = false;
+            if(rotationIsActive) rotationIsActive = false;
         }
     }
 }

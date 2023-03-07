@@ -1,7 +1,9 @@
-﻿namespace Area_overview_webgl.Scripts.Interfaces
+﻿using UnityEngine;
+
+namespace Area_overview_webgl.Scripts.Interfaces
 {
     public interface ITeleportable
     {
-        void TryMakeTeleport();
+        void TryMakeTeleport(Vector3 cursorPosition);
     }
 }

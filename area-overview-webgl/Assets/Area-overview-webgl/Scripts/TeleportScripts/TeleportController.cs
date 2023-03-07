@@ -26,10 +26,11 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             Instance = this;
         }
 
-        public void Init(Transform firstPersonCamera, CapsuleCollider firstPersonCollider)
+        public void Init(Transform firstPersonCamera, CapsuleCollider firstPersonCollider, Camera myCamera)
         {
             telepot.Init(firstPersonCamera, firstPersonCollider);
             telepot.OnEndTeleportation += OnEndTeleportation;
+            this.myCamera = myCamera;
         }
 
         private void OnEndTeleportation()
@@ -39,11 +40,11 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         
         
         // check layer for teleport
-        private bool CheckLayer(Vector3 _rayStartPosition)
+        private bool CheckLayer(Vector3 rayStartPosition)
         {
             var isLayerForTeleport = false;
             RaycastHit hit;
-            var ray = myCamera.ScreenPointToRay(_rayStartPosition); // make ray from position
+            var ray = myCamera.ScreenPointToRay(rayStartPosition); // make ray from position
             if (Physics.Raycast(ray, out hit))
             {
                 var hitObject = hit.transform.gameObject; // ray hit this object
@@ -59,7 +60,15 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         public void TryMakeTeleport(Vector2 _position)
         {
             if (CheckLayer(_position))
+            {
+                Debug.Log("Try make teleport in teleportController");
                 telepot.MakeTeleport(GetHit().point);
+            }
+              
+            else
+            {
+                Debug.Log("Don't hit layer for teleport");
+            }
                // CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
         }
         

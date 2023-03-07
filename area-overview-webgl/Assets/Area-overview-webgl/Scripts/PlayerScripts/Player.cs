@@ -144,6 +144,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         public void Rotate(float horizontalValue, float verticalValue)
         {
+            lookAtController.StopLookAtRotation();
             currentRotationSpeedLerpValue = maxRotationSpeed;
             h = horizontalValue;
             v = verticalValue;
@@ -231,18 +232,23 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         #region Teleport
 
-        public void TryMakeTeleport()
+        public void TryMakeTeleport(Vector3 cursorPosition)
         {
-            Debug.Log("Try make teleport");
+            Debug.Log("Try make teleport in player");
+            teleportController.TryMakeTeleport(cursorPosition);
+            ResetRotationSpeed();
+            lookAtController.StopLookAtRotation();
         }
 
         #endregion
 
         #region LookAtObject
 
-        public void TryLookAtObject()
+        public void TryLookAtObject(Vector3 cursorPosition)
         {
             Debug.Log("Try make look at object");
+            ResetRotationSpeed();
+            lookAtController.TryRotateToObject(cursorPosition);
         }
 
         #endregion

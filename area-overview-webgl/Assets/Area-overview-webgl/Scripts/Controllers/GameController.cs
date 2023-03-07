@@ -51,11 +51,11 @@ namespace Area_overview_webgl.Scripts.Controllers
             uiController.Init(currentGamePlatform, startCameraMode); 
             
             // set player x and y transform for rotation
-            lookAtRotatorController.Init(playerCamera,player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetBody()); 
+            lookAtRotatorController.Init(playerCamera, player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetBody()); 
             
             parallelAreaIndicatorMainController.Init(currentGamePlatform, playerCamera);
             
-            teleportController.Init(player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetCapsuleCollider());
+            teleportController.Init(player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetCapsuleCollider(), playerCamera);
             
             player.Init(currentGamePlatform, uiController);
             

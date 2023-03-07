@@ -29,6 +29,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         
         public void MakeTeleport(Vector3 _newPos)
         {
+            Debug.Log("Start make teleport");
             teleportation = StartCoroutine(MakeTeleportCor(_newPos));
         }
 
