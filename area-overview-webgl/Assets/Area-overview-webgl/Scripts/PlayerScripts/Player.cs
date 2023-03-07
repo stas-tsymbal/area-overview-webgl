@@ -2,18 +2,27 @@
 using System.Collections;
 using Area_overview_webgl.Scripts.Controllers;
 using Area_overview_webgl.Scripts.Interfaces;
+using Area_overview_webgl.Scripts.LookAtRotatorScripts;
+using Area_overview_webgl.Scripts.ParallelAreaScripts;
+using Area_overview_webgl.Scripts.TeleportScripts;
 using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
-    public class Player : MonoBehaviour, IMove, IRotate
+    public class Player : MonoBehaviour, IMove, IRotatable, ITeleportable, ILookAtRotatable
     {
         private GamePlatform currentGamePlatform;
+        [Header("Input")]
         [SerializeField] private MovingInputController movingInputController;
         [SerializeField] private RotationInputController rotationInputController;
         [SerializeField] private ClickController clickController;
+
+        [Header("Mechanicks controllers")] 
+        [SerializeField] private LookAtRotatorController lookAtController;
+        [SerializeField] private TeleportController teleportController;
+        [SerializeField] private ParallelAreaIndicatorMainController parallelAreaController;
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
@@ -37,14 +46,12 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private float mobileSensitivity = .1f;
         [SerializeField] private float mouseSensitivity = .1f;
         
-        
-        
-        
         public void Init(GamePlatform currentGamePlatform, UIController uiController)
         {
             this.currentGamePlatform = currentGamePlatform;
             movingInputController.Init(this, currentGamePlatform, uiController);
             rotationInputController.Init(this, currentGamePlatform);
+            clickController.Init(this,this, currentGamePlatform);
            
         }
 
@@ -217,6 +224,25 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             currentRotationSpeedLerpValue = 0;
             h = 0;
             v = 0;
+        }
+
+        #endregion
+
+
+        #region Teleport
+
+        public void TryMakeTeleport()
+        {
+            Debug.Log("Try make teleport");
+        }
+
+        #endregion
+
+        #region LookAtObject
+
+        public void TryLookAtObject()
+        {
+            Debug.Log("Try make look at object");
         }
 
         #endregion

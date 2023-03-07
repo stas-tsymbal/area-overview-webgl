@@ -38,120 +38,6 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         }
         
         
-        private void Update()
-        {
-            //TODO remove Update
-          /*  if (!Application.isMobilePlatform)
-            {
-                #region PC teleport detector
-
-                // detect mouse btn down and remember camera angle
-                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-                {
-                    RememberCurrentCameraAngle();
-                }
-
-                // detect mouse btn up and try to make teleport
-                if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
-                {
-                    if (CanTeleport() && CheckLayer(Input.mousePosition))
-                    {
-                        LookAtRotatorController.Insctance.StopLookAtRotation();
-                       // CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
-                        telepot.MakeTeleport(GetHit().point);
-                    }
-                    else
-                    {
-                        //added to provide look at mech
-                        if (CanTeleport()) LookAtRotatorController.Insctance.TryRotateToObject(Input.mousePosition);
-                    }
-                }
-
-                #endregion
-            }
-            else
-            {
-                #region Mobile teleport detector
-
-                // remember current angle in click detector and try 
-
-                // detect touch down and remember camera angle
-                if (Input.touchCount > 0)
-                {
-                    
-                }
-
-                #endregion
-            }*/
-        }
-        
-        
-    /*    [SerializeField] private Transform firstPersonX;
-        [SerializeField] private Transform firstPersonY;
-        
-        [SerializeField] private Transform orbitalCamera;
-        // remember camera angle
-        public void RememberCurrentCameraAngle()
-        {
-            if (isRememberCurrentAngle) return; // don't remember again while mouse btn down
-
-            isRememberCurrentAngle = true;
-            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
-                currentAngle = new Vector2(firstPersonX.eulerAngles.y, firstPersonY.eulerAngles.x);
-            else
-                currentAngle = new Vector2(orbitalCamera.eulerAngles.y, orbitalCamera.eulerAngles.z);
-        }*/
-
- /*   [Header("Ignore teleport")]
-    [SerializeField] private float angleForIgnoreTeleport;
-        private bool CanTeleport()
-        {
-            isRememberCurrentAngle = false;
-            var canTeleport = true;
-            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
-            {
-                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(firstPersonX.eulerAngles.y)) >
-                    angleForIgnoreTeleport || // check X
-                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(firstPersonY.eulerAngles.x)) >
-                     angleForIgnoreTeleport)) // check Y
-                    canTeleport = false;
-            }
-            else
-            {
-                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(orbitalCamera.eulerAngles.y)) >
-                    angleForIgnoreTeleport || // check X
-                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(orbitalCamera.eulerAngles.z)) >
-                     angleForIgnoreTeleport)) // check Y
-                    canTeleport = false;
-            }
-
-            return canTeleport;
-        }*/
-        
-      /*  private bool CanTeleport(Transform firstPersonX, Transform firstPersonY)
-        {
-            isRememberCurrentAngle = false;
-            var canTeleport = true;
-            if (!CameraModeController.CameraModeController.Instance.IsCurrentModeOrbital())
-            {
-                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(firstPersonX.eulerAngles.y)) >
-                    angleForIgnoreTeleport || // check X
-                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(firstPersonY.eulerAngles.x)) >
-                     angleForIgnoreTeleport)) // check Y
-                    canTeleport = false;
-            }
-            else
-            {
-                if (Math.Abs(Math.Abs(currentAngle.x) - Math.Abs(orbitalCamera.eulerAngles.y)) >
-                    angleForIgnoreTeleport || // check X
-                    (Math.Abs(Math.Abs(currentAngle.y) - Math.Abs(orbitalCamera.eulerAngles.z)) >
-                     angleForIgnoreTeleport)) // check Y
-                    canTeleport = false;
-            }
-
-            return canTeleport;
-        }*/
-        
         // check layer for teleport
         private bool CheckLayer(Vector3 _rayStartPosition)
         {
@@ -174,7 +60,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         {
             if (CheckLayer(_position))
                 telepot.MakeTeleport(GetHit().point);
-              //  CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
+               // CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
         }
         
         private RaycastHit GetHit()

@@ -12,7 +12,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         private GameObject player; // main camera,  use for rotate vertical
        // private Rigidbody cameraBody; // camera body,  use for rotate horizontal and moving
         
-        [Header("Rotation speed")]
+  /*      [Header("Rotation speed")]
         [SerializeField] private float maxRotationSpeed = 8f; //rotation speed
 
         [Header("Vertical limit and damping")] [SerializeField]
@@ -42,7 +42,7 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         [Header("Copy Y for orbital camera")] [SerializeField]
         private Transform orbitalCamera;
-        
+        */
 
         private void Awake()
         {
@@ -53,9 +53,9 @@ namespace Area_overview_webgl.Scripts.FPSCamera
 
         private void OnEnable()
         {
-            currentRotationSpeed = 0;
+         /*   currentRotationSpeed = 0;
             h = 0;
-            v = 0;
+            v = 0;*/
         }
 
         private void Update()
@@ -175,8 +175,8 @@ namespace Area_overview_webgl.Scripts.FPSCamera
         // enable/disable control btn for mobile
         public void SetStateControlBtn(bool _val)
         {
-            if (Application.isMobilePlatform)
-                controlBtn.SetActive(_val);
+       //     if (Application.isMobilePlatform)
+         //       controlBtn.SetActive(_val);
         }
 
  

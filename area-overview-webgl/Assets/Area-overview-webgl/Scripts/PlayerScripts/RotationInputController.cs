@@ -6,13 +6,13 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 {
     public class RotationInputController : MonoBehaviour
     {
-        IRotate player;
+        IRotatable player;
         private GamePlatform currentGamePlatform;
         
         [Header("Invert mobile rotation")] 
         [SerializeField] private bool invertX;
         [SerializeField] private bool invertY;
-        public void Init(IRotate player, GamePlatform currentGamePlatform)
+        public void Init(IRotatable player, GamePlatform currentGamePlatform)
         {
             this.player = player;
             this.currentGamePlatform = currentGamePlatform;
