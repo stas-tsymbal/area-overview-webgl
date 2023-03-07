@@ -1,6 +1,7 @@
 ﻿using Area_overview_webgl.Scripts.Controllers;
 using Area_overview_webgl.Scripts.Interfaces;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
@@ -8,15 +9,16 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
     {
         IRotatable player;
         private GamePlatform currentGamePlatform;
+        private ClickController clickController;
         
         [Header("Invert mobile rotation")] 
         [SerializeField] private bool invertX;
         [SerializeField] private bool invertY;
-        public void Init(IRotatable player, GamePlatform currentGamePlatform)
+        public void Init(IRotatable player, GamePlatform currentGamePlatform, ClickController clickController)
         {
             this.player = player;
             this.currentGamePlatform = currentGamePlatform;
-            
+            this.clickController = clickController;
         }
        
         private void Update()
@@ -28,13 +30,12 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 case GamePlatform.mobile: DetectRotationMobile();;
                     break;
             }
-            
         }
 
         #region Mobile
         private void DetectRotationMobile()
         {
-            if (!ClickDetector.Instance.GetRotationTouch().isPressed)
+            if (!clickController.GetRotationTouch().isPressed)
             {
                 player.DampRotation();
             }
@@ -48,27 +49,28 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
             if ((Input.touchCount > 0))
             {
-                // if (!ClickDetector.Instance.GetUiTouch().isPressed)
-                        //ResetCameraMoving();
+                if(Input.GetTouch(clickController.GetRotationTouch().touchID).phase == TouchPhase.Began)
+                {
+                    player.Rotate(0,0);
+                }
+                
+                if (clickController.GetRotationTouch().isPressed &&
+                    Input.GetTouch(clickController.GetRotationTouch().touchID).phase == TouchPhase.Moved)
+                {
+                    // invert control
+                    int _invertX = -1;
+                    if (invertX) _invertX = 1;
 
-                    if (ClickDetector.Instance.GetRotationTouch().isPressed &&
-                        Input.GetTouch(ClickDetector.Instance.GetRotationTouch().touchID).phase == TouchPhase.Moved)
-                    {
-                        //  if(Input.GetTouch(0).deltaPosition.magnitude > startMoveTrashold) return;  //added to prevent start camera flip
-                        
-                        // invert control
-                        int _invertX = -1;
-                        if (invertX) _invertX = 1;
+                    int _invertY = 1;
+                    if (invertY) _invertY = -1;
 
-                        int _invertY = 1;
-                        if (invertY) _invertY = -1;
-
-                        float _xDelta = Input.GetTouch(ClickDetector.Instance.GetRotationTouch().touchID).deltaPosition.x;
-                        float _yDelta = Input.GetTouch(ClickDetector.Instance.GetRotationTouch().touchID).deltaPosition.y;
-                       var horizontal = _xDelta * _invertX;
-                       var vertical = _yDelta * _invertY;
-                        player.Rotate(horizontal,vertical);
-                    }
+                    float _xDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.x;
+                    float _yDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.y;
+                    var horizontal = _xDelta * _invertX;
+                    var vertical = _yDelta * _invertY;
+                    player.Rotate(horizontal,vertical);
+                }
+                    
             }
         }
         
@@ -91,14 +93,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 return;
             }
 
-            if ((Input.GetMouseButton(0) && !ClickDetector.Instance.IsMouseOverUI()))
+            if ((Input.GetMouseButton(0) && !clickController.IsMouseOverUI()))
             {
-                //   LookAtRotatorController.Insctance.StopLookAtRotation();
                 var horizontal = -Input.GetAxis("Mouse X");
                 var vertical = Input.GetAxis("Mouse Y");
-                 player.Rotate(horizontal,vertical);
+                player.Rotate(horizontal,vertical);
             }
         }
+
+        
         
         #endregion
         

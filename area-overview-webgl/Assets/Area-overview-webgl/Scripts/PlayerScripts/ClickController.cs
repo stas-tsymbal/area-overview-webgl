@@ -134,6 +134,11 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 mouseHeld = false;
             }
         }
+        
+        public bool IsMouseOverUI()
+        {
+            return  EventSystem.current.IsPointerOverGameObject();
+        }
 
         #endregion
     }

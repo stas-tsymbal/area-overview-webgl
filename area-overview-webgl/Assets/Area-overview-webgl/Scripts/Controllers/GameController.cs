@@ -57,7 +57,7 @@ namespace Area_overview_webgl.Scripts.Controllers
             
             teleportController.Init(player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetCapsuleCollider(), playerCamera);
             
-            player.Init(currentGamePlatform, uiController);
+            player.Init(currentGamePlatform, uiController, startCameraMode);
             
             switch (currentGamePlatform)
             {

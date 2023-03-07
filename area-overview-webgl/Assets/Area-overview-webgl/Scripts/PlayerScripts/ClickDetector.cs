@@ -12,7 +12,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
  */
     public class ClickDetector : MonoBehaviour
     {
-        public static ClickDetector Instance;
+        //public static ClickDetector Instance;
 
         [Header("Touch status")] [SerializeField]
         private TouchSample uiTouch;
@@ -35,7 +35,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         private void Awake()
         {
-            Instance = this;
+           // Instance = this;
         }
 
         private void Update()

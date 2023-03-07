@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Area_overview_webgl.Scripts.CameraModeScripts;
 using Area_overview_webgl.Scripts.Controllers;
 using Area_overview_webgl.Scripts.Interfaces;
 using Area_overview_webgl.Scripts.LookAtRotatorScripts;
@@ -7,22 +8,28 @@ using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using Area_overview_webgl.Scripts.TeleportScripts;
 using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
     public class Player : MonoBehaviour, IMove, IRotatable, ITeleportable, ILookAtRotatable
     {
         private GamePlatform currentGamePlatform;
+        private CameraMode cameraMode;
         [Header("Input")]
         [SerializeField] private MovingInputController movingInputController;
         [SerializeField] private RotationInputController rotationInputController;
         [SerializeField] private ClickController clickController;
 
+        
         [Header("Mechanicks controllers")] 
         [SerializeField] private LookAtRotatorController lookAtController;
         [SerializeField] private TeleportController teleportController;
         [SerializeField] private ParallelAreaIndicatorMainController parallelAreaController;
+        
+        [SerializeField] private FirstPersonRotator firstPersonRotator;
+        [SerializeField] private OrbitRotator orbitRotator;
+        
+        
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
@@ -32,44 +39,27 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         [SerializeField] private float boostSpeed = 5f; // speed when press shift
         private bool isBoost;
-        
-        [Header("Player Rotation")]
-        [SerializeField] private float maxRotationSpeed = 8f; //rotation speed
-        [SerializeField] private float yAxisTopLimit = 280f; //upper euler angle for the camera rotation
-        [SerializeField] private float yAxisBottomLimit = 80f; //lower euler angle for the camera rotation 
        
-        [SerializeField] private float lerpSpeed = 10f;
 
-        
-        [FormerlySerializedAs("touchSensitivity")]
-        [Header("Rotation Sensitivity")]
-        [SerializeField] private float mobileSensitivity = .1f;
-        [SerializeField] private float mouseSensitivity = .1f;
-        
-        public void Init(GamePlatform currentGamePlatform, UIController uiController)
+        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode)
         {
             this.currentGamePlatform = currentGamePlatform;
+            this.cameraMode = cameraMode;
+            
             movingInputController.Init(this, currentGamePlatform, uiController);
-            rotationInputController.Init(this, currentGamePlatform);
+            rotationInputController.Init(this, currentGamePlatform, clickController);
             clickController.Init(this,this, currentGamePlatform);
-           
+            
+            firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);
+            orbitRotator.Init(currentGamePlatform);
+
         }
 
         public PlayerBody GetPlayerBody()
         {
             return playerBody;
         }
-
-        private void FixedUpdate()
-        {
-            ApplyRotation();
-        }
         
-        private void LateUpdate()
-        {
-            CorrectRotationVerticalLimit();
-        }
-
         
         #region PlayerMoving
         public void MoveForward()
@@ -137,94 +127,34 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         #endregion
 
         #region Rotation
-
-        private float currentRotationSpeedLerpValue;
-        private float h;
-        private float v;
         
         public void Rotate(float horizontalValue, float verticalValue)
         {
             lookAtController.StopLookAtRotation();
-            currentRotationSpeedLerpValue = maxRotationSpeed;
-            h = horizontalValue;
-            v = verticalValue;
+            switch (cameraMode)
+            {
+                case CameraMode.orbital:  orbitRotator.Rotate(horizontalValue, verticalValue);
+                    break;
+                case CameraMode.firstPerson:
+                    firstPersonRotator.Rotate(horizontalValue, verticalValue);
+                    break;
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
+            }
+            
         }
 
         public void DampRotation()
         {
-            currentRotationSpeedLerpValue = Mathf.Lerp(currentRotationSpeedLerpValue, 0f, Time.deltaTime * lerpSpeed);
-        }
-
-        void ApplyRotation()
-        {
-            float currentVerticalRotationValue;
-            float currentHorizontalRotationValue;
-
-            switch (currentGamePlatform)
+            switch (cameraMode)
             {
-                case GamePlatform.PC: 
-                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mouseSensitivity;
-                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mouseSensitivity;
+                case CameraMode.orbital:  orbitRotator.DampRotation();
                     break;
-                case GamePlatform.mobile:
-                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mobileSensitivity;
-                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mobileSensitivity;
+                case CameraMode.firstPerson: firstPersonRotator.DampRotation();
                     break;
-                default:  throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
             }
-            
-            currentVerticalRotationValue = CheckVerticalLimit(currentVerticalRotationValue);
-
-            RotateVertical(currentVerticalRotationValue);
-
-            RotateHorizontal(currentHorizontalRotationValue);
-        }
-
-        private float CheckVerticalLimit(float currentVerticalRotationValue)
-        {
-            var _newYAfterRotation = GetPlayerBody().GetHead().eulerAngles.x + currentVerticalRotationValue;
-            if (_newYAfterRotation <= yAxisTopLimit && _newYAfterRotation > 180 ||
-                _newYAfterRotation >= yAxisBottomLimit && _newYAfterRotation < 180)
-                return 0;
-            else
-                return currentVerticalRotationValue;
-        }
-
-        private void RotateVertical(float currentVerticalRotationValue)
-        {
-            // rotate vertical
-            Vector3 eulerAnglesVertical = GetPlayerBody().GetHead().eulerAngles;
-            eulerAnglesVertical = new Vector3(eulerAnglesVertical.x + currentVerticalRotationValue, 
-                eulerAnglesVertical.y,
-                eulerAnglesVertical.z);
-            GetPlayerBody().GetHead().eulerAngles = eulerAnglesVertical;
-        }
-        private void RotateHorizontal(float currentHorizontalRotationValue)
-        {
-            // rotate horizontal
-            Vector3 eulerAnglesHorizontal = GetPlayerBody().GetBody().transform.eulerAngles;
-            eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x, 
-                eulerAnglesHorizontal.y + currentHorizontalRotationValue,
-                eulerAnglesHorizontal.z);
-            GetPlayerBody().GetBody().transform.eulerAngles = eulerAnglesHorizontal;
-        }
-        private void CorrectRotationVerticalLimit()
-        {
-            var cameraRotation = GetPlayerBody().GetHead().eulerAngles;
-            // top
-            if (cameraRotation.x <= yAxisTopLimit && cameraRotation.x > 180)
-                GetPlayerBody().GetHead().eulerAngles = new Vector3(yAxisTopLimit, cameraRotation.y, cameraRotation.z);
-
-            // bottom 
-            if (cameraRotation.x >= yAxisBottomLimit && cameraRotation.x < 180)
-                GetPlayerBody().GetHead().eulerAngles = new Vector3(yAxisBottomLimit, cameraRotation.y, cameraRotation.z);
-        }
-        
-        private void ResetRotationSpeed()
-        {
-            currentRotationSpeedLerpValue = 0;
-            h = 0;
-            v = 0;
         }
 
         #endregion
@@ -235,9 +165,17 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         public void TryMakeTeleport(Vector3 cursorPosition)
         {
             Debug.Log("Try make teleport in player");
-            teleportController.TryMakeTeleport(cursorPosition);
-            ResetRotationSpeed();
+            switch (cameraMode)
+            {
+                case CameraMode.orbital:  orbitRotator.ResetRotationSpeed();
+                    break;
+                case CameraMode.firstPerson: firstPersonRotator.ResetRotationSpeed();
+                    break;
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
+            }
             lookAtController.StopLookAtRotation();
+            teleportController.TryMakeTeleport(cursorPosition);
         }
 
         #endregion
@@ -247,7 +185,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         public void TryLookAtObject(Vector3 cursorPosition)
         {
             Debug.Log("Try make look at object");
-            ResetRotationSpeed();
+            switch (cameraMode)
+            {
+                case CameraMode.orbital:  orbitRotator.ResetRotationSpeed();
+                    break;
+                case CameraMode.firstPerson: firstPersonRotator.ResetRotationSpeed();
+                    break;
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
+            }
             lookAtController.TryRotateToObject(cursorPosition);
         }
 

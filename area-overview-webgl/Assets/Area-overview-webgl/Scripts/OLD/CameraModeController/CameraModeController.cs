@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Area_overview_webgl.Scripts.FPSCamera;
+
 using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using UnityEngine;
@@ -19,8 +19,8 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     [SerializeField] private CameraMode cameraMode;
 
     [Header("Control Scripts")]
-    [SerializeField] private OrbitRotation.OrbitRotation orbitalLogic;
-    [SerializeField] private FirstPersonRotator mobileFirstPerson; // logic PC and mobile
+ //   [SerializeField] private OrbitRotation.OrbitRotator orbitalLogic;
+  //  [SerializeField] private FirstPersonRotator mobileFirstPerson; // logic PC and mobile
 
     [Header("Camera Moving")]
     [SerializeField] private Transform orbitalPosition; 
@@ -151,14 +151,14 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     // on/off orbital script
     private void EnableOrbitalScript(bool _val)
     {
-        orbitalLogic.enabled = _val;
+       // orbitalLogic.enabled = _val;
     }
     
     // on/off mobile camera script
     private void EnableMobileFirstPersonScript(bool _val)
     {
-        if(mobileFirstPerson != null)
-            mobileFirstPerson.enabled = _val;
+     /*   if(mobileFirstPerson != null)
+            mobileFirstPerson.enabled = _val;*/
     }
 
     // set orbital position for camera

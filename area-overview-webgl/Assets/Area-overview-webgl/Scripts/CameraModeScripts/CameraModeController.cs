@@ -6,8 +6,8 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
     public class CameraModeController : MonoBehaviour
     {
         [SerializeField] private CameraMode currentCameraMode;
-        [SerializeField] private FirstPersonRotator firstPersonRotator;
-        [SerializeField] private OrbitalRotator orbitalRotator;
+       // [SerializeField] private FirstPersonRotator firstPersonRotator;
+       // [SerializeField] private OrbitalRotator orbitalRotator;
 
         public Action<CameraMode> OnCameraModeChange;
 
