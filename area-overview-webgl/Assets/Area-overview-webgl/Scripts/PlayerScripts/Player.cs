@@ -29,8 +29,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private FirstPersonRotator firstPersonRotator;
         [SerializeField] private OrbitRotator orbitRotator;
         
-        
-        
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
         
@@ -39,12 +37,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         [SerializeField] private float boostSpeed = 5f; // speed when press shift
         private bool isBoost;
-       
 
-        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode)
+        private CameraModeScripts.CameraModeController cameraModeController;
+        
+      
+        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, CameraModeScripts.CameraModeController cameraModeController)
         {
             this.currentGamePlatform = currentGamePlatform;
             this.cameraMode = cameraMode;
+            this.cameraModeController = cameraModeController;
             
             movingInputController.Init(this, currentGamePlatform, uiController);
             rotationInputController.Init(this, currentGamePlatform, clickController);
@@ -52,7 +53,19 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             
             firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);
             orbitRotator.Init(currentGamePlatform);
+            
+            cameraModeController.OnCameraModeChange += OnCameraModeChange;
+        }
 
+        public void OnCameraModeChange(CameraMode cameraMode)
+        {
+            this.cameraMode = cameraMode;
+            Debug.Log("Change camera mode + " + cameraMode);
+        }
+
+        private void OnDestroy()
+        {
+            cameraModeController.OnCameraModeChange -= OnCameraModeChange;
         }
 
         public PlayerBody GetPlayerBody()

@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class UiController : MonoBehaviour
 {
-    #region Signleton
+   /* #region Signleton
 
     public static UiController Instance;
 
@@ -76,5 +76,5 @@ public class UiController : MonoBehaviour
     public void SetView(int _idInOverlayUiViews, GameObject _view)
     {
         overlayUiViews[_idInOverlayUiViews].SetView(_view);
-    }
+    }*/
 }

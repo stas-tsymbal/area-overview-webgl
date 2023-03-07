@@ -721,7 +721,7 @@ RectTransform:
   - {fileID: 3561843687516827750}
   - {fileID: 3561843686310641041}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1380,7 +1380,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMode: 1
-  orbitalLogic: {fileID: 163741826}
   orbitalPosition: {fileID: 1386473194}
   orbitalCameraParent: {fileID: 163741825}
   firstPersonCameraParent: {fileID: 1861629548}
@@ -1494,7 +1493,7 @@ Transform:
   - {fileID: 221930757}
   - {fileID: 8345070699639368655}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1018565313
 GameObject:
@@ -1932,7 +1931,7 @@ Transform:
   - {fileID: 1761450559}
   - {fileID: 357738559}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1236404859
 GameObject:
@@ -2857,57 +2856,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4152775979022966003, guid: 89ee1686f11347845b5d018fafdb9c5e, type: 3}
   m_PrefabInstance: {fileID: 4152775978568649429}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1722691693
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1722691694}
-  - component: {fileID: 1722691695}
-  m_Layer: 0
-  m_Name: click detector- check mobile teleport
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1722691694
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722691693}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 235, y: 147, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1722691695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722691693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6655500920d5f1249ad9168a3c68cfb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiTouch:
-    touchID: -1
-    isPressed: 0
-  rotationTouch:
-    touchID: -1
-    isPressed: 0
-  isMousePressOverUI: 0
 --- !u!1 &1761450558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,7 +3247,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1958598952
 MonoBehaviour:
@@ -3572,7 +3520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 731421431912081331, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 731421431912081331, guid: 70212424bc876a549829f7779c7b03e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3645,6 +3593,7 @@ MonoBehaviour:
   teleportController: {fileID: 743713401}
   parallelAreaController: {fileID: 729585688}
   firstPersonRotator: {fileID: 765245951}
+  orbitRotator: {fileID: 163741826}
   playerBody:
     head: {fileID: 1811196001}
     body: {fileID: 1861629551}
@@ -5449,6 +5398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 6597960473253957187, guid: 29b16dce3a870eb41a4785007e459d43, type: 3}
+      propertyPath: orbitSphere
+      value: 
+      objectReference: {fileID: 163741825}
     - target: {fileID: 6597960473253957308, guid: 29b16dce3a870eb41a4785007e459d43, type: 3}
       propertyPath: m_Name
       value: Sphere orbit

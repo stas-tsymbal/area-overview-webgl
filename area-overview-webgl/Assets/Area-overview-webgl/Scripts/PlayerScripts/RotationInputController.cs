@@ -41,11 +41,11 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             }
             
             // block rotation if UI is open
-            if (UiController.Instance.SomeOverlayUiIsActive())
+          /*  if (UiController.Instance.SomeOverlayUiIsActive())
             {
                 player.DampRotation();
                 return;
-            }
+            }*/
 
             if ((Input.touchCount > 0))
             {
@@ -87,11 +87,11 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             }
             
             // block rotation if UI is open
-            if (UiController.Instance.SomeOverlayUiIsActive())
+           /* if (UiController.Instance.SomeOverlayUiIsActive())
             {
                 player.DampRotation();
                 return;
-            }
+            }*/
 
             if ((Input.GetMouseButton(0) && !clickController.IsMouseOverUI()))
             {

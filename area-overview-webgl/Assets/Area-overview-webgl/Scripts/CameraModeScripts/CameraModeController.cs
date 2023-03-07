@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Area_overview_webgl.Scripts.UIScripts;
 
 namespace Area_overview_webgl.Scripts.CameraModeScripts
 {
@@ -10,8 +11,8 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
        // [SerializeField] private OrbitalRotator orbitalRotator;
 
         public Action<CameraMode> OnCameraModeChange;
-
-        public void Init(CameraMode currentCameraMode)
+        private UIController uiController;
+        public void Init(CameraMode currentCameraMode, UIController uiController)
         {
             switch (currentCameraMode)
             {
@@ -21,9 +22,23 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
                     break;
                 default: throw new ArgumentException($"Check CameraMode enum for this value {currentCameraMode}");
             }
+
+            this.uiController = uiController;
+            Subscribe();
+        }
+
+        void Subscribe()
+        {
+            uiController.GetCameraModeIndicator().OnOrbitalModeClick += SetOrbitalMode;
+            uiController.GetCameraModeIndicator().OnFirstPersonModeClick += SetFirstPersonMode;
+        }
+
+        void UnSubscribe()
+        {
+            uiController.GetCameraModeIndicator().OnOrbitalModeClick -= SetOrbitalMode;
+            uiController.GetCameraModeIndicator().OnFirstPersonModeClick -= SetFirstPersonMode;
         }
         
-
         #region First Person Mode
         public void SetFirstPersonMode()
         {
@@ -42,10 +57,6 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
         }
         
         #endregion
-        
-        
-        
-
         
     }
 }
