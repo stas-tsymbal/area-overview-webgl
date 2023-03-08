@@ -30,6 +30,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private OrbitRotator orbitRotator;
 
         [SerializeField] private PlayerCameraModeSwitcher cameraModeSwitcher;
+        [SerializeField] private PlayerCameraModeSynchronizer cameraModeSynchronizer;
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
@@ -65,8 +66,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             
             cameraModeController.OnCameraModeChange += OnCameraModeChange;
             
-            cameraModeSwitcher.Init();
-            
+            cameraModeSynchronizer.Init(cameraMode, cameraModeController, transform, orbitRotator.transform);
+           
             
         }
 

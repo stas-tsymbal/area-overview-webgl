@@ -56,8 +56,6 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             return isLayerForTeleport;
         }
         
-        
-        
         // call from TouchPhase.Ended in click detector
         public void TryMakeTeleportWithCheck(Vector2 _position)
         {

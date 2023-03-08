@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-
+using Area_overview_webgl.Scripts.CameraModeScripts;
 using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using UnityEngine;
@@ -9,12 +9,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 {
     public class PlayerCameraModeSwitcher : MonoBehaviour
     {
-        private enum CameraMode
-    {
-        orbital,
-        firstPerson
-    }
-
+        
     [SerializeField] private CameraMode currentCameraMode;
     
     [Header("Camera Moving")]
@@ -54,7 +49,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         MoveCameraToOrbital(); // copy and set camera position 
         
         // lerp camera
-       // StopAllCoroutines();
+        StopAllCoroutines();
         StartCoroutine(LerpOrbitalMode());
         
     }
@@ -68,13 +63,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             myCamera.rotation = Quaternion.Lerp(myCamera.rotation, orbitalPosition.rotation, Time.deltaTime * lerpSpeed);
             yield return null;
         }
+
+        myCamera.position = targetTransform.position;
         OnCameraModeChanged?.Invoke();
     }
 
     // Remember first person position
     private void RememberFirstPersonPosition()
     {
-        lastFPPosition.position = myCamera.position;
+        lastFPPosition.position = rayYHeight.position;
         lastFPPosition.eulerAngles = myCamera.eulerAngles;
     }
 
@@ -85,7 +82,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         // reset parent
         myCamera.SetParent(firstPersonCameraParent.transform);
         // lerp moving 
-      //  StopAllCoroutines();
+        StopAllCoroutines();
         StartCoroutine(LerpForFirsPersonMode());
     }
 
@@ -104,6 +101,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             myCamera.rotation = Quaternion.Lerp(myCamera.rotation, lastFPPosition.rotation, Time.deltaTime * lerpSpeed);
             yield return null;
         }
+
+        myCamera.position = lastFPPosition.position;
         OnCameraModeChanged?.Invoke();
     }
     

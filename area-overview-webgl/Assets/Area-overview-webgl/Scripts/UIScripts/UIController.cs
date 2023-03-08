@@ -36,7 +36,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
         {
             return mobileMovingButtons;
         }
-
+        
         private void OnCameraModeChange(CameraMode cameraMode)
         {
             switch (cameraMode)

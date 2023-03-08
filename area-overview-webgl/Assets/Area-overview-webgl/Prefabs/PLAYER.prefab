@@ -219,16 +219,8 @@ MonoBehaviour:
   yAxisTopLimit: 280
   yAxisBottomLimit: 80
   lerpSpeed: 10
-  touchSensitivity: 0.1
+  mobileSensitivity: 0.1
   mouseSensitivity: 0.1
-  invertX: 1
-  invertY: 1
-  movingForceSpeed: 10
-  cameraRotationFromKeySpeed: 10
-  shiftBoostSpeed: 5
-  controlBtn: {fileID: 0}
-  orbitalCamera: {fileID: 0}
-  orbitStandardAngle: 80
 --- !u!1 &731421432194735027
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731421432194735027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
