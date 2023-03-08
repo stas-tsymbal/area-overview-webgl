@@ -20,7 +20,7 @@ namespace Area_overview_webgl.Scripts.Controllers
         [SerializeField] private Camera playerCamera;
         [FormerlySerializedAs("parallelAreaIndicatorController")]
         [Header("Controllers")]
-        [SerializeField] private CameraModeScripts.CameraModeController cameraModeController;
+        [SerializeField] private CameraModeController cameraModeController;
 
         [Header("UI")]
         [SerializeField] private UIController uiController;
@@ -45,7 +45,7 @@ namespace Area_overview_webgl.Scripts.Controllers
             //currentGamePlatform = GamePlatform.mobile;
             
             // activate menu, add listeners on buttons
-            uiController.Init(currentGamePlatform, startCameraMode); 
+            uiController.Init(currentGamePlatform, startCameraMode, cameraModeController); 
             
             // set player x and y transform for rotation
             

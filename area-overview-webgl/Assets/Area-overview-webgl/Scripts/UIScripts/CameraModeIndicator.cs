@@ -33,11 +33,13 @@ namespace Area_overview_webgl.Scripts.UIScripts
         public Action OnFirstPersonModeClick;
         public Action OnOrbitalModeClick;
 
-
-        public void Init(CameraMode startCameraMode)
+        private CameraModeController cameraModeController;
+        public void Init(CameraMode startCameraMode, CameraModeController cameraModeController)
         {
             AddEventsOnButton();
             PaintButtonOnStart(startCameraMode);
+            this.cameraModeController = cameraModeController;
+            cameraModeController.OnCameraModeChange += OnChangeCameraMode;
         }
 
        private void PaintButtonOnStart(CameraMode startCameraMode)
@@ -65,19 +67,31 @@ namespace Area_overview_webgl.Scripts.UIScripts
         
         private void ClickFirstPersonButton()
         {
-            PaintFirstPersonColorButton();
+           
             OnFirstPersonModeClick?.Invoke();
         }
         
         private void ClickOrbitalButton()
         {
-            PaintOrbitalColorButton();
+            
             OnOrbitalModeClick?.Invoke();
         }
-        
+
+        public void OnChangeCameraMode(CameraMode cameraMode)
+        {
+            switch (cameraMode)
+            {
+                case CameraMode.orbital: PaintOrbitalColorButton();;
+                    break;
+                case CameraMode.firstPerson:  PaintFirstPersonColorButton();; 
+                    break;
+                default:
+                    throw new ArgumentException($"Check CameraMode enum for this value {cameraMode}");
+            }
+        }
         
         // Change indicator color for first person button -> active, orbital - inactive
-        public void PaintFirstPersonColorButton()
+        private void PaintFirstPersonColorButton()
         {
             firstPerson.color = pressedColor;
             orbit.color = standardColor;
@@ -87,7 +101,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
         }
 
         // Change indicator color for orbital -> active, first person button - inactive
-        public void PaintOrbitalColorButton()
+        private void PaintOrbitalColorButton()
         {
             firstPerson.color = standardColor;
             orbit.color = pressedColor;

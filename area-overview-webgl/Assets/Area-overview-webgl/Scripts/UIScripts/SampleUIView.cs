@@ -13,5 +13,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
         {
             gameObject.SetActive(false);
         }
+        
+        
     }
 }
