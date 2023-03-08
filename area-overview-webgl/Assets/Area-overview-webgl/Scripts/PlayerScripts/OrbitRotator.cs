@@ -1,4 +1,5 @@
-﻿using Area_overview_webgl.Scripts.Controllers;
+﻿using System;
+using Area_overview_webgl.Scripts.Controllers;
 using UnityEngine;
 
 namespace  Area_overview_webgl.Scripts.PlayerScripts
@@ -20,7 +21,7 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         private float v;
 
         [Header("Sensitivity")] [SerializeField]
-        private float touchSensitivity = .1f;
+        private float mobileSensitivity = .1f;
 
         [SerializeField] private float mouseSensitivity = .1f;
 
@@ -73,15 +74,27 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         
         private void FixedUpdate()
         {
-            var _curV = v * currentRotationSpeedLerpValue * mouseSensitivity;
-            var _curH = h * currentRotationSpeedLerpValue * mouseSensitivity;
-
-            if (orbitSphere.transform.eulerAngles.z + _curV <= 0.1f ||
-                orbitSphere.transform.eulerAngles.z + _curV >= 179.9f)
-                _curV = 0;
+            float currentVerticalRotationValue;
+            float currentHorizontalRotationValue;
+            switch (currentGamePlatform)
+            {
+                case GamePlatform.PC: 
+                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mouseSensitivity;
+                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mouseSensitivity;
+                    break;
+                case GamePlatform.mobile:
+                    currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mobileSensitivity;
+                    currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mobileSensitivity;
+                    break;
+                default:  throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
+            }
+            
+            if (orbitSphere.transform.eulerAngles.z + currentVerticalRotationValue <= 0.1f ||
+                orbitSphere.transform.eulerAngles.z + currentVerticalRotationValue >= 179.9f)
+                currentVerticalRotationValue = 0;
 
             var eulerAngles = orbitSphere.transform.eulerAngles;
-            eulerAngles = new Vector3(eulerAngles.x, eulerAngles.y + _curH, eulerAngles.z + _curV);
+            eulerAngles = new Vector3(eulerAngles.x, eulerAngles.y + currentHorizontalRotationValue, eulerAngles.z + currentVerticalRotationValue);
             orbitSphere.transform.eulerAngles = eulerAngles;
         }
 

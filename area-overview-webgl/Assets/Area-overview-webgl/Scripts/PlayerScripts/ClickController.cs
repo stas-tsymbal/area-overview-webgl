@@ -87,7 +87,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                             Debug.Log("it is teleport or rotate click");
                             playerTeleport.TryMakeTeleport(touch.position);
                             playerLookAt.TryLookAtObject(touch.position);
-                            //TeleportController.Instance.TryMakeTeleport(touch.position); // try to make teleport
                         }
                        
                     }

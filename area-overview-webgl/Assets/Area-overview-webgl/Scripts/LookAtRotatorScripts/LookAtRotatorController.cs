@@ -12,14 +12,7 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
         private LayerMask lookAtLayer;
         
         [SerializeField] private Camera myCamera;
-
-        public static LookAtRotatorController Insctance;
-
-        private void Awake()
-        {
-            Insctance = this;
-        }
-
+        
         public void Init(Camera myCamera, Transform playerHead, Transform playerBody)
         {
             this.myCamera = myCamera;

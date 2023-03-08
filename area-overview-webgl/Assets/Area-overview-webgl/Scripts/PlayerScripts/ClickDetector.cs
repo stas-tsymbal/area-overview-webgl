@@ -9,7 +9,10 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
     /**
  * Script detect touch and write touch ID and type(over UI or not)
  * Can check mouse over UI in void IsMouseOverUI()
+     *
+     * 
  */
+    // OLD
     public class ClickDetector : MonoBehaviour
     {
         //public static ClickDetector Instance;
@@ -32,12 +35,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 isPressed = _state;
             }
         }
-
-        private void Awake()
-        {
-           // Instance = this;
-        }
-
+        
         private void Update()
         {
             if (Application.isMobilePlatform)
@@ -85,7 +83,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                     if (rotationTouch.isPressed && rotationTouch.touchID == id)
                     {
                         rotationTouch.SetTouchState(-1, false);
-                        TeleportController.Instance.TryMakeTeleport(touch.position); // try to make teleport
+                        //TeleportController.Instance.Try(touch.position); // try to make teleport
                     }
                 }
             }

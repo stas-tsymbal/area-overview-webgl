@@ -40,7 +40,7 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
         
         
         // check layer for teleport
-        private bool CheckLayer(Vector3 rayStartPosition)
+        public bool CanMakeTeleport(Vector3 rayStartPosition)
         {
             var isLayerForTeleport = false;
             RaycastHit hit;
@@ -56,20 +56,25 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             return isLayerForTeleport;
         }
         
+        
+        
         // call from TouchPhase.Ended in click detector
-        public void TryMakeTeleport(Vector2 _position)
+        public void TryMakeTeleportWithCheck(Vector2 _position)
         {
-            if (CheckLayer(_position))
+            if (CanMakeTeleport(_position))
             {
                 Debug.Log("Try make teleport in teleportController");
                 telepot.MakeTeleport(GetHit().point);
             }
-              
             else
             {
                 Debug.Log("Don't hit layer for teleport");
             }
-               // CameraModeController.CameraModeController.Instance.MoveCameraByClick(GetHit().point);
+        }
+
+        public void MakeTeleport()
+        {
+            telepot.MakeTeleport(GetHit().point);
         }
         
         private RaycastHit GetHit()

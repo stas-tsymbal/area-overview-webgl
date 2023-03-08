@@ -304,10 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCameraMode: 0
   playerCamera: {fileID: 1811196000}
-  parallelAreaIndicatorMainController: {fileID: 729585688}
-  lookAtRotatorController: {fileID: 202431331}
   cameraModeController: {fileID: 357738560}
-  teleportController: {fileID: 743713401}
   uiController: {fileID: 1761450560}
   player: {fileID: 731421431418327521}
 --- !u!1 &202431329
@@ -1343,7 +1340,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 886649354}
-  - component: {fileID: 886649355}
   m_Layer: 0
   m_Name: Camera mode controller
   m_TagString: Untagged
@@ -1367,30 +1363,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &886649355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 886649353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93a7cdfed0744ff93b1b3a2ad04921a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraMode: 1
-  orbitalPosition: {fileID: 1386473194}
-  orbitalCameraParent: {fileID: 163741825}
-  firstPersonCameraParent: {fileID: 1861629548}
-  myCamera: {fileID: 1811196001}
-  lerpSpeed: 10
-  targetTransform: {fileID: 965497708}
-  lerpMinValue: 0.1
-  lastFPPosition: {fileID: 1955593901}
-  firstPersonStandardAngle: 0
-  normalDetector: {fileID: 1666827066}
-  rayYHeight: {fileID: 2145323632}
 --- !u!1 &896268154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1394,7 @@ Transform:
   - {fileID: 202431330}
   - {fileID: 743713400}
   - {fileID: 729585687}
+  - {fileID: 1373925029}
   m_Father: {fileID: 1861629551}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2404,6 +2377,61 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: eb8cf7db9d1efc7439c241455e8164a6, type: 2}
+--- !u!1 &1373925028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373925029}
+  - component: {fileID: 1373925030}
+  m_Layer: 6
+  m_Name: PlayerCameraModeSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1373925029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373925028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 896268155}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1373925030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373925028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b93a7cdfed0744ff93b1b3a2ad04921a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCameraMode: 0
+  orbitalPosition: {fileID: 1386473194}
+  orbitalCameraParent: {fileID: 163741825}
+  firstPersonCameraParent: {fileID: 1861629548}
+  myCamera: {fileID: 1811196001}
+  lerpSpeed: 10
+  targetTransform: {fileID: 965497708}
+  lerpMinValue: 0.1
+  lastFPPosition: {fileID: 1955593901}
+  firstPersonStandardAngle: 0
+  rayYHeight: {fileID: 2145323632}
 --- !u!1 &1379666746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,7 +3351,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3510d0b6d0bcc478423dcac505a98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayUiViews: []
 --- !u!114 &2079307366 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4049541783804286791, guid: 035d75e4825e0914eaeef3bf3292e9ef, type: 3}
@@ -3594,6 +3621,7 @@ MonoBehaviour:
   parallelAreaController: {fileID: 729585688}
   firstPersonRotator: {fileID: 765245951}
   orbitRotator: {fileID: 163741826}
+  cameraModeSwitcher: {fileID: 1373925030}
   playerBody:
     head: {fileID: 1811196001}
     body: {fileID: 1861629551}

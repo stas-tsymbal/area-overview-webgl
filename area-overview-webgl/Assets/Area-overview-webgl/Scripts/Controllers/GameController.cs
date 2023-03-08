@@ -20,11 +20,8 @@ namespace Area_overview_webgl.Scripts.Controllers
         [SerializeField] private Camera playerCamera;
         [FormerlySerializedAs("parallelAreaIndicatorController")]
         [Header("Controllers")]
-        [SerializeField] private ParallelAreaIndicatorMainController parallelAreaIndicatorMainController;
-        [SerializeField] private LookAtRotatorController lookAtRotatorController;
         [SerializeField] private CameraModeScripts.CameraModeController cameraModeController;
-        [SerializeField] private TeleportController teleportController;
-        
+
         [Header("UI")]
         [SerializeField] private UIController uiController;
         
@@ -51,15 +48,11 @@ namespace Area_overview_webgl.Scripts.Controllers
             uiController.Init(currentGamePlatform, startCameraMode); 
             
             // set player x and y transform for rotation
-            lookAtRotatorController.Init(playerCamera, player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetBody()); 
             
-            parallelAreaIndicatorMainController.Init(currentGamePlatform, playerCamera);
-            
-            teleportController.Init(player.GetPlayerBody().GetHead(), player.GetPlayerBody().GetCapsuleCollider(), playerCamera);
-            
-            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController);
             
             cameraModeController.Init(startCameraMode, uiController);
+            
+            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera);
             
             switch (currentGamePlatform)
             {

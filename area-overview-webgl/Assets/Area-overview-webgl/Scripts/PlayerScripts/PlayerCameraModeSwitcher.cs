@@ -5,26 +5,22 @@ using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using UnityEngine;
 
-namespace Area_overview_webgl.Scripts.CameraModeController
+namespace Area_overview_webgl.Scripts.PlayerScripts
 {
-    public class CameraModeController : MonoBehaviour
+    public class PlayerCameraModeSwitcher : MonoBehaviour
     {
-         public static CameraModeController Instance;
-    private enum CameraMode
+        private enum CameraMode
     {
         orbital,
         firstPerson
     }
 
-    [SerializeField] private CameraMode cameraMode;
-
-    [Header("Control Scripts")]
- //   [SerializeField] private OrbitRotation.OrbitRotator orbitalLogic;
-  //  [SerializeField] private FirstPersonRotator mobileFirstPerson; // logic PC and mobile
-
+    [SerializeField] private CameraMode currentCameraMode;
+    
     [Header("Camera Moving")]
     [SerializeField] private Transform orbitalPosition; 
     [SerializeField] private Transform orbitalCameraParent; // parent for orbital camera
+    [Space]
     [SerializeField] private CapsuleCollider firstPersonCameraParent; // parent for first person camera
     [SerializeField] private Transform myCamera;
     [Header("Lerp changing mode")]
@@ -38,62 +34,41 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     [Header("First person angle on ground")] // set this angle when activate FP mode, settings for orbitStandardAngle you can find in mobile and pc first player logic  
     [SerializeField] private float firstPersonStandardAngle = 0; // apply for cam x
     private Coroutine moveCor;
-  //  [SerializeField] private CameraModeIndicator cameraModeIndicator;
-    [SerializeField] private ParallelAreaIndicatorActivationController normalDetector;
+    
     [SerializeField] private Transform rayYHeight; // height of ray for check teleport
-    
-    private void Awake()
-    {
-        Instance = this;
-    }
-    
-    private void Start()
-    {
-        // indicate default mode
-        if (IsCurrentModeOrbital())
-        {
-            SetCameraMode(CameraMode.firstPerson); // change mode because void return the same camera mode  --> if(cameraMode.Equals(CameraMode.orbital)) return;
-            SetOrbitalMode(); 
-        }
-        else
-        {
-            SetCameraMode(CameraMode.orbital);
-            SetFirstPersonMode();
-        }
-    }
 
+    public Action OnCameraModeChanged;
+
+    public void Init()
+    {
+        
+    }
+    
     // set orbital mode, call from UI
     public void SetOrbitalMode()
     {
-        if(IsCurrentModeOrbital()) return;
-      //  cameraModeIndicator.SetOrbitColor();
         SetCameraMode(CameraMode.orbital); // set camera mode
-        EnableMobileFirstPersonScript(false);
-        
+       
         RememberFirstPersonPosition();
         myCamera.SetParent(orbitalCameraParent);
         MoveCameraToOrbital(); // copy and set camera position 
         
         // lerp camera
-        StopAllCoroutines();
+       // StopAllCoroutines();
         StartCoroutine(LerpOrbitalMode());
-        SetStateMobileControlBtn(false);
         
-        LookAtRotatorController.Insctance.StopLookAtRotation();
     }
     
     // disable camera rotation and moving scripts while lerp 
     private IEnumerator LerpOrbitalMode()
     {
-        normalDetector.DisableIndicatorForTeleport(true);
         while (Vector3.Distance(myCamera.position,targetTransform.position) > lerpMinValue)
         {
             myCamera.position = Vector3.Lerp( myCamera.position, targetTransform.position, Time.deltaTime * lerpSpeed);
             myCamera.rotation = Quaternion.Lerp(myCamera.rotation, orbitalPosition.rotation, Time.deltaTime * lerpSpeed);
             yield return null;
         }
-        EnableOrbitalScript(true);
-        normalDetector.DisableIndicatorForTeleport(false);
+        OnCameraModeChanged?.Invoke();
     }
 
     // Remember first person position
@@ -106,24 +81,17 @@ namespace Area_overview_webgl.Scripts.CameraModeController
     // set first person mode, call from UI
     public void SetFirstPersonMode()
     {
-        if(!IsCurrentModeOrbital()) return;
-        // set camera mode
-   //     cameraModeIndicator.SetWalkColor();
         SetCameraMode(CameraMode.firstPerson);
-        // off orbital moving logic 
-        EnableOrbitalScript(false);
         // reset parent
         myCamera.SetParent(firstPersonCameraParent.transform);
         // lerp moving 
-        StopAllCoroutines();
+      //  StopAllCoroutines();
         StartCoroutine(LerpForFirsPersonMode());
-        SetStateMobileControlBtn(true);
     }
 
     // disable camera rotation and moving scripts while lerp 
     private IEnumerator LerpForFirsPersonMode()
     {
-        normalDetector.DisableIndicatorForTeleport(true);
         // set X axis for first person cam -> lastFPPosition.eulerAngles(NEW_value, OLD, OLD)
         var eulerAngles = lastFPPosition.eulerAngles;
         eulerAngles = new Vector3(firstPersonStandardAngle, eulerAngles.y, eulerAngles.z);
@@ -136,29 +104,13 @@ namespace Area_overview_webgl.Scripts.CameraModeController
             myCamera.rotation = Quaternion.Lerp(myCamera.rotation, lastFPPosition.rotation, Time.deltaTime * lerpSpeed);
             yield return null;
         }
-       
-        // on first person moving logic
-        EnableMobileFirstPersonScript(true);
-        normalDetector.DisableIndicatorForTeleport(false);
+        OnCameraModeChanged?.Invoke();
     }
     
     // set camera mode
     private void SetCameraMode(CameraMode _mode)
     {
-        cameraMode = _mode;
-    }
-
-    // on/off orbital script
-    private void EnableOrbitalScript(bool _val)
-    {
-       // orbitalLogic.enabled = _val;
-    }
-    
-    // on/off mobile camera script
-    private void EnableMobileFirstPersonScript(bool _val)
-    {
-     /*   if(mobileFirstPerson != null)
-            mobileFirstPerson.enabled = _val;*/
+        currentCameraMode = _mode;
     }
 
     // set orbital position for camera
@@ -167,18 +119,7 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         targetTransform.position = orbitalPosition.position;
         targetTransform.eulerAngles = orbitalPosition.eulerAngles;
     }
-
-    // on/off mobile control btn for first person mode 
-    public void SetStateMobileControlBtn(bool _val)
-    {
-       // mobileFirstPerson.SetStateControlBtn(_val);
-    }
-
-    // return is orbital game mode
-    public bool IsCurrentModeOrbital()
-    {
-        return cameraMode.Equals(CameraMode.orbital);
-    }
+    
 
     // set new position for last person position gameobject
     private void SetLastPersonPosition(Vector3 _pos)
@@ -186,24 +127,6 @@ namespace Area_overview_webgl.Scripts.CameraModeController
         firstPersonCameraParent.transform.position = new Vector3(_pos.x, _pos.y + firstPersonCameraParent.height/2, _pos.z);
         lastFPPosition.position = new Vector3(_pos.x, lastFPPosition.position .y, _pos.z);
     }
-
-    //click 
-    public void MoveCameraByClick(Vector3 _newPos)
-    {
-        if (IsCurrentModeOrbital())
-        {
-            SetLastPersonPosition(_newPos);
-            SetFirstPersonMode();
-        }
-        else
-        {
-            if(moveCor != null)
-                StopCoroutine(moveCor);
-          //  moveCor = StartCoroutine(MoveByClick(_newPos));
-            //TODO call teleport
-        }
-    }
-    
     
     }
 }

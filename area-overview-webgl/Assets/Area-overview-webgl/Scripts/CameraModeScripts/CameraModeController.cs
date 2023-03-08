@@ -42,6 +42,7 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
         #region First Person Mode
         public void SetFirstPersonMode()
         {
+            if( currentCameraMode == CameraMode.firstPerson) return;
             currentCameraMode = CameraMode.firstPerson;
             OnCameraModeChange?.Invoke(currentCameraMode);
         }
@@ -52,6 +53,7 @@ namespace Area_overview_webgl.Scripts.CameraModeScripts
         
         public void SetOrbitalMode()
         {
+            if( currentCameraMode == CameraMode.orbital) return;
             currentCameraMode = CameraMode.orbital;
             OnCameraModeChange?.Invoke(currentCameraMode);
         }

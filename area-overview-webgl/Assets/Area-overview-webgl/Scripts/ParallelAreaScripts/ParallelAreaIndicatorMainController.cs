@@ -24,6 +24,15 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             }
         }
 
+        public void HideIndicator()
+        {
+            parallelAreaIndicator.SetIndicatorMaxColor(false);
+        }
+        
+        public void ShowIndicator()
+        {
+            parallelAreaIndicator.SetIndicatorMaxColor(true);
+        }
         
         private void DestroyIndicatorElements()
         {

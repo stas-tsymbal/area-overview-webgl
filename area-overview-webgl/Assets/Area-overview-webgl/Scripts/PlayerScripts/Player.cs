@@ -28,6 +28,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         [SerializeField] private FirstPersonRotator firstPersonRotator;
         [SerializeField] private OrbitRotator orbitRotator;
+
+        [SerializeField] private PlayerCameraModeSwitcher cameraModeSwitcher;
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
@@ -38,29 +40,66 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private float boostSpeed = 5f; // speed when press shift
         private bool isBoost;
 
-        private CameraModeScripts.CameraModeController cameraModeController;
+        private CameraModeController cameraModeController;
         
       
-        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, CameraModeScripts.CameraModeController cameraModeController)
+        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, CameraModeController cameraModeController, Camera playerCamera)
         {
             this.currentGamePlatform = currentGamePlatform;
             this.cameraMode = cameraMode;
             this.cameraModeController = cameraModeController;
             
+            lookAtController.Init(playerCamera,GetPlayerBody().GetHead(), GetPlayerBody().GetBody()); 
+            
+            teleportController.Init(GetPlayerBody().GetHead(), GetPlayerBody().GetCapsuleCollider(), playerCamera);
+            
+            
             movingInputController.Init(this, currentGamePlatform, uiController);
             rotationInputController.Init(this, currentGamePlatform, clickController);
             clickController.Init(this,this, currentGamePlatform);
+            
+            parallelAreaController.Init( currentGamePlatform, playerCamera);
             
             firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);
             orbitRotator.Init(currentGamePlatform);
             
             cameraModeController.OnCameraModeChange += OnCameraModeChange;
+            
+            cameraModeSwitcher.Init();
+            
+            
         }
 
         public void OnCameraModeChange(CameraMode cameraMode)
         {
+            //if(this.cameraMode == cameraMode) return;
+            
             this.cameraMode = cameraMode;
+            lookAtController.StopLookAtRotation();
+        
+            orbitRotator.ResetRotationSpeed();
+            firstPersonRotator.ResetRotationSpeed();
+            
+            if (currentGamePlatform == GamePlatform.PC) parallelAreaController.HideIndicator();
+
+            cameraModeSwitcher.OnCameraModeChanged += OnCameraModeFinalChanged;
+            
+            switch (cameraMode)
+            {
+                case CameraMode.orbital:  cameraModeSwitcher.SetOrbitalMode();
+                    break;
+                case CameraMode.firstPerson: cameraModeSwitcher.SetFirstPersonMode();
+                    break;
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
+            }
             Debug.Log("Change camera mode + " + cameraMode);
+        }
+
+        public void OnCameraModeFinalChanged()
+        {
+            cameraModeSwitcher.OnCameraModeChanged -= OnCameraModeFinalChanged;
+            if (currentGamePlatform == GamePlatform.PC) parallelAreaController.ShowIndicator();
         }
 
         private void OnDestroy()
@@ -188,7 +227,12 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                     throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
             }
             lookAtController.StopLookAtRotation();
-            teleportController.TryMakeTeleport(cursorPosition);
+
+            if (teleportController.CanMakeTeleport(cursorPosition))
+            {
+                cameraModeController.SetFirstPersonMode();
+                teleportController.MakeTeleport();
+            }
         }
 
         #endregion
