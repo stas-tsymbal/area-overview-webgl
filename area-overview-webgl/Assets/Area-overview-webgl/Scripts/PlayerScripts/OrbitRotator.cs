@@ -1,6 +1,7 @@
 ﻿using System;
 using Area_overview_webgl.Scripts.Controllers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace  Area_overview_webgl.Scripts.PlayerScripts
 {
@@ -24,8 +25,7 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         private float mobileSensitivity = .1f;
 
         [SerializeField] private float mouseSensitivity = .1f;
-
-
+        
         [Header("Invert mobile moving")] 
         [SerializeField] private bool m_invertX;
 
@@ -34,16 +34,16 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         [Header("Invert PC moving")] 
         [SerializeField] private bool pc_invertX;
         [SerializeField] private bool pc_invertY;
-
         
-        [SerializeField] private Transform orbitSphere; //link to the camera sphere
+        [Header("Object for rotation")]
+        [SerializeField] private Transform orbitalSphere; //link to the camera sphere
 
         private GamePlatform currentGamePlatform;
-        private ClickController clickController;
-        
+
         public void Init(GamePlatform currentGamePlatform)
         {
             this.currentGamePlatform = currentGamePlatform;
+            transform.SetParent(null);
         }
         
         public void Rotate(float horizontalValue, float verticalValue)
@@ -82,13 +82,13 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
                 default:  throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
             }
             
-            if (orbitSphere.transform.eulerAngles.z + currentVerticalRotationValue <= 0.1f ||
-                orbitSphere.transform.eulerAngles.z + currentVerticalRotationValue >= 179.9f)
+            if (orbitalSphere.transform.eulerAngles.x + currentVerticalRotationValue <= 0.1f ||
+                orbitalSphere.transform.eulerAngles.x + currentVerticalRotationValue >= 179.9f)
                 currentVerticalRotationValue = 0;
 
-            var eulerAngles = orbitSphere.transform.eulerAngles;
-            eulerAngles = new Vector3(eulerAngles.x, eulerAngles.y + currentHorizontalRotationValue, eulerAngles.z + currentVerticalRotationValue);
-            orbitSphere.transform.eulerAngles = eulerAngles;
+            var eulerAngles = orbitalSphere.transform.eulerAngles;
+            eulerAngles = new Vector3(eulerAngles.x + currentVerticalRotationValue, eulerAngles.y + currentHorizontalRotationValue, eulerAngles.z);
+            orbitalSphere.transform.eulerAngles = eulerAngles;
         }
 
        
@@ -100,9 +100,9 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         // Check lower camera limit
         private void CheckLoverCameraLimit()
         {
-            var _cameraRotation = orbitSphere.transform.eulerAngles;
-            if (_cameraRotation.z > yAxisBottomLimit)
-                orbitSphere.transform.eulerAngles = new Vector3(_cameraRotation.x, _cameraRotation.y, yAxisBottomLimit);
+            var _cameraRotation = orbitalSphere.transform.eulerAngles;
+            if (_cameraRotation.x > yAxisBottomLimit)
+                orbitalSphere.transform.eulerAngles = new Vector3(yAxisBottomLimit, _cameraRotation.y, _cameraRotation.z);
         }
     }
 }

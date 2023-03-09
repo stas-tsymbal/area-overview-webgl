@@ -24,7 +24,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [Header("Lerp changing mode")] [SerializeField]
         private float lerpSpeed = 10f;
         [SerializeField] private float lerpMinValue = 0.1f;
-        [SerializeField] private Transform targetTransform; // target  for orbital camera lerp 
 
         [Header("Last first person position")] [SerializeField]
         private Transform lastFPPosition;
@@ -41,7 +40,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         public void Init()
         {
-            
         }
 
         // set orbital mode, call from UI
@@ -50,7 +48,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             SetCameraMode(CameraMode.orbital); // set camera mode
             RememberFirstPersonPosition();
             myCamera.SetParent(orbitalCameraParent);
-            MoveCameraToOrbital(); // copy and set camera position 
 
             // lerp camera
             if(moveCor != null) StopCoroutine(moveCor);
@@ -60,16 +57,16 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         // disable camera rotation and moving scripts while lerp 
         private IEnumerator LerpOrbitalMode()
         {
-            while (Vector3.Distance(myCamera.position, targetTransform.position) > lerpMinValue)
+            while (Vector3.Distance(myCamera.position, orbitalPosition.position) > lerpMinValue)
             {
                 myCamera.position =
-                    Vector3.Lerp(myCamera.position, targetTransform.position, Time.deltaTime * lerpSpeed);
+                    Vector3.Lerp(myCamera.position, orbitalPosition.position, Time.deltaTime * lerpSpeed);
                 myCamera.rotation =
                     Quaternion.Lerp(myCamera.rotation, orbitalPosition.rotation, Time.deltaTime * lerpSpeed);
                 yield return null;
             }
 
-            myCamera.position = targetTransform.position;
+            myCamera.position = orbitalPosition.position;
             moveCor = null;
             OnCameraModeChanged?.Invoke();
         }
@@ -119,15 +116,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             currentCameraMode = _mode;
         }
-
-        // set orbital position for camera
-        private void MoveCameraToOrbital()
-        {
-            targetTransform.position = orbitalPosition.position;
-            targetTransform.eulerAngles = orbitalPosition.eulerAngles;
-        }
-
-
+        
         // set new position for last person position gameobject
         private void SetLastPersonPosition(Vector3 _pos)
         {

@@ -14,7 +14,7 @@ namespace Area_overview_webgl.Scripts.LookAtRotatorScripts
         [Header("Rotates to an object with this layer")] [SerializeField]
         private LayerMask lookAtLayer;
 
-        [SerializeField] private Camera myCamera;
+        private Camera myCamera;
 
         public void Init(Camera myCamera, Transform playerHead, Transform playerBody)
         {

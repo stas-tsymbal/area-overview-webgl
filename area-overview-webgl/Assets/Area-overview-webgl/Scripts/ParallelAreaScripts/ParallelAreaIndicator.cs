@@ -19,17 +19,16 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 
         [Header("Ignore parallel indicator for this layer")] [SerializeField]
         private LayerMask ignoreLayer; // ignore raycast for this layer
-
-        [SerializeField] private Camera myCamera; // make ray from this camera
-
+        
         [Space] [SerializeField]
         private Transform cursorIndicator; // this object we set when ray collide with some area 
 
         [SerializeField] private Image indicatorImg;
 
         private bool isIndicatorDisable;
-
-
+        
+        private Camera myCamera; // make ray from this camera
+        
         public void Init(Camera myCamera)
         {
             this.myCamera = myCamera;

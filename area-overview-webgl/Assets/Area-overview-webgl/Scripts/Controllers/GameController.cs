@@ -23,6 +23,9 @@ namespace Area_overview_webgl.Scripts.Controllers
 
         [Header("Player")] [SerializeField] private Player player;
 
+        [Header("Central point for orbital rotator")]
+        private Transform centralPointForOrbitalRotator;
+
         public void Awake()
         {
             StartInit(GetGamePlatform(), startCameraMode);
