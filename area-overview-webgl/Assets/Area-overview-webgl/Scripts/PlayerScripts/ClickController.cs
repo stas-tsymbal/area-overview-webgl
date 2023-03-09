@@ -1,34 +1,32 @@
 ﻿using System;
 using Area_overview_webgl.Scripts.Controllers;
-using Area_overview_webgl.Scripts.Interfaces;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
+    /**
+     * Script detect mouse/mobile without moving pointer click and send event OnClick
+     */
     public class ClickController : MonoBehaviour
     {
-        [Header("Mobile touch status")] 
+        [Header("Mobile touch status")]
         [SerializeField] private TouchSample uiTouch;
         [SerializeField] private TouchSample rotationTouch;
         
-        
-        public bool mouseHeld = false;
+        private bool mouseHold;
         private Vector3 mousePosition;
         private Vector2 touchPosition;
         private GamePlatform currentGamePlatform;
         
-        ITeleportable playerTeleport;
-        ILookAtRotatable playerLookAt;
-        public void Init(ITeleportable playerTeleport, ILookAtRotatable playerLookAt, GamePlatform currentGamePlatform)
-        {
-           this.playerTeleport = playerTeleport;
-           this.playerLookAt = playerLookAt;
-           this.currentGamePlatform = currentGamePlatform;
-
-        }
+        public Action<Vector3> OnClick;
         
+        public void Init(GamePlatform currentGamePlatform)
+        {
+            this.currentGamePlatform = currentGamePlatform;
+        }
+
         private void Update()
         {
             switch (currentGamePlatform)
@@ -36,12 +34,12 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 case GamePlatform.mobile:
                     DetectClickMobile();
                     break;
-                case GamePlatform.PC: DetectClickPC();
+                case GamePlatform.PC:
+                    DetectClickPC();
                     break;
                 default:
                     throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
             }
-            
         }
 
         #region Mobile
@@ -63,7 +61,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                     if (!rotationTouch.isPressed && !EventSystem.current.IsPointerOverGameObject(id))
                     {
                         rotationTouch.SetTouchState(id, true);
-                        // TeleportController.Instance.RememberCurrentCameraAngle(); // remember angle for teleport detector
                         touchPosition = touch.position;
                     }
                 }
@@ -82,13 +79,14 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                         rotationTouch.SetTouchState(-1, false);
                         if (Vector3.SqrMagnitude(touchPosition - touch.position) > 0)
                         {
-                            // 
-                        } else  {
-                            Debug.Log("it is teleport or rotate click");
-                            playerTeleport.TryMakeTeleport(touch.position);
-                            playerLookAt.TryLookAtObject(touch.position);
+                            // touch was moved and then released
                         }
-                       
+                        else
+                        {
+                            // click
+                            OnClick?.Invoke(touch.position);
+                            
+                        }
                     }
                 }
             }
@@ -104,44 +102,49 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             return rotationTouch;
         }
-        
+
         #endregion
 
         #region PC
 
         private void DetectClickPC()
         {
-            if (Input.GetMouseButtonDown(0)) {
-                mouseHeld = false;
+            if (Input.GetMouseButtonDown(0))
+            {
+                mouseHold = false;
                 mousePosition = Input.mousePosition;
             }
 
-            if (Input.GetMouseButton(0)) {
-                mouseHeld = true;
+            if (Input.GetMouseButton(0))
+            {
+                mouseHold = true;
             }
 
             // I separate mouse moving and single click
-            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject()) {
-                if (mouseHeld && Vector3.SqrMagnitude(mousePosition - Input.mousePosition) > 0)
+            if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                if (mouseHold && Vector3.SqrMagnitude(mousePosition - Input.mousePosition) > 0)
                 {
-                    // left mouse button is released after being held and moved
-                } else  {
-                    Debug.Log("it is teleport or rotate click");
-                    playerTeleport.TryMakeTeleport(Input.mousePosition);
-                    playerLookAt.TryLookAtObject(Input.mousePosition);
+                    // left mouse button was moved and then released
                 }
-                mouseHeld = false;
+                else
+                {
+                    // click
+                    OnClick?.Invoke(Input.mousePosition);
+                }
+
+                mouseHold = false;
             }
         }
-        
+
         public bool IsMouseOverUI()
         {
-            return  EventSystem.current.IsPointerOverGameObject();
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         #endregion
     }
-    
+
     [Serializable]
     public class TouchSample
     {

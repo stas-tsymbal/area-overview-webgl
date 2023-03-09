@@ -7,19 +7,19 @@ namespace Area_overview_webgl.Scripts.UIScripts
     {
         [SerializeField] private SampleEventTrigger forwardButton;
         [SerializeField] private SampleEventTrigger backButton;
-        
+
         // Forward Button
         public Action OnPointerEnterForwardButton;
         public Action OnPointerExitForwardButton;
         public Action OnPointerDownForwardButton;
         public Action OnPointerUpForwardButton;
-        
+
         // Back Button
         public Action OnPointerEnterBackButton;
         public Action OnPointerExitBackButton;
         public Action OnPointerDownBackButton;
         public Action OnPointerUpBackButton;
-        
+
         public void Init()
         {
             AddEventsOnButton();
@@ -33,7 +33,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
             forwardButton.OnExit += () => { OnPointerExitForwardButton?.Invoke(); };
             forwardButton.OnDown += () => { OnPointerDownForwardButton?.Invoke(); };
             forwardButton.OnUp += () => { OnPointerUpForwardButton?.Invoke(); };
-            
+
             backButton.InitControlButton();
             backButton.OnEnter += () => { OnPointerEnterBackButton?.Invoke(); };
             backButton.OnExit += () => { OnPointerExitBackButton?.Invoke(); };
@@ -53,7 +53,5 @@ namespace Area_overview_webgl.Scripts.UIScripts
             backButton.OnDown -= () => { OnPointerDownBackButton?.Invoke(); };
             backButton.OnUp -= () => { OnPointerUpBackButton?.Invoke(); };
         }
-        
-        
     }
 }

@@ -3,29 +3,32 @@ using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
+    /**
+     * Script consist information about part of player body
+     */
     [Serializable]
-    public class PlayerBody 
+    public class PlayerBody
     {
         [SerializeField] private Transform head;
         [SerializeField] private Transform body;
         [SerializeField] private CapsuleCollider collider;
         [SerializeField] private Rigidbody rigidbody;
-       
+
         public Transform GetHead()
         {
             return head;
         }
-       
+
         public Transform GetBody()
         {
             return body;
         }
-       
+
         public CapsuleCollider GetCapsuleCollider()
         {
             return collider;
         }
-       
+
         public Rigidbody GetRigidbody()
         {
             return rigidbody;

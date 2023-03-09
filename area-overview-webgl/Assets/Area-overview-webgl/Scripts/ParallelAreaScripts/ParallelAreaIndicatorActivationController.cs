@@ -5,27 +5,22 @@ using UnityEngine.EventSystems;
 
 namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 {
+    /**
+     * This class control Timer for enabling/disabling ParallelAreaIndicator
+     */
     public class ParallelAreaIndicatorActivationController : MonoBehaviour
     {
-        public static ParallelAreaIndicatorActivationController Instance;
-        
-        private Timer timer;
-        
         [Header("After this time we disable cursor")] [SerializeField]
         private float disablingTime = 3f;
+
+        private Timer timer;
         
         private bool timerIsRunning;
         private bool isMousePressed;
-        private bool indicatorDisableForTeleport;
 
-        private Vector3 currentMousePosition = Vector3.zero; // current mouse position, use for check disable/enable cursorIndicator
-        
-        public Action<bool> OnChangeCursorIndicatorState;
-        
-        private void Awake()
-        {
-            Instance = this;
-        }
+        private Vector3 currentMousePosition = Vector3.zero; // current mouse position, use for checking enabling/disabling ParallelAreaIndicator
+
+        public Action<bool> OnChangeCursorIndicatorState; // call when cursor change state (enabling/disabling)
         
         public void Init()
         {
@@ -46,9 +41,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         private void FixedUpdate()
         {
             if (isMousePressed) return;
-
-            if (indicatorDisableForTeleport) return;
-
+            
             TryStartTimerForDisablingCursor();
         }
 
@@ -56,13 +49,13 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         {
             DetectMouseClick();
         }
-        
-        void DetectMouseClick()
+
+        private void DetectMouseClick()
         {
             if (Input.GetMouseButton(0))
             {
                 isMousePressed = true;
-                SetCurrentMousePosition(Input.mousePosition);
+                UpdateCurrentMousePosition(Input.mousePosition);
                 // stop timer and disable cursor indicator
                 if (timerIsRunning) PauseTimer();
                 OnChangeCursorIndicatorState?.Invoke(false);
@@ -70,17 +63,17 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             else
                 isMousePressed = false;
         }
-        
-        
-        // set current mouse position
-        private void SetCurrentMousePosition(Vector3 _position)
+
+
+        // Set new current mouse position
+        private void UpdateCurrentMousePosition(Vector3 _position)
         {
             currentMousePosition = _position;
         }
 
+        // Try start Timer if we don't moving or clicking mouse
         void TryStartTimerForDisablingCursor()
         {
-            // disable/enable cursorIndicator if mouse don't move
             if (currentMousePosition == Input.mousePosition)
             {
                 // start check 
@@ -89,7 +82,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             }
             else
             {
-                SetCurrentMousePosition(Input.mousePosition);
+                UpdateCurrentMousePosition(Input.mousePosition);
                 if (IsTimerRunning())
                 {
                     PauseTimer();
@@ -97,18 +90,6 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
                         OnChangeCursorIndicatorState?.Invoke(true);
                 }
             }
-        }
-        
-        public void DisableIndicatorForTeleport(bool _val)
-        {
-            indicatorDisableForTeleport = _val;
-            if (_val && gameObject.activeSelf)
-                OnChangeCursorIndicatorState?.Invoke(false); // disable indicator
-        }
-
-        public void DisableCursor()
-        {
-            OnChangeCursorIndicatorState?.Invoke(false);
         }
         
         #region Timer
@@ -146,7 +127,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         {
             return timerIsRunning;
         }
-        #endregion
 
+        #endregion
     }
 }

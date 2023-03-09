@@ -8,12 +8,10 @@ namespace Area_overview_webgl.Scripts.UIScripts
         {
             gameObject.SetActive(true);
         }
-        
+
         public void Hide()
         {
             gameObject.SetActive(false);
         }
-        
-        
     }
 }

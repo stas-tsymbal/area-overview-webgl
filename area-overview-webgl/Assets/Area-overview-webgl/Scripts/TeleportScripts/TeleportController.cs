@@ -1,31 +1,26 @@
-﻿using System;
-using Area_overview_webgl.Scripts.LookAtRotatorScripts;
-using Area_overview_webgl.Scripts.Static;
+﻿using Area_overview_webgl.Scripts.Static;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Area_overview_webgl.Scripts.TeleportScripts
 {
+    /**
+     * Control object teleportation and
+     * provide checking opportunity for teleporting (LayerMask teleportLayerMask)
+     */
     public class TeleportController : MonoBehaviour
     {
-        [Header("Teleport")] [SerializeField] private Teleport telepot;
-        [Header("Layer for teleport")]
-        [SerializeField] private LayerMask teleportLayerMask ;
-        
+        [Header("Teleport")] 
+        [SerializeField] private Teleport telepot;
+
+        [Header("Layer for teleport")] 
+        [SerializeField] private LayerMask teleportLayerMask;
+
         [Space] private Vector2 currentAngle; // use for remember current angle -> X and Y
         private bool isRememberCurrentAngle;
-        
+
         private Camera myCamera;
         private RaycastHit currentHit;
         
-        
-        public static TeleportController Instance;
-
-        private void Awake()
-        {
-            Instance = this;
-        }
-
         public void Init(Transform firstPersonCamera, CapsuleCollider firstPersonCollider, Camera myCamera)
         {
             telepot.Init(firstPersonCamera, firstPersonCollider);
@@ -35,11 +30,11 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
 
         private void OnEndTeleportation()
         {
-            Debug.Log("end teleportation");
+            //Debug.Log("end teleportation");
         }
-        
-        
-        // check layer for teleport
+
+
+        // Check layer for teleportation and update currentHit
         public bool CanMakeTeleport(Vector3 rayStartPosition)
         {
             var isLayerForTeleport = false;
@@ -56,12 +51,11 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             return isLayerForTeleport;
         }
         
-        // call from TouchPhase.Ended in click detector
+        // Try make teleport with layer checking
         public void TryMakeTeleportWithCheck(Vector2 _position)
         {
             if (CanMakeTeleport(_position))
             {
-                Debug.Log("Try make teleport in teleportController");
                 telepot.MakeTeleport(GetHit().point);
             }
             else
@@ -70,16 +64,15 @@ namespace Area_overview_webgl.Scripts.TeleportScripts
             }
         }
 
+        // Make teleport to last hit
         public void MakeTeleport()
         {
             telepot.MakeTeleport(GetHit().point);
         }
-        
+
         private RaycastHit GetHit()
         {
             return currentHit;
         }
-        
-        
     }
 }

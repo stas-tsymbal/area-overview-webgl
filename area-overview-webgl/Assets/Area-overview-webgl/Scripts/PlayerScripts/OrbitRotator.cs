@@ -26,16 +26,16 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private float mouseSensitivity = .1f;
 
 
-        [Header("Invert mobile moving")] [SerializeField]
-        private bool m_invertX;
+        [Header("Invert mobile moving")] 
+        [SerializeField] private bool m_invertX;
 
         [SerializeField] private bool m_invertY;
 
-        [Header("Invert PC moving")] [SerializeField]
-        private bool pc_invertX;
-
+        [Header("Invert PC moving")] 
+        [SerializeField] private bool pc_invertX;
         [SerializeField] private bool pc_invertY;
 
+        
         [SerializeField] private Transform orbitSphere; //link to the camera sphere
 
         private GamePlatform currentGamePlatform;
@@ -44,13 +44,6 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         public void Init(GamePlatform currentGamePlatform)
         {
             this.currentGamePlatform = currentGamePlatform;
-        }
-
-        private void OnEnable()
-        {
-            currentRotationSpeedLerpValue = 0;
-            h = 0;
-            v = 0;
         }
         
         public void Rotate(float horizontalValue, float verticalValue)
@@ -98,11 +91,16 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
             orbitSphere.transform.eulerAngles = eulerAngles;
         }
 
-        //check for the lower camera limit
+       
         private void LateUpdate()
         {
-            var _cameraRotation = orbitSphere.transform.eulerAngles;
+            CheckLoverCameraLimit();
+        }
 
+        // Check lower camera limit
+        private void CheckLoverCameraLimit()
+        {
+            var _cameraRotation = orbitSphere.transform.eulerAngles;
             if (_cameraRotation.z > yAxisBottomLimit)
                 orbitSphere.transform.eulerAngles = new Vector3(_cameraRotation.x, _cameraRotation.y, yAxisBottomLimit);
         }

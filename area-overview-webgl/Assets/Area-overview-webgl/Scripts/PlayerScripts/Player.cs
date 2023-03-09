@@ -25,53 +25,66 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private LookAtRotatorController lookAtController;
         [SerializeField] private TeleportController teleportController;
         [SerializeField] private ParallelAreaIndicatorMainController parallelAreaController;
-        
+        [Header("Camera mode rotators")]
         [SerializeField] private FirstPersonRotator firstPersonRotator;
         [SerializeField] private OrbitRotator orbitRotator;
 
+        [Header("Camera mode switcher")]
         [SerializeField] private PlayerCameraModeSwitcher cameraModeSwitcher;
+        [Header("Camera mode synchronizer")]
         [SerializeField] private PlayerCameraModeSynchronizer cameraModeSynchronizer;
         
         [Header("PlayerBody")]
         [SerializeField] private PlayerBody playerBody;
         
-        [Header("Player Moving")] [SerializeField]
-        private float movingForceSpeed = 10f; // use for correct camera body speed 
-        
-        [SerializeField] private float boostSpeed = 5f; // speed when press shift
+        [Header("Player Moving")] 
+        [SerializeField] private float movingForceSpeed = 10f;
+        [SerializeField] private float boostSpeed = 5f;
         private bool isBoost;
 
         private CameraModeController cameraModeController;
         
-      
         public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, CameraModeController cameraModeController, Camera playerCamera)
         {
+            // set start setting for camera mode, platform, 
             this.currentGamePlatform = currentGamePlatform;
             this.cameraMode = cameraMode;
             this.cameraModeController = cameraModeController;
             
+            // init look at logic
             lookAtController.Init(playerCamera,GetPlayerBody().GetHead(), GetPlayerBody().GetBody()); 
             
+            // init teleportation logic
             teleportController.Init(GetPlayerBody().GetHead(), GetPlayerBody().GetCapsuleCollider(), playerCamera);
             
-            
+            // init input controllers
             movingInputController.Init(this, currentGamePlatform, uiController);
             rotationInputController.Init(this, currentGamePlatform, clickController);
-            clickController.Init(this,this, currentGamePlatform);
+            clickController.Init(currentGamePlatform);
+            clickController.OnClick += OnInputClick;
             
+            // init parallel area indicator
             parallelAreaController.Init( currentGamePlatform, playerCamera);
             
+            // init rotation (first person and orbital)
             firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);
             orbitRotator.Init(currentGamePlatform);
             
+            // detect camera mode changing 
             cameraModeController.OnCameraModeChange += OnCameraModeChange;
             
+            // init camera mode synchronizer
             cameraModeSynchronizer.Init(cameraMode, cameraModeController, transform, orbitRotator.transform);
-           
             
         }
+        
+        private PlayerBody GetPlayerBody()
+        {
+            return playerBody;
+        }
 
-        public void OnCameraModeChange(CameraMode cameraMode)
+        #region Camera Mode changing
+        private void OnCameraModeChange(CameraMode cameraMode)
         {
             //if(this.cameraMode == cameraMode) return;
             
@@ -97,7 +110,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             Debug.Log("Change camera mode + " + cameraMode);
         }
 
-        public void OnCameraModeFinalChanged()
+        // Void will call after all action that call in 
+        private void OnCameraModeFinalChanged()
         {
             cameraModeSwitcher.OnCameraModeChanged -= OnCameraModeFinalChanged;
             if (currentGamePlatform == GamePlatform.PC) parallelAreaController.ShowIndicator();
@@ -107,41 +121,43 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             cameraModeController.OnCameraModeChange -= OnCameraModeChange;
         }
+        
+        #endregion
+        
 
-        public PlayerBody GetPlayerBody()
+        #region Click from input
+
+        private void OnInputClick(Vector3 inputPosition)
         {
-            return playerBody;
+            TryMakeTeleport(Input.mousePosition);
+            TryLookAtObject(Input.mousePosition);
         }
         
+        #endregion
         
         #region PlayerMoving
         public void MoveForward()
         {
-            Debug.Log("Move forward");
             ApplyForceToTheBody( GetPlayerBody().GetHead().forward);
         }
 
         public void MoveBack()
         {
-            Debug.Log("Move back");
             ApplyForceToTheBody(-GetPlayerBody().GetHead().forward);
         }
 
         public void MoveLeft()
         {
-            Debug.Log("Move left");
             ApplyForceToTheBody(-GetPlayerBody().GetHead().right);
         }
 
         public void MoveRight()
         {
-            Debug.Log("Move right");
             ApplyForceToTheBody(GetPlayerBody().GetHead().right);
         }
 
         public void BoostSpeed(bool val)
         {
-            Debug.Log($"Boost {val}");
             isBoost = val;
         }
         
@@ -186,7 +202,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             lookAtController.StopLookAtRotation();
             switch (cameraMode)
             {
-                case CameraMode.orbital:  orbitRotator.Rotate(horizontalValue, verticalValue);
+                case CameraMode.orbital: orbitRotator.Rotate(horizontalValue, verticalValue);
                     break;
                 case CameraMode.firstPerson:
                     firstPersonRotator.Rotate(horizontalValue, verticalValue);
@@ -217,10 +233,9 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         public void TryMakeTeleport(Vector3 cursorPosition)
         {
-            Debug.Log("Try make teleport in player");
             switch (cameraMode)
             {
-                case CameraMode.orbital:  orbitRotator.ResetRotationSpeed();
+                case CameraMode.orbital: orbitRotator.ResetRotationSpeed();
                     break;
                 case CameraMode.firstPerson: firstPersonRotator.ResetRotationSpeed();
                     break;
@@ -242,7 +257,6 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         public void TryLookAtObject(Vector3 cursorPosition)
         {
-            Debug.Log("Try make look at object");
             switch (cameraMode)
             {
                 case CameraMode.orbital:  orbitRotator.ResetRotationSpeed();

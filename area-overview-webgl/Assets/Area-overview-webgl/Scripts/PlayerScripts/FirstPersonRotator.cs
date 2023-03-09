@@ -1,44 +1,46 @@
 ﻿using System;
-using System.Collections;
 using Area_overview_webgl.Scripts.Controllers;
-using Area_overview_webgl.Scripts.LookAtRotatorScripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
+    /**
+     * Script provide rotation for player in First Camera mode
+     */
     public class FirstPersonRotator : MonoBehaviour
     {
-         
-        [Header("Player Rotation")]
-        [SerializeField] private float maxRotationSpeed = 8f; //rotation speed
+        [Header("Maximal rotation speed")] [SerializeField]
+        private float maxRotationSpeed = 8f; //rotation speed
+
+        [Header("Vertical rotation limit")]
         [SerializeField] private float yAxisTopLimit = 280f; //upper euler angle for the camera rotation
-        [SerializeField] private float yAxisBottomLimit = 80f; //lower euler angle for the camera rotation 
-        [SerializeField] private float lerpSpeed = 10f;
+        [SerializeField] private float yAxisBottomLimit = 80f; //lower euler angle for the camera rotation
         
-        [FormerlySerializedAs("touchSensitivity")]
-        [Header("Rotation Sensitivity")]
+        [Header("Damp rotation")]
+        [SerializeField] private float lerpSpeed = 10f;
+
+        [Header("Rotation Sensitivity")] 
         [SerializeField] private float mobileSensitivity = .1f;
         [SerializeField] private float mouseSensitivity = .1f;
-        
+
         private float currentRotationSpeedLerpValue;
         private float h;
         private float v;
 
         private PlayerBody playerBody;
         private GamePlatform currentGamePlatform;
-        
+
         public void Init(PlayerBody playerBody, GamePlatform currentGamePlatform)
         {
             this.playerBody = playerBody;
             this.currentGamePlatform = currentGamePlatform;
         }
-        
+
         private void FixedUpdate()
         {
-            ApplyRotation();        
+            ApplyRotation();
         }
-        
+
         private void LateUpdate()
         {
             CorrectRotationVerticalLimit();
@@ -63,7 +65,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
             switch (currentGamePlatform)
             {
-                case GamePlatform.PC: 
+                case GamePlatform.PC:
                     currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mouseSensitivity;
                     currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mouseSensitivity;
                     break;
@@ -71,9 +73,9 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                     currentVerticalRotationValue = v * currentRotationSpeedLerpValue * mobileSensitivity;
                     currentHorizontalRotationValue = h * currentRotationSpeedLerpValue * mobileSensitivity;
                     break;
-                default:  throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
+                default: throw new ArgumentException($"Check GamePlatform enum for this value {currentGamePlatform}");
             }
-            
+
             currentVerticalRotationValue = CheckVerticalLimit(currentVerticalRotationValue);
 
             RotateVertical(currentVerticalRotationValue);
@@ -95,20 +97,22 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             // rotate vertical
             Vector3 eulerAnglesVertical = playerBody.GetHead().eulerAngles;
-            eulerAnglesVertical = new Vector3(eulerAnglesVertical.x + currentVerticalRotationValue, 
+            eulerAnglesVertical = new Vector3(eulerAnglesVertical.x + currentVerticalRotationValue,
                 eulerAnglesVertical.y,
                 eulerAnglesVertical.z);
             playerBody.GetHead().eulerAngles = eulerAnglesVertical;
         }
+
         private void RotateHorizontal(float currentHorizontalRotationValue)
         {
             // rotate horizontal
             Vector3 eulerAnglesHorizontal = playerBody.GetBody().transform.eulerAngles;
-            eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x, 
+            eulerAnglesHorizontal = new Vector3(eulerAnglesHorizontal.x,
                 eulerAnglesHorizontal.y + currentHorizontalRotationValue,
                 eulerAnglesHorizontal.z);
             playerBody.GetBody().transform.eulerAngles = eulerAnglesHorizontal;
         }
+
         private void CorrectRotationVerticalLimit()
         {
             var cameraRotation = playerBody.GetHead().eulerAngles;
@@ -120,7 +124,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             if (cameraRotation.x >= yAxisBottomLimit && cameraRotation.x < 180)
                 playerBody.GetHead().eulerAngles = new Vector3(yAxisBottomLimit, cameraRotation.y, cameraRotation.z);
         }
-        
+
         public void ResetRotationSpeed()
         {
             currentRotationSpeedLerpValue = 0;

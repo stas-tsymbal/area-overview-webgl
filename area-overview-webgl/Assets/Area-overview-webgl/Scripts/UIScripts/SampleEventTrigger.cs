@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,20 +11,21 @@ namespace Area_overview_webgl.Scripts.UIScripts
         public Action OnExit;
         public Action OnDown;
         public Action OnUp;
-        
-        // add on click for button
+
+        // Add event trigger component with event type Pointer Click
         public void InitClick()
         {
             var eventTrigger = gameObject.AddComponent<EventTrigger>();
-            
+
             var entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerClick;
-            
+
             entry.callback.AddListener((data) => { CLickEventTrigger(); });
-            
+
             eventTrigger.triggers.Add(entry);
         }
 
+        // Add event trigger component with event type Pointer Enter, Pointer Exit, Pointer Down, Pointer Up
         public void InitControlButton()
         {
             var eventTrigger = gameObject.AddComponent<EventTrigger>();
@@ -59,37 +59,30 @@ namespace Area_overview_webgl.Scripts.UIScripts
         private void PointerEnterEventTrigger()
         {
             OnEnter?.Invoke();
-            Debug.Log("pointer enter");
         }
 
         // Pointer Exit
         private void PointerExitEventTrigger()
         {
             OnExit?.Invoke();
-            Debug.Log("pointer exit");
         }
 
         // Pointer Down
         private void PointerDownEventTrigger()
         {
             OnDown?.Invoke();
-            Debug.Log("pointer down");
         }
 
         // Pointer Up
         private void PointerUpEventTrigger()
         {
             OnUp?.Invoke();
-            Debug.Log("pointer up");
         }
-        
+
         //Button Clicked
         private void CLickEventTrigger()
         {
             OnClick?.Invoke();
-            Debug.Log("pointer click");
         }
-
-        
     }
 }

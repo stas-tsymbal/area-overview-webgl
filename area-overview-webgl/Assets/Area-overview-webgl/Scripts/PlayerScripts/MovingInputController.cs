@@ -6,18 +6,21 @@ using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
+    /**
+     * Detect input for player movement
+     */
     public class MovingInputController : MonoBehaviour
     { 
         IMove player;
         private GamePlatform currentGamePlatform;
         
-        [Header("Moving")]
+        [Header("PC Moving")]
        [SerializeField] private KeyCode moveForwardKey = KeyCode.W;
        [SerializeField] private KeyCode moveBackSpeedKey = KeyCode.S;
        [SerializeField] private KeyCode moveRightSpeedKey = KeyCode.A;
        [SerializeField] private KeyCode moveLeftSpeedKey = KeyCode.D;
         
-       [Header("Boost moving speed")]
+       [Header("PC boost moving speed")]
        [SerializeField] private KeyCode boostMovingSpeedKey = KeyCode.LeftShift;
 
        public void Init(IMove player, GamePlatform currentGamePlatform, UIController uiController)
@@ -88,6 +91,20 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         private bool mobileBack;
         private MobileControlButton mobileMovingButtons;
         
+        // I use UI buttons for mobile input (they change bool mobileForward and bool mobileBack)
+        private void InitMobile( UIController uiController)
+        {
+            mobileMovingButtons = uiController.GetMobileMovingButtons();
+
+            // subscribe on forward UI button
+            mobileMovingButtons.OnPointerEnterForwardButton += ActivateMobileForwardMoving;
+            mobileMovingButtons.OnPointerExitForwardButton += DeactivateMobileForwardMoving;
+            
+            // subscribe on back UI button 
+            mobileMovingButtons.OnPointerEnterBackButton += ActivateMobileBackMoving;
+            mobileMovingButtons.OnPointerExitBackButton += DeactivateMobileBackMoving;
+        }
+        
         private void DetectMovingMobile()
         {
             if (mobileForward) // move forward
@@ -101,18 +118,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             }
         }
         
-        private void InitMobile( UIController uiController)
-        {
-            mobileMovingButtons = uiController.GetMobileMovingButtons();
-
-            mobileMovingButtons.OnPointerEnterForwardButton += ActivateMobileForwardMoving;
-            mobileMovingButtons.OnPointerExitForwardButton += DeactivateMobileForwardMoving;
-            
-            mobileMovingButtons.OnPointerEnterBackButton += ActivateMobileBackMoving;
-            mobileMovingButtons.OnPointerExitBackButton += DeactivateMobileBackMoving;
-            
-        }
-
+        
         private void ActivateMobileForwardMoving()
         {
             SetStateMoveForward(true);

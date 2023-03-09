@@ -1,25 +1,25 @@
 ﻿using System;
-using System.Collections;
 using Area_overview_webgl.Scripts.CameraModeScripts;
-using Area_overview_webgl.Scripts.LookAtRotatorScripts;
-using Area_overview_webgl.Scripts.ParallelAreaScripts;
 using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.PlayerScripts
 {
+    /**
+     * Synchronize orbital and first person camera,
+     * orbital and first person camera will be in the same direction of view
+     */
     public class PlayerCameraModeSynchronizer : MonoBehaviour
     {
-
         private CameraMode currentCameraMode;
 
         [Header("Camera Moving")]
         [SerializeField] private Transform firstPersonTransform;
         [SerializeField] private Transform orbitalTransform; 
         
-        
         private CameraModeController cameraModeController;
         private bool isNeedSync;
-        public void OnCameraModeChangeSynchronization(CameraMode cameraMode)
+
+        private void OnCameraModeChangeSynchronization(CameraMode cameraMode)
         {
             currentCameraMode = cameraMode;
         }
@@ -58,11 +58,13 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             switch (currentCameraMode)
             {
                 case CameraMode.orbital:
+                    // copy angle for firs person from orbital
                     var eulerAnglesFirstPerson = firstPersonTransform.eulerAngles;
                     eulerAnglesFirstPerson = new Vector3(eulerAnglesFirstPerson.x, orbitalTransform.eulerAngles.y, eulerAnglesFirstPerson.z);
                     firstPersonTransform.eulerAngles = eulerAnglesFirstPerson;
                     break;
                 case CameraMode.firstPerson: 
+                    // copy angle for orbital from person from 
                     var eulerAnglesOrbital = orbitalTransform.eulerAngles;
                     eulerAnglesOrbital = new Vector3(eulerAnglesOrbital.x, firstPersonTransform.eulerAngles.y, eulerAnglesOrbital.z);
                     orbitalTransform.eulerAngles = eulerAnglesOrbital;

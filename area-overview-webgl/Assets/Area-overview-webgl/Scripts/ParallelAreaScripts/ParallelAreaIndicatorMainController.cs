@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 {
+    /**
+     * Start init enable Indicator for PC and destroy for mobile
+     * This script connect ParallelAreaIndicatorActivationController with ParallelAreaIndicator
+     */
     public class ParallelAreaIndicatorMainController : MonoBehaviour
     {
         [SerializeField] private ParallelAreaIndicator parallelAreaIndicator;

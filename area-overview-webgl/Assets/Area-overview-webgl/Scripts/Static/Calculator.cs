@@ -2,12 +2,15 @@
 
 namespace Area_overview_webgl.Scripts.Static
 {
+    /**
+     * This static class consist functions that can be using in game calculation
+     */
     public static class Calculator
     {
         /*
          * Get pow number of 2 
-         * powVal = 8, return 3
-         * powWal = 16, return 4
+         * powVal = 8, return 3, because 2*2*2
+         * powWal = 16, return 4, because 2*2*2*2
          * powWal = 128, return 7...
          */
         public static int GetPowNumber2(int powVal)
