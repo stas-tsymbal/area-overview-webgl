@@ -152,22 +152,22 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         #region PlayerMoving
         public void MoveForward()
         {
-            ApplyForceToTheBody( GetPlayerBody().GetHead().forward);
+            ApplyForceToTheBody( GetPlayerBody().GetBody().forward);
         }
 
         public void MoveBack()
         {
-            ApplyForceToTheBody(-GetPlayerBody().GetHead().forward);
+            ApplyForceToTheBody(-GetPlayerBody().GetBody().forward);
         }
 
         public void MoveLeft()
         {
-            ApplyForceToTheBody(-GetPlayerBody().GetHead().right);
+            ApplyForceToTheBody(-GetPlayerBody().GetBody().right);
         }
 
         public void MoveRight()
         {
-            ApplyForceToTheBody(GetPlayerBody().GetHead().right);
+            ApplyForceToTheBody(GetPlayerBody().GetBody().right);
         }
 
         public void BoostSpeed(bool val)
@@ -179,34 +179,16 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         {
             var forceForMoving = GetForceForMoving(forceHeading);
             var finalForce = forceForMoving * movingForceSpeed;
-           
-            SetKinematicStateForRigidbody(false);
-            GetPlayerBody().GetRigidbody().AddForce(finalForce);
             
-            // LookAtRotatorController.Insctance.StopLookAtRotation();
-            if(freezingRigidbodyCor != null) StopCoroutine(freezingRigidbodyCor);
-            freezingRigidbodyCor = StartCoroutine(FreezingRigidbody()); // try freez RB  
+            GetPlayerBody().GetRigidbody().AddForce(finalForce);
         }
-
-        private Coroutine freezingRigidbodyCor;
-        private IEnumerator FreezingRigidbody()
-        {
-            yield return new WaitForSeconds(0.1f);
-            SetKinematicStateForRigidbody(true);
-        }
-
+        
         private Vector3 GetForceForMoving(Vector3 forceHeading)
         {
             var movingForce = Time.fixedDeltaTime * forceHeading;
             return isBoost ? movingForce * boostSpeed : movingForce ;
         }
         
-        private void SetKinematicStateForRigidbody(bool val)
-        {
-            GetPlayerBody().SetKinematicStateForRigidbody(val);
-        }
-        
-
         #endregion
 
         #region Rotation

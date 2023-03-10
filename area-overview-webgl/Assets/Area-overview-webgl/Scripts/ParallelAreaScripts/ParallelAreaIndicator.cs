@@ -28,7 +28,8 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         private bool isIndicatorDisable;
         
         private Camera myCamera; // make ray from this camera
-        
+
+        private bool ifCursorOutOfMap;
         public void Init(Camera myCamera)
         {
             this.myCamera = myCamera;
@@ -50,11 +51,12 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignoreLayer))
             {
+                //ifCursorOutOfMap = false;
                 cursorIndicator.position =
                     hit.point + hit.normal / 100; // set cursor indicator over hit point(height of cursor indicator);
                 // '/100' - use for correct distance from hit point to cursorIndicator(bigger value -> less distance) 
                 cursorIndicator.LookAt(hit.point);
-
+               // SetIndicatorMaxColor(true);
                 // DEBUG DRAW RAYCAST
                 // Debug.DrawRay(hit.point, camera.transform.position, Color.green); // ray from camera
                 // Debug.DrawLine(vectorNormal, hit.point, Color.red); // normal ray from object
@@ -62,7 +64,10 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             else
             {
                 // Disable cursor
-                indicatorImg.color = new Color32(255, 255, 255, 0);
+                //indicatorImg.color = new Color32(255, 255, 255, 0);
+              //  ifCursorOutOfMap = true;
+              SetIndicatorMaxColor(false);
+            
             }
         }
 
