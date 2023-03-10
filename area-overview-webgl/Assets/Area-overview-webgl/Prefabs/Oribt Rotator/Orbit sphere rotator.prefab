@@ -78,13 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555ae683dc414b5abb282625566030e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRotationSpeed: 8
+  maxRotationSpeed: 5
   yAxisBottomLimit: 35
-  lerpSpeed: 10
+  lerpSpeed: 2
   mobileSensitivity: 0.1
   mouseSensitivity: 0.1
-  m_invertX: 1
-  m_invertY: 1
+  m_invertX: 0
+  m_invertY: 0
   pc_invertX: 1
   pc_invertY: 1
   orbitalSphere: {fileID: 991522171594355700}

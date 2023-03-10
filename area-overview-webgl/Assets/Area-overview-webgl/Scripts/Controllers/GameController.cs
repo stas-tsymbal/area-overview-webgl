@@ -26,6 +26,7 @@ namespace Area_overview_webgl.Scripts.Controllers
         [Header("Central point for orbital rotator")]
         [SerializeField] private Transform centralPointForOrbitalRotator;
 
+        [Header("Canvas")] [SerializeField] private Canvas canvas;
       
         public void Awake()
         {
@@ -43,7 +44,8 @@ namespace Area_overview_webgl.Scripts.Controllers
         {
             uiController.Init(currentGamePlatform, startCameraMode, cameraModeController);
             cameraModeController.Init(startCameraMode, uiController);
-            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera, centralPointForOrbitalRotator);
+            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera,
+                centralPointForOrbitalRotator, canvas.scaleFactor);
             
         }
         

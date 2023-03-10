@@ -13,16 +13,14 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         private GamePlatform currentGamePlatform;
         private ClickController clickController;
 
-        [Header("Invert mobile rotation")] [SerializeField]
-        private bool invertX;
-
-        [SerializeField] private bool invertY;
-
-        public void Init(IRotatable player, GamePlatform currentGamePlatform, ClickController clickController)
+        private float canvasScaleFactor;
+        
+        public void Init(IRotatable player, GamePlatform currentGamePlatform, ClickController clickController, float canvasScaleFactor)
         {
             this.player = player;
             this.currentGamePlatform = currentGamePlatform;
             this.clickController = clickController;
+            this.canvasScaleFactor = canvasScaleFactor;
         }
 
         private void Update()
@@ -58,17 +56,10 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 if (clickController.GetRotationTouch().isPressed &&
                     Input.GetTouch(clickController.GetRotationTouch().touchID).phase == TouchPhase.Moved)
                 {
-                    // invert control
-                    int _invertX = -1;
-                    if (invertX) _invertX = 1;
-
-                    int _invertY = 1;
-                    if (invertY) _invertY = -1;
-
-                    float _xDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.x;
-                    float _yDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.y;
-                    var horizontal = _xDelta * _invertX;
-                    var vertical = _yDelta * _invertY;
+                    float _xDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.x / canvasScaleFactor;
+                    float _yDelta = Input.GetTouch(clickController.GetRotationTouch().touchID).deltaPosition.y / canvasScaleFactor;
+                    var horizontal = _xDelta;
+                    var vertical = _yDelta;
                     player.Rotate(horizontal, vertical);
                 }
             }
@@ -87,8 +78,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
             if ((Input.GetMouseButton(0) && !clickController.IsMouseOverUI()))
             {
-                var horizontal = -Input.GetAxis("Mouse X");
-                var vertical = Input.GetAxis("Mouse Y");
+                var horizontal = -Input.GetAxis("Mouse X") / canvasScaleFactor;
+                var vertical = Input.GetAxis("Mouse Y") / canvasScaleFactor;
                 player.Rotate(horizontal, vertical);
             }
         }

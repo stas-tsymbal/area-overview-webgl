@@ -45,7 +45,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         private CameraModeController cameraModeController;
         
         public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, 
-            CameraModeController cameraModeController, Camera playerCamera, Transform centralPointForOrbitalRotator)
+            CameraModeController cameraModeController, Camera playerCamera, Transform centralPointForOrbitalRotator, float canvasScaleFactor)
         {
             // set start setting for camera mode, platform, 
             this.currentGamePlatform = currentGamePlatform;
@@ -63,7 +63,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             
             // init input controllers
             movingInputController.Init(this, currentGamePlatform, uiController);
-            rotationInputController.Init(this, currentGamePlatform, clickController);
+            rotationInputController.Init(this, currentGamePlatform, clickController, canvasScaleFactor);
             clickController.Init(currentGamePlatform);
             clickController.OnClick += OnInputClick;
             
@@ -111,7 +111,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
                 default:
                     throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
             }
-            Debug.Log("Change camera mode + " + cameraMode);
+            //Debug.Log("Change camera mode + " + cameraMode);
         }
 
         // Void will call after all action that call in 
@@ -133,8 +133,18 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         private void OnInputClick(Vector3 inputPosition)
         {
-            TryMakeTeleport(Input.mousePosition);
-            TryLookAtObject(Input.mousePosition);
+            switch (cameraMode)
+            {
+                case CameraMode.orbital: TryMakeTeleport(Input.mousePosition);
+                    break;
+                case CameraMode.firstPerson: 
+                    TryMakeTeleport(Input.mousePosition);
+                    TryLookAtObject(Input.mousePosition);
+                    break;
+                default:
+                    throw new ArgumentException($"Check GameMode enum for this value {cameraMode}");
+            }
+            
         }
         
         #endregion

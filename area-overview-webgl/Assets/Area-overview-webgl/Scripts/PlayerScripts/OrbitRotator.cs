@@ -50,9 +50,23 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         
         public void Rotate(float horizontalValue, float verticalValue)
         {
-            currentRotationSpeedLerpValue = maxRotationSpeed;
-            h = horizontalValue;
-            v = verticalValue;
+            int invertX = 1;
+            int invertY = 1;
+            switch (currentGamePlatform)
+            {
+                case GamePlatform.PC:
+                    if (pc_invertX) invertX = -1;
+                    if (pc_invertY) invertY = -1;
+                    break;
+                case GamePlatform.mobile :
+                    if (m_invertX) invertX = -1;
+                    if (m_invertY) invertY = -1;
+                    break;
+            }
+            
+            currentRotationSpeedLerpValue = Mathf.Lerp(currentRotationSpeedLerpValue, maxRotationSpeed, Time.deltaTime * lerpSpeed);
+            h = horizontalValue * invertX;
+            v = verticalValue * invertY;
         }
         
         public void DampRotation()
@@ -67,7 +81,7 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
             v = 0;
         }
         
-        private void FixedUpdate()
+        private void Update()
         {
             float currentVerticalRotationValue;
             float currentHorizontalRotationValue;
