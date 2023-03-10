@@ -1790,8 +1790,16 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8768825227749886714, guid: 360d9cb28bd6cbe43a5ac1d5520ea80d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768825227749886714, guid: 360d9cb28bd6cbe43a5ac1d5520ea80d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8768825227749886715, guid: 360d9cb28bd6cbe43a5ac1d5520ea80d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 8768825227910727272, guid: 360d9cb28bd6cbe43a5ac1d5520ea80d, type: 3}
       propertyPath: m_StaticEditorFlags

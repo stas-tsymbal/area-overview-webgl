@@ -37,8 +37,6 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 
         private void FixedUpdate()
         {
-            if (isIndicatorDisable) return;
-
             DrawParallelAreaIndicator();
         }
 
@@ -51,11 +49,12 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~ignoreLayer))
             {
-                //ifCursorOutOfMap = false;
+                ifCursorOutOfMap = false;
                 cursorIndicator.position =
                     hit.point + hit.normal / 100; // set cursor indicator over hit point(height of cursor indicator);
                 // '/100' - use for correct distance from hit point to cursorIndicator(bigger value -> less distance) 
-                cursorIndicator.LookAt(hit.point);
+                if(!isIndicatorDisable)
+                    cursorIndicator.LookAt(hit.point);
                // SetIndicatorMaxColor(true);
                 // DEBUG DRAW RAYCAST
                 // Debug.DrawRay(hit.point, camera.transform.position, Color.green); // ray from camera
@@ -65,7 +64,7 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             {
                 // Disable cursor
                 //indicatorImg.color = new Color32(255, 255, 255, 0);
-              //  ifCursorOutOfMap = true;
+                 ifCursorOutOfMap = true;
               SetIndicatorMaxColor(false);
             
             }
@@ -76,10 +75,11 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         // On/off indicator , true - enable indicator, false - disable
         public void SetIndicatorMaxColor(bool _val)
         {
+            Debug.Log(_val);
             if (_val)
             {
                 // Enable image
-                if (isIndicatorDisable)
+                if (isIndicatorDisable && !ifCursorOutOfMap)
                     LeanTween.value(gameObject, UpdateImageAlpha, 0f, maxIndicatorAlphaColor, cursorAnimationTime)
                         .setOnStart(() => SetStateIndicator(false));
             }
