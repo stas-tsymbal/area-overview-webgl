@@ -13,6 +13,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         [SerializeField] private Transform body;
         [SerializeField] private CapsuleCollider collider;
         [SerializeField] private Rigidbody rigidbody;
+        [SerializeField] private Transform firstCamPosition;
+        [SerializeField] private Transform cameraYPosition;
 
         public Transform GetHead()
         {
@@ -22,6 +24,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         public Transform GetBody()
         {
             return body;
+        }
+        public Transform GetFirstCamPosition()
+        {
+            return firstCamPosition;
+        }
+        
+        public Transform GetCameraYPosition()
+        {
+            return cameraYPosition;
         }
 
         public CapsuleCollider GetCapsuleCollider()

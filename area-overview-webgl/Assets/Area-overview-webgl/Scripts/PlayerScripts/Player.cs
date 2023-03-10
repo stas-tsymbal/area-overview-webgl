@@ -44,12 +44,16 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         private CameraModeController cameraModeController;
         
-        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, CameraModeController cameraModeController, Camera playerCamera)
+        public void Init(GamePlatform currentGamePlatform, UIController uiController, CameraMode cameraMode, 
+            CameraModeController cameraModeController, Camera playerCamera, Transform centralPointForOrbitalRotator)
         {
             // set start setting for camera mode, platform, 
             this.currentGamePlatform = currentGamePlatform;
             this.cameraMode = cameraMode;
             this.cameraModeController = cameraModeController;
+            
+            cameraModeSwitcher.Init(GetPlayerBody().GetCapsuleCollider(), playerCamera.transform, orbitRotator.GetSphereRotator(),
+                orbitRotator.GetLastOrbitCameraPosition(),GetPlayerBody().GetFirstCamPosition(),GetPlayerBody().GetCameraYPosition() );
             
             // init look at logic
             lookAtController.Init(playerCamera,GetPlayerBody().GetHead(), GetPlayerBody().GetBody()); 
@@ -68,7 +72,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             
             // init rotation (first person and orbital)
             firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);
-            orbitRotator.Init(currentGamePlatform);
+            orbitRotator.Init(currentGamePlatform, centralPointForOrbitalRotator);
             
             // detect camera mode changing 
             cameraModeController.OnCameraModeChange += OnCameraModeChange;

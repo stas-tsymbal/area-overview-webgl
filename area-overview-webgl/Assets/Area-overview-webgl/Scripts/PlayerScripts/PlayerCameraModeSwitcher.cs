@@ -38,8 +38,15 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
 
         public Action OnCameraModeChanged; // call when mode is changed and camera finished moving
 
-        public void Init()
+        public void Init( CapsuleCollider firstPersonCameraParent, Transform myCamera, Transform orbitalPosition,
+            Transform orbitalCameraParent, Transform lastFPPosition, Transform rayYHeight)
         {
+            this.firstPersonCameraParent = firstPersonCameraParent;
+            this.myCamera = myCamera;
+            this.orbitalPosition = orbitalPosition;
+            this.orbitalCameraParent = orbitalCameraParent;
+            this.lastFPPosition = lastFPPosition;
+            this.rayYHeight = rayYHeight;
         }
 
         // set orbital mode, call from UI

@@ -13,7 +13,7 @@ namespace Area_overview_webgl.Scripts.Controllers
     {
         [Header("Set start camera mode")] 
         [SerializeField] private CameraMode startCameraMode;
-        
+        [Space]
         [SerializeField] private Camera playerCamera;
 
         [Header("Camera mode controller")] [SerializeField]
@@ -24,8 +24,9 @@ namespace Area_overview_webgl.Scripts.Controllers
         [Header("Player")] [SerializeField] private Player player;
 
         [Header("Central point for orbital rotator")]
-        private Transform centralPointForOrbitalRotator;
+        [SerializeField] private Transform centralPointForOrbitalRotator;
 
+      
         public void Awake()
         {
             StartInit(GetGamePlatform(), startCameraMode);
@@ -42,7 +43,7 @@ namespace Area_overview_webgl.Scripts.Controllers
         {
             uiController.Init(currentGamePlatform, startCameraMode, cameraModeController);
             cameraModeController.Init(startCameraMode, uiController);
-            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera);
+            player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera, centralPointForOrbitalRotator);
             
         }
         

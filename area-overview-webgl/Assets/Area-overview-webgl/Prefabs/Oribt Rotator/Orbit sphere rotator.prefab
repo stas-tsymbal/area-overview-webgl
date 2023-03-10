@@ -88,6 +88,7 @@ MonoBehaviour:
   pc_invertX: 1
   pc_invertY: 1
   orbitalSphere: {fileID: 991522171594355700}
+  lastOrbitCameraPosition: {fileID: 991522170703140255}
 --- !u!33 &991522171240230966
 MeshFilter:
   m_ObjectHideFlags: 0

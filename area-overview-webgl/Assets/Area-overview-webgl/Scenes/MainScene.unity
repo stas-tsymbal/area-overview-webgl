@@ -172,6 +172,7 @@ MonoBehaviour:
   cameraModeController: {fileID: 357738560}
   uiController: {fileID: 1761450560}
   player: {fileID: 731421431418327521}
+  centralPointForOrbitalRotator: {fileID: 628274608}
 --- !u!1 &357738558
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +376,11 @@ Transform:
   m_Father: {fileID: 1958598951}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!4 &1384676168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 576708369180955604, guid: 94898ccef64945c4e92589847084513e, type: 3}
+  m_PrefabInstance: {fileID: 576708368419616062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1761450558
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +529,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 576708368298145212, guid: 94898ccef64945c4e92589847084513e, type: 3}
+      propertyPath: lastOrbitCameraPosition
+      value: 
+      objectReference: {fileID: 1384676168}
     - target: {fileID: 576708369789961041, guid: 94898ccef64945c4e92589847084513e, type: 3}
       propertyPath: m_RootOrder
       value: 1

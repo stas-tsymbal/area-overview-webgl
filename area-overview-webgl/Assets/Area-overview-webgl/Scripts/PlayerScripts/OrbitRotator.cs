@@ -28,7 +28,6 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         
         [Header("Invert mobile moving")] 
         [SerializeField] private bool m_invertX;
-
         [SerializeField] private bool m_invertY;
 
         [Header("Invert PC moving")] 
@@ -37,12 +36,15 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
         
         [Header("Object for rotation")]
         [SerializeField] private Transform orbitalSphere; //link to the camera sphere
+        [SerializeField] private Transform lastOrbitCameraPosition; //link to the camera sphere
 
         private GamePlatform currentGamePlatform;
 
-        public void Init(GamePlatform currentGamePlatform)
+        public void Init(GamePlatform currentGamePlatform, Transform centralPointForOrbitalRotator)
         {
             this.currentGamePlatform = currentGamePlatform;
+
+            transform.position = centralPointForOrbitalRotator.position;
             transform.SetParent(null);
         }
         
@@ -103,6 +105,16 @@ namespace  Area_overview_webgl.Scripts.PlayerScripts
             var _cameraRotation = orbitalSphere.transform.eulerAngles;
             if (_cameraRotation.x > yAxisBottomLimit)
                 orbitalSphere.transform.eulerAngles = new Vector3(yAxisBottomLimit, _cameraRotation.y, _cameraRotation.z);
+        }
+
+        public Transform GetSphereRotator()
+        {
+            return orbitalSphere;
+        }
+        
+        public Transform GetLastOrbitCameraPosition()
+        {
+            return lastOrbitCameraPosition;
         }
     }
 }

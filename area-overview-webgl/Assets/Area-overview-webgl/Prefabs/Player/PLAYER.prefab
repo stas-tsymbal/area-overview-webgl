@@ -423,15 +423,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCameraMode: 0
-  orbitalPosition: {fileID: 576708369180955604}
-  orbitalCameraParent: {fileID: 576708368298145215}
-  firstPersonCameraParent: {fileID: 576708369789961042}
-  myCamera: {fileID: 576708369873755487}
+  orbitalPosition: {fileID: 0}
+  orbitalCameraParent: {fileID: 0}
+  firstPersonCameraParent: {fileID: 0}
+  myCamera: {fileID: 0}
   lerpSpeed: 12
   lerpMinValue: 0.02
-  lastFPPosition: {fileID: 576708369686629267}
+  lastFPPosition: {fileID: 0}
   firstPersonStandardAngle: 0
-  rayYHeight: {fileID: 576708369540874062}
+  rayYHeight: {fileID: 0}
 --- !u!1 &576708369540874065
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +444,7 @@ GameObject:
   m_Layer: 6
   m_Name: Y camera height
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -475,7 +475,7 @@ GameObject:
   m_Layer: 6
   m_Name: First cam position
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -561,6 +561,8 @@ MonoBehaviour:
     body: {fileID: 576708369789961041}
     collider: {fileID: 576708369789961042}
     rigidbody: {fileID: 576708369789961038}
+    firstCamPosition: {fileID: 576708369686629267}
+    cameraYPosition: {fileID: 576708369540874062}
   movingForceSpeed: 100
   boostSpeed: 3
 --- !u!33 &576708369789961040
@@ -578,7 +580,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576708369789961045}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -871,11 +873,6 @@ MonoBehaviour:
 --- !u!4 &576708368298145215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 991522171594355700, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
-  m_PrefabInstance: {fileID: 415027285421835851}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &576708369180955604 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 991522170703140255, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
   m_PrefabInstance: {fileID: 415027285421835851}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6181397377337298137
