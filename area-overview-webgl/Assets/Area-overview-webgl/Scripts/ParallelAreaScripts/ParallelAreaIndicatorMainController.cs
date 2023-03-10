@@ -1,5 +1,6 @@
 ﻿using System;
 using Area_overview_webgl.Scripts.Controllers;
+using Area_overview_webgl.Scripts.UIScripts;
 using UnityEngine;
 
 namespace Area_overview_webgl.Scripts.ParallelAreaScripts
@@ -14,9 +15,10 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         [SerializeField] private ParallelAreaIndicatorActivationController activationController;
 
         private GamePlatform currentGamePlatform;
-        public void Init(GamePlatform currentGamePlatform, Camera myCamera)
+        public void Init(GamePlatform currentGamePlatform, Camera myCamera, UIController uiController)
         {
             this.currentGamePlatform = currentGamePlatform;
+            uiController.GetCameraModeIndicator().OnPointerEnter += HideIndicator;
             switch (this.currentGamePlatform)
             {
                 case GamePlatform.mobile: DestroyIndicatorElements();

@@ -68,7 +68,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             clickController.OnClick += OnInputClick;
             
             // init parallel area indicator
-            parallelAreaController.Init( currentGamePlatform, playerCamera);
+            parallelAreaController.Init( currentGamePlatform, playerCamera, uiController);
             
             // init rotation (first person and orbital)
             firstPersonRotator.Init(GetPlayerBody(), currentGamePlatform);

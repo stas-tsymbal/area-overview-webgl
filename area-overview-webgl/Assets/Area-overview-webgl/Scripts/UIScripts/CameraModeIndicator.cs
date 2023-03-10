@@ -30,6 +30,7 @@ namespace Area_overview_webgl.Scripts.UIScripts
 
         public Action OnFirstPersonModeClick; // call when click FirstPersonMode button
         public Action OnOrbitalModeClick;// call when click OrbitalMode button
+        public Action OnPointerEnter;// call when pointer enter
 
         private CameraModeController cameraModeController;
 
@@ -61,11 +62,18 @@ namespace Area_overview_webgl.Scripts.UIScripts
         {
             firstPersonEventTrigger.InitClick();
             firstPersonEventTrigger.OnClick += ClickFirstPersonButton;
+            firstPersonEventTrigger.OnEnter += EnterButton;
 
             orbitalEventTrigger.InitClick();
             orbitalEventTrigger.OnClick += ClickOrbitalButton;
+            orbitalEventTrigger.OnEnter += EnterButton;
         }
 
+        private void EnterButton()
+        {
+            OnPointerEnter?.Invoke();
+        }
+        
         private void ClickFirstPersonButton()
         {
             OnFirstPersonModeClick?.Invoke();
@@ -114,7 +122,10 @@ namespace Area_overview_webgl.Scripts.UIScripts
         private void OnDestroy()
         {
             firstPersonEventTrigger.OnClick -= ClickFirstPersonButton;
+            firstPersonEventTrigger.OnEnter -= EnterButton;
+            
             orbitalEventTrigger.OnClick -= ClickOrbitalButton;
+            orbitalEventTrigger.OnEnter -= EnterButton;
         }
     }
 }

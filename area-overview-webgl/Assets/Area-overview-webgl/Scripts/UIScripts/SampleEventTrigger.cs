@@ -16,13 +16,18 @@ namespace Area_overview_webgl.Scripts.UIScripts
         public void InitClick()
         {
             var eventTrigger = gameObject.AddComponent<EventTrigger>();
-
+            
+            // click
             var entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerClick;
-
             entry.callback.AddListener((data) => { CLickEventTrigger(); });
-
             eventTrigger.triggers.Add(entry);
+            
+            // Pointer Enter Event
+            var pointerEnter = new EventTrigger.Entry();
+            pointerEnter.eventID = EventTriggerType.PointerEnter;
+            pointerEnter.callback.AddListener((data) => { PointerEnterEventTrigger(); });
+            eventTrigger.triggers.Add(pointerEnter);
         }
 
         // Add event trigger component with event type Pointer Enter, Pointer Exit, Pointer Down, Pointer Up

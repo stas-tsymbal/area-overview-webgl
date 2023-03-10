@@ -75,7 +75,6 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
         // On/off indicator , true - enable indicator, false - disable
         public void SetIndicatorMaxColor(bool _val)
         {
-            Debug.Log(_val);
             if (_val)
             {
                 // Enable image
