@@ -17,7 +17,8 @@ namespace Area_overview_webgl.Scripts.UIScripts
             CameraModeController cameraModeController)
         {
             // Init mode indicator
-            cameraModeIndicator.Init(startCameraMode, cameraModeController);
+            cameraModeIndicator.Init(startCameraMode, cameraModeController, 
+                currentGamePlatform);
 
             // Init mobile input for moving
             if (currentGamePlatform == GamePlatform.mobile)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.47401053, g: 0.6063109, b: 0.74979556, a: 1}
+  m_IndirectSpecularColor: {r: 0.49946633, g: 0.71511936, b: 0.9773365, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -496,27 +496,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1958598948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_SendPointerHoverToParent: 1
-  m_MoveRepeatDelay: 0.5
-  m_MoveRepeatRate: 0.1
-  m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
-  m_DeselectOnBackgroundClick: 1
-  m_PointerBehavior: 0
-  m_CursorLockBehavior: 0
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
 --- !u!114 &2079307366 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7051612619558677844, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
@@ -535,6 +525,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 154924341772510431, guid: 94898ccef64945c4e92589847084513e, type: 3}
+      propertyPath: movingForceSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 576708368298145212, guid: 94898ccef64945c4e92589847084513e, type: 3}
       propertyPath: lastOrbitCameraPosition
       value: 
@@ -691,6 +685,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 203850620284671878, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 203850620284671878, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 203850620962058090, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 577911624059640109, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -707,6 +713,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 685063172962956934, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Color.a
+      value: 0.64705884
+      objectReference: {fileID: 0}
+    - target: {fileID: 685063172962956934, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 685063172962956934, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 685063172962956935, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -722,6 +740,22 @@ PrefabInstance:
     - target: {fileID: 685063172962956935, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 685063173967312035, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 685063174384634959, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 685063174384634959, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051612621088815097, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7051612621088815099, guid: 1b407531920c3004d8efc6cdbba736c9, type: 3}
       propertyPath: m_Name

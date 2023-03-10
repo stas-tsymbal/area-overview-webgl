@@ -1,5 +1,6 @@
 using System;
 using Area_overview_webgl.Scripts.CameraModeScripts;
+using Area_overview_webgl.Scripts.Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,12 +34,15 @@ namespace Area_overview_webgl.Scripts.UIScripts
         public Action OnPointerEnter;// call when pointer enter
 
         private CameraModeController cameraModeController;
+        private GamePlatform currentGamePlatform;
 
-        public void Init(CameraMode startCameraMode, CameraModeController cameraModeController)
+        public void Init(CameraMode startCameraMode, CameraModeController cameraModeController, GamePlatform currentGamePlatform)
         {
+            this.currentGamePlatform = currentGamePlatform;
+            this.cameraModeController = cameraModeController;
+            
             AddEventsOnButton();
             PaintButtonOnStart(startCameraMode);
-            this.cameraModeController = cameraModeController;
             cameraModeController.OnCameraModeChange += OnChangeCameraMode;
         }
 
@@ -62,11 +66,15 @@ namespace Area_overview_webgl.Scripts.UIScripts
         {
             firstPersonEventTrigger.InitClick();
             firstPersonEventTrigger.OnClick += ClickFirstPersonButton;
-            firstPersonEventTrigger.OnEnter += EnterButton;
-
+            
             orbitalEventTrigger.InitClick();
             orbitalEventTrigger.OnClick += ClickOrbitalButton;
-            orbitalEventTrigger.OnEnter += EnterButton;
+            
+            if (currentGamePlatform == GamePlatform.PC)
+            {
+                firstPersonEventTrigger.OnEnter += EnterButton;
+                orbitalEventTrigger.OnEnter += EnterButton;
+            }
         }
 
         private void EnterButton()
@@ -122,10 +130,13 @@ namespace Area_overview_webgl.Scripts.UIScripts
         private void OnDestroy()
         {
             firstPersonEventTrigger.OnClick -= ClickFirstPersonButton;
-            firstPersonEventTrigger.OnEnter -= EnterButton;
-            
             orbitalEventTrigger.OnClick -= ClickOrbitalButton;
-            orbitalEventTrigger.OnEnter -= EnterButton;
+
+            if (currentGamePlatform == GamePlatform.PC)
+            {
+                firstPersonEventTrigger.OnEnter -= EnterButton;
+                orbitalEventTrigger.OnEnter -= EnterButton;
+            }
         }
     }
 }

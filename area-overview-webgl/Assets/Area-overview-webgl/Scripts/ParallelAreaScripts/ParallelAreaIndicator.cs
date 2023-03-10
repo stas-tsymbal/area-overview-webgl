@@ -55,7 +55,6 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
                 // '/100' - use for correct distance from hit point to cursorIndicator(bigger value -> less distance) 
                 if(!isIndicatorDisable)
                     cursorIndicator.LookAt(hit.point);
-               // SetIndicatorMaxColor(true);
                 // DEBUG DRAW RAYCAST
                 // Debug.DrawRay(hit.point, camera.transform.position, Color.green); // ray from camera
                 // Debug.DrawLine(vectorNormal, hit.point, Color.red); // normal ray from object
@@ -63,10 +62,8 @@ namespace Area_overview_webgl.Scripts.ParallelAreaScripts
             else
             {
                 // Disable cursor
-                //indicatorImg.color = new Color32(255, 255, 255, 0);
-                 ifCursorOutOfMap = true;
-              SetIndicatorMaxColor(false);
-            
+                ifCursorOutOfMap = true;
+                SetIndicatorMaxColor(false);
             }
         }
 

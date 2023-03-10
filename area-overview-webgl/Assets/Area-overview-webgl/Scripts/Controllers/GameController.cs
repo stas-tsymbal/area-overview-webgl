@@ -46,7 +46,6 @@ namespace Area_overview_webgl.Scripts.Controllers
             cameraModeController.Init(startCameraMode, uiController);
             player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera,
                 centralPointForOrbitalRotator, canvas.scaleFactor);
-            
         }
         
     }

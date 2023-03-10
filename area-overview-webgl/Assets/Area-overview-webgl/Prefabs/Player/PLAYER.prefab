@@ -231,7 +231,7 @@ MonoBehaviour:
   lerpSpeed: 3
   mobileSensitivity: 0.1
   mouseSensitivity: 0.1
-  m_invertX: 0
+  m_invertX: 1
   m_invertY: 0
   pc_invertX: 0
   pc_invertY: 0

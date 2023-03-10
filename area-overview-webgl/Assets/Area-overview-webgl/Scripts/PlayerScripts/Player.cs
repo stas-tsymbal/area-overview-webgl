@@ -185,7 +185,7 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         private Vector3 GetForceForMoving(Vector3 forceHeading)
         {
-            var movingForce = Time.fixedDeltaTime * forceHeading;
+            var movingForce =  forceHeading;
             return isBoost ? movingForce * boostSpeed : movingForce ;
         }
         

@@ -99,10 +99,14 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             // subscribe on forward UI button
             mobileMovingButtons.OnPointerEnterForwardButton += ActivateMobileForwardMoving;
             mobileMovingButtons.OnPointerExitForwardButton += DeactivateMobileForwardMoving;
+            mobileMovingButtons.OnPointerDownForwardButton += ActivateMobileForwardMoving;
+            mobileMovingButtons.OnPointerUpForwardButton += DeactivateMobileForwardMoving;
             
             // subscribe on back UI button 
             mobileMovingButtons.OnPointerEnterBackButton += ActivateMobileBackMoving;
             mobileMovingButtons.OnPointerExitBackButton += DeactivateMobileBackMoving;
+            mobileMovingButtons.OnPointerDownBackButton += ActivateMobileBackMoving;
+            mobileMovingButtons.OnPointerUpBackButton += DeactivateMobileBackMoving;
         }
         
         private void DetectMovingMobile()
@@ -156,9 +160,13 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             {
                 mobileMovingButtons.OnPointerEnterForwardButton -= ActivateMobileForwardMoving;
                 mobileMovingButtons.OnPointerExitForwardButton -= DeactivateMobileForwardMoving;
+                mobileMovingButtons.OnPointerDownForwardButton -= ActivateMobileForwardMoving;
+                mobileMovingButtons.OnPointerUpForwardButton -= DeactivateMobileForwardMoving;
             
                 mobileMovingButtons.OnPointerEnterForwardButton -= ActivateMobileBackMoving;
                 mobileMovingButtons.OnPointerExitForwardButton -= DeactivateMobileBackMoving;
+                mobileMovingButtons.OnPointerDownBackButton -= ActivateMobileBackMoving;
+                mobileMovingButtons.OnPointerUpBackButton -= DeactivateMobileBackMoving;
             }
         }
     }
