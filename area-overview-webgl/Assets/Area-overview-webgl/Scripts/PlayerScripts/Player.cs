@@ -52,8 +52,8 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             this.cameraMode = cameraMode;
             this.cameraModeController = cameraModeController;
             
-            cameraModeSwitcher.Init(GetPlayerBody().GetCapsuleCollider(), playerCamera.transform, orbitRotator.GetSphereRotator(),
-                orbitRotator.GetLastOrbitCameraPosition(),GetPlayerBody().GetFirstCamPosition(),GetPlayerBody().GetCameraYPosition() );
+            cameraModeSwitcher.Init(GetPlayerBody().GetCapsuleCollider(), playerCamera.transform, orbitRotator.GetLastOrbitCameraPosition(),
+                orbitRotator.GetSphereRotator(),GetPlayerBody().GetFirstCamPosition(),GetPlayerBody().GetCameraYPosition() );
             
             // init look at logic
             lookAtController.Init(playerCamera,GetPlayerBody().GetHead(), GetPlayerBody().GetBody()); 
