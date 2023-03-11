@@ -97,13 +97,11 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
             mobileMovingButtons = uiController.GetMobileMovingButtons();
 
             // subscribe on forward UI button
-            mobileMovingButtons.OnPointerEnterForwardButton += ActivateMobileForwardMoving;
             mobileMovingButtons.OnPointerExitForwardButton += DeactivateMobileForwardMoving;
             mobileMovingButtons.OnPointerDownForwardButton += ActivateMobileForwardMoving;
             mobileMovingButtons.OnPointerUpForwardButton += DeactivateMobileForwardMoving;
             
             // subscribe on back UI button 
-            mobileMovingButtons.OnPointerEnterBackButton += ActivateMobileBackMoving;
             mobileMovingButtons.OnPointerExitBackButton += DeactivateMobileBackMoving;
             mobileMovingButtons.OnPointerDownBackButton += ActivateMobileBackMoving;
             mobileMovingButtons.OnPointerUpBackButton += DeactivateMobileBackMoving;
@@ -111,12 +109,12 @@ namespace Area_overview_webgl.Scripts.PlayerScripts
         
         private void DetectMovingMobile()
         {
-            if (mobileForward) // move forward
+            if (mobileForward && Input.touchCount > 0) // move forward
             {
                 player.MoveForward();
             }
 
-            if (mobileBack) // move back
+            if (mobileBack && Input.touchCount > 0) // move back
             {
                 player.MoveBack();
             }

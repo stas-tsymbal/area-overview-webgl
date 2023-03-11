@@ -42,6 +42,7 @@ namespace Area_overview_webgl.Scripts.Controllers
         // Initialization parameters for start game 
         private void StartInit(GamePlatform currentGamePlatform, CameraMode startCameraMode)
         {
+            currentGamePlatform = GamePlatform.mobile;
             uiController.Init(currentGamePlatform, startCameraMode, cameraModeController);
             cameraModeController.Init(startCameraMode, uiController);
             player.Init(currentGamePlatform, uiController, startCameraMode, cameraModeController, playerCamera,
