@@ -231,8 +231,8 @@ MonoBehaviour:
   lerpSpeed: 3
   mobileSensitivity: 0.1
   mouseSensitivity: 0.1
-  m_invertX: 1
-  m_invertY: 0
+  m_invertX: 0
+  m_invertY: 1
   pc_invertX: 0
   pc_invertY: 0
 --- !u!1 &576708369015812913
@@ -858,6 +858,14 @@ PrefabInstance:
     - target: {fileID: 991522171594355700, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 991522171594355703, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
+      propertyPath: m_invertX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 991522171594355703, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
+      propertyPath: m_invertY
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 991522171594355703, guid: 3556acba3efc7fd4db028f6ff62e0d2e, type: 3}
       propertyPath: maxRotationSpeed
